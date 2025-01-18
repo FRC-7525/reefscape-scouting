@@ -1,14 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Switch } from 'react-native';
 import Dropdown from './components/Dropdown';
 import TextInput from './components/TextInput';
 import NavButton from './components/NavButton';
 import ReefAlgaeView from './views/ReefAlgaeView';
+import AutoStartPositionView from './views/AutoStartPositionView'
 
 export default function App() {
   return (
     <View style={styles.container}>
       <NavButton text="Back" pageName=""></NavButton>
+
+      <AutoStartPositionView/>
 
       <ReefAlgaeView />
 
