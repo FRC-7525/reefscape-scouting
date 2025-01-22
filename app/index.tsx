@@ -4,13 +4,11 @@ import Dropdown from './components/Dropdown';
 import TextInput from './components/TextInput';
 import NavButton from './components/NavButton';
 import PageHeader from './components/Header';
-import HorizontalLine from './components/HorizontalLine';
 
 export default function App() {
   return (
     <View style={styles.container}>
       <PageHeader title='Main' pageNumber='1/4' />
-      <HorizontalLine />
       <Dropdown label="Name" id="nameSelect" items={["Name 1", "Name 2", "Name 3", "Name 4"]} placeholder="[Select your name]" />
       <TextInput label="Team number" editable={false} />
       <TextInput label="Match number" editable={false} />

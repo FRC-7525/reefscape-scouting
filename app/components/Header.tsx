@@ -1,4 +1,5 @@
 import { Text, View, StyleSheet } from "react-native";
+import HorizontalLine from "./HorizontalLine";
 
 interface PageHeaderProps {
   title: string;
@@ -7,9 +8,12 @@ interface PageHeaderProps {
 
 function PageHeader({ title, pageNumber }: PageHeaderProps) {
   return (
-    <View style={styles.header}>
-      <Text style={styles.centerText}>{title}</Text>
-      <Text style={styles.rightText}>{pageNumber}</Text>
+    <View>
+      <View style={styles.header}>
+        <Text style={styles.centerText}>{title}</Text>
+        <Text style={styles.rightText}>{pageNumber}</Text>
+      </View>
+      <HorizontalLine />
     </View>
   )
 }
