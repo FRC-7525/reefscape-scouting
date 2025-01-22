@@ -21,4 +21,11 @@ function NavButton({ text, id, pageName }: NavButtonProps) {
   )
 }
 
+const styles = StyleSheet.create({
+  button: {
+    width: 50,
+    height: "auto"
+  }
+})
+
 export default NavButton;
