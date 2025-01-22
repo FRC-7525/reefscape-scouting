@@ -7,8 +7,8 @@ import ReefAlgaeView from './views/ReefAlgaeView';
 export default function App() {
   return (
     <View style={styles.container}>
-      <PageHeader title='Autonomous' pageNumber='2/4'></PageHeader>
-      <NavButton text="Back" pageName=""></NavButton>
+      <PageHeader title='Autonomous' pageNumber='2/4' />
+      <NavButton text="Back" pageName="" />
 
       <ReefAlgaeView />
 
