@@ -20,6 +20,10 @@ jobs:
     - run: npm ci
     - name: Prebuild
       run: npx expo prebuild
+    - uses: irgaly/xcode-cache@v1
+      with:
+        key: xcode-cache-deriveddata-${{ github.workflow }}-${{ github.sha }}
+        restore-keys: xcode-cache-deriveddata-${{ github.workflow }}-
     - name: Deploy to TestFlight
       run: |
         brew install fastlane
