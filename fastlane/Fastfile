@@ -33,6 +33,7 @@ platform :ios do
       build_configuration: "Release"
     )
     increment_build_number({
+      xcodeproj: XCODEPROJ,
       build_number: latest_testflight_build_number(api_key_path: API_KEY_PATH) + 1
     })
     build_app(workspace: "./ios/reefscapescouting.xcworkspace", scheme: "reefscapescouting")
