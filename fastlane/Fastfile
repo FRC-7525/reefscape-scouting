@@ -46,7 +46,7 @@ platform :ios do
 end
 
 platform :android do
-  desc "Push a new internal release to Google Play"
+  desc "Build Android APK (currently not deployed)"
   lane :beta do
     setup_ci if ENV['CI']
     gradle(task: "assembleRelease", project_dir: "./android")
