@@ -44,3 +44,11 @@ platform :ios do
     )
   end
 end
+
+platform :android do
+  desc "Push a new internal release to Google Play"
+  lane :beta do
+    setup_ci if ENV['CI']
+    gradle(task: "assembleRelease", project_dir: "./android")
+  end
+end
