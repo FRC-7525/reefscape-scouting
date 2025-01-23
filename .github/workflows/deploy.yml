@@ -50,6 +50,12 @@ jobs:
     - run: npm ci
     - name: Prebuild
       run: npx expo prebuild
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'corretto'
+        cache: gradle
     - name: Deploy to Play Store Testing
       run: |
         sudo gem install fastlane
