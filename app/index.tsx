@@ -1,15 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
 import Dropdown from './components/Dropdown';
-import TextInput from './components/TextInput';
+import TextInputComponent from './components/TextInputComponent';
 import NavButton from './components/NavButton';
 
 export default function App() {
   return (
     <View style={styles.container}>
       <Dropdown label="Name" id="nameSelect" items={["Name 1", "Name 2", "Name 3", "Name 4"]} placeholder="[Select your name]"></Dropdown>
-      <TextInput label="Team number" editable={false}></TextInput>
-      <TextInput label="Match number" editable={false}></TextInput>
+      <TextInputComponent label="Team number" editable={false}/>
+      <TextInputComponent label="Match number" editable={false}/>
       <Dropdown label="Driver Station Location" id="nameSelect" items={["Name 1", "Name 2", "Name 3", "Name 4"]} placeholder="[Select location]"></Dropdown>
       <NavButton text="Go" pageName="auto"></NavButton>
 

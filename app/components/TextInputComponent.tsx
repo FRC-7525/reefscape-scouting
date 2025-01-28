@@ -7,7 +7,7 @@ interface TextInputProps {
   placeholder?: string;
 }
 
-function TextInput({ label, id, editable, placeholder }: TextInputProps) {
+function TextInputComponent({ label, id, editable, placeholder }: TextInputProps) {
   var hideLabel = false
 
   if (label == undefined) {
@@ -40,4 +40,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default TextInput;
+export default TextInputComponent;

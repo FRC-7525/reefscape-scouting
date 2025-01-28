@@ -1,12 +1,18 @@
 import { Switch, StyleSheet, Button, Text, View } from 'react-native';
 import { useState } from 'react';
 import React from 'react';
+import RadioButtonComponent from '../components/RadioButtonComponent';
 
 const Separator = () => <View style={styles.separator} />;
 
 function AutoStartPositionView () {
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+    const data = [
+      { label: 'Scoring Table Side', value: 0 },
+      { label: 'Center', value: 1 },
+      { label: 'Audience Side', value: 2 },
+    ];
   
     return (
       <>
@@ -21,8 +27,10 @@ function AutoStartPositionView () {
           value={isEnabled} /> 
         <Text> {isEnabled ? 'Yes' : 'No'}</Text>
 
-        <Text> {'Starting Position'}</Text>
-        
+        <Text> {'Starting Position:'}</Text>
+        <RadioButtonComponent
+        data= {data}
+          />
         <Separator></Separator>
 
         </>   
