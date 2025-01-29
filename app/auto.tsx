@@ -3,16 +3,18 @@ import { StyleSheet, View } from 'react-native';
 import PageHeader from './components/Header';
 import NavButton from './components/NavButton';
 import ReefAlgaeView from './views/ReefAlgaeView';
+import AlgaeView from './views/AlgaeView';
 
 export default function App() {
   return (
     <View style={styles.container}>
       <PageHeader title='Autonomous' pageNumber='2/4' />
 
-      <NavButton text="Back" pageName="" />
 
       <ReefAlgaeView />
+      <AlgaeView />
 
+      <NavButton text="Back" pageName="" />
       <StatusBar style="auto" />
     </View>
   );
