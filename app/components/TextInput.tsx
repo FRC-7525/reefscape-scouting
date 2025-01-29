@@ -8,7 +8,7 @@ interface LabeledTextInputProps {
 }
 
 function LabeledTextInput({ label, id, editable, placeholder }: LabeledTextInputProps) {
-  var hideLabel = false
+  let hideLabel = false
 
   if (label == undefined) {
     hideLabel = true
