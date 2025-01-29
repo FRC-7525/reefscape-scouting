@@ -1,7 +1,7 @@
 import * as FileSystem from 'expo-file-system';
 import { MatchData, GamePhase, DRIVER_STATION, START_POSITION, Tag, CLIMB_TYPE } from "./data_types";
 
-const path = FileSystem.documentDirectory + "matchData.json";
+const path = FileSystem.documentDirectory ?? "" + "matchData.json";
 
 function getMatchData(): Promise<MatchData> {
     return new Promise((resolve, reject) => {
@@ -13,11 +13,7 @@ function getMatchData(): Promise<MatchData> {
 }
 
 function saveMatchData(newData: MatchData): Promise<void> {
-    return new Promise((resolve, reject) => {
-        FileSystem.writeAsStringAsync(path, JSON.stringify(newData))
-            .then(resolve)
-            .catch((err) => reject(err));
-    })
+    return FileSystem.writeAsStringAsync(path, JSON.stringify(newData));
 }
 
 function updateMatchData(modifier: (matchData: MatchData) => MatchData): Promise<void> {
