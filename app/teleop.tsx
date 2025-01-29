@@ -7,15 +7,13 @@ import ReefAlgaeView from './views/ReefAlgaeView';
 export default function App() {
   return (
     <View style={styles.container}>
-      <PageHeader title='Autonomous' pageNumber='2/4' />
+      <PageHeader title='Teleop' pageNumber='3/4' />
 
-      <NavButton text="Back" pageName="" />
+      <NavButton text="Back" pageName="auto" />
 
       <ReefAlgaeView />
 
       <StatusBar style="auto" />
-
-      <NavButton text="Next" pageName="teleop" />
     </View>
   );
 }
