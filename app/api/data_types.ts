@@ -1,23 +1,23 @@
 export enum DRIVER_STATION {
-    RED_ONE = 0,
-    RED_TWO,
-    RED_THREE,
-    BLUE_ONE,
-    BLUE_TWO,
-    BLUE_THREE,
+    RED_ONE = "Red 1",
+    RED_TWO = "Red 2",
+    RED_THREE = "Red 3",
+    BLUE_ONE = "Blue 1",
+    BLUE_TWO = "Blue 2",
+    BLUE_THREE = "Blue 3",
 };
 
 export enum START_POSITION {
-    SCORING_TABLE = 0,
-    CENTER,
-    AUDIENCE,
+    SCORING_TABLE = "Scoring Table Side",
+    CENTER = "Center",
+    AUDIENCE = "Audience Side",
 };
 
 export enum CLIMB_TYPE {
-    DEEP_CLIMB = 0,
-    SHALLOW_CLIMB,
-    PARK,
-    NO_CLIMB,
+    DEEP_CLIMB = "Deep Climb",
+    SHALLOW_CLIMB = "Shallow Climb",
+    PARK = "Park",
+    NO_CLIMB = "No Climb",
 };
 
 export interface Score {
