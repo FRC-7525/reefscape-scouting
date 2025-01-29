@@ -1,43 +1,39 @@
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, TextInput } from "react-native";
 
-interface TextInputProps {
+interface LabeledTextInputProps {
   label?: string;
   id?: string;
   editable?: boolean;
   placeholder?: string;
 }
 
-function TextInput({ label, id, editable, placeholder }: TextInputProps) {
+function LabeledTextInput({ label, id, editable, placeholder }: LabeledTextInputProps) {
   var hideLabel = false
 
   if (label == undefined) {
     hideLabel = true
   }
 
-  if (editable != undefined) {
-    editable = !editable;
-  }
-
   return (
-    <View style={styles.container}>
+    <View>
       { !hideLabel &&
         <Text>{label} </Text>
       }
 
-      <input type="text" disabled={editable} style={styles.input} placeholder={placeholder}></input>
+      <TextInput editable={editable} style={styles.input} placeholder={placeholder} placeholderTextColor={"#bbb"}/>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    width: 200
-    // flex: 1,
-    // width: 10
-  },
   input: {
-    // flex: 1
+    flex: 1,
+    width: 200,
+    height: 30,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    padding: 6
   }
 })
 
-export default TextInput;
+export default LabeledTextInput;
