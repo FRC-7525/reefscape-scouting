@@ -1,14 +1,11 @@
-import MathButton from '../components/MathButton';
+import MathBlock from '../components/MathBlock';
+import { View } from 'react-native';
 
 function ReefAlgaeView() {
   return (
-    <div>
-      <MathButton operation="-" idToEdit='num' minOrMax={0}></MathButton>
-
-      <span id="num">0</span>
-
-      <MathButton operation="+" idToEdit='num' minOrMax={10}></MathButton>
-    </div>
+    <View>
+      <MathBlock min={0} max={10} />
+    </View>
   )
 }
 
