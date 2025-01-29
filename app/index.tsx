@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import Dropdown from './components/Dropdown';
 import NavButton from './components/NavButton';
 import PageHeader from './components/Header';
-import LabeledTextInput from './components/TextInput';
+import LabeledTextInput from './components/LabeledTextInput';
 
 export default function App() {
   return (
