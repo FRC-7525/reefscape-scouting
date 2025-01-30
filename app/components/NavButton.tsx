@@ -1,4 +1,5 @@
 import { Link } from 'expo-router';
+import { Button, StyleSheet, View } from 'react-native';
 
 interface NavButtonProps {
   text: string;
@@ -12,13 +13,19 @@ function NavButton({ text, id, pageName }: NavButtonProps) {
   }
 
   return (
-    <div>
+    <View>
       <Link href={"/" + pageName} asChild>
-        <input type="button" value={text}></input>
+        <Button title={text}></Button>
       </Link>
-
-    </div>
+    </View>
   )
 }
+
+const styles = StyleSheet.create({
+  button: {
+    width: 50,
+    height: "auto"
+  }
+})
 
 export default NavButton;

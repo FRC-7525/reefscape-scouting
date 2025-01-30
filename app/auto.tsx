@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, Switch } from 'react-native';
 import Dropdown from './components/Dropdown';
 import TextInput from './components/TextInputComponent';
+import PageHeader from './components/Header';
 import NavButton from './components/NavButton';
 import ReefAlgaeView from './views/ReefAlgaeView';
 import AutoStartPositionView from './views/AutoStartPositionView'
@@ -9,13 +10,16 @@ import AutoStartPositionView from './views/AutoStartPositionView'
 export default function App() {
   return (
     <View style={styles.container}>
-      <NavButton text="Next" pageName="teleop"></NavButton>
-
       <AutoStartPositionView/>
+      <PageHeader title='Autonomous' pageNumber='2/4' />
+
+      <NavButton text="Back" pageName="" />
 
       <ReefAlgaeView />
 
       <StatusBar style="auto" />
+
+      <NavButton text="Next" pageName="teleop" />
     </View>
   );
 }

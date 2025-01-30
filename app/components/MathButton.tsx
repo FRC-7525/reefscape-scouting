@@ -1,42 +1,31 @@
-import { Link } from 'expo-router';
+import { Dispatch, SetStateAction } from "react";
+import { Button } from "react-native";
 
 interface MathButtonProps {
-  operation: string; // either "+" or "-"
-  idToEdit: string;
-  minOrMax?: number;
-}
+  operation: "+" | "-";
+  count: number;
+  setCount: Dispatch<SetStateAction<number>>;
+  min?: number;
+  max?: number;
+};
 
-function MathButton({ operation, idToEdit, minOrMax }: MathButtonProps) {
+function MathButton({ operation, count, setCount, min, max }: MathButtonProps) {
   return (
-    <input type="button" value={operation} onClick={
-      () => {
-        var elem = document.getElementById(idToEdit)
+    <Button title={operation} onPress={() => {
+      if (operation == "-") {
+        setCount(count - 1);
 
-        if (elem != null) {
-          var num: number = +elem.innerText
-          var tempNum = 0
-          
-          if (operation == "+") {
-            tempNum = num + 1
-
-            if (minOrMax != undefined && tempNum > minOrMax) {
-              tempNum = minOrMax
-            }
-          } else if (operation == "-") {
-            tempNum = num - 1
-
-            if (minOrMax != undefined && tempNum < minOrMax) {
-              tempNum = minOrMax
-            }
-          }
-
-          elem.innerText = tempNum.toString()
-        } else {
-          console.log("WARNING: element ID " + idToEdit + " not found.")
+        if (min !== undefined && count <= min) {
+          setCount(min); 
         }
+      } else {
+        setCount(count + 1);
 
+        if (max !== undefined && count >= max) {
+          setCount(max);
+        }
       }
-    }></input>
+    }} />
   )
 }
 

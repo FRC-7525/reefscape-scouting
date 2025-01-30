@@ -5,14 +5,16 @@ import TextInput from './components/TextInputComponent';
 import NavButton from './components/NavButton';
 import ReefAlgaeView from './views/ReefAlgaeView';
 import EndgameView from './views/EndgameView';
+import PageHeader from './components/Header';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <NavButton text="Back" pageName="auto"></NavButton>
-      <NavButton text="Next" pageName="summary"></NavButton>
+      <PageHeader title='Teleop' pageNumber='3/4' />
 
-      <ReefAlgaeView/>
+      <NavButton text="Back" pageName="auto" />
+
+      <ReefAlgaeView />
       <EndgameView/>
 
       <StatusBar style="auto" />
@@ -21,12 +23,12 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      padding: 15,
-      flex: 1,
-      backgroundColor: '#fff',
-      rowGap: 15
-      // alignItems: 'center',
-      // justifyContent: 'center',
-    },
-  });
+  container: {
+    padding: 15,
+    flex: 1,
+    backgroundColor: '#fff',
+    rowGap: 15
+    // alignItems: 'center',
+    // justifyContent: 'center',
+  },
+});

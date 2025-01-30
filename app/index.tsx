@@ -1,8 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, TextInput } from 'react-native';
 import Dropdown from './components/Dropdown';
 import TextInputComponent from './components/TextInputComponent';
 import NavButton from './components/NavButton';
+import PageHeader from './components/Header';
 
 export default function App() {
   return (
