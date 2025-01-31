@@ -8,10 +8,11 @@ import PageHeader from './components/Header';
 export default function App() {
   return (
     <View style={styles.container}>
+      <PageHeader title='Main' pageNumber='1/4' />
       <Dropdown label="Name" id="nameSelect" items={["Name 1", "Name 2", "Name 3", "Name 4"]} placeholder="[Select your name]"></Dropdown>
       <TextInputComponent label="Team number" editable={false}/>
       <TextInputComponent label="Match number" editable={false}/>
-      <Dropdown label="Driver Station Location" id="nameSelect" items={["Name 1", "Name 2", "Name 3", "Name 4"]} placeholder="[Select location]"></Dropdown>
+      <Dropdown label="Driver Station Location" id="nameSelect" items={["Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"]} placeholder="[Select location]"></Dropdown>
       <NavButton text="Go" pageName="auto"></NavButton>
 
       <StatusBar style="auto" />

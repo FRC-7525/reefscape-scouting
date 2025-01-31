@@ -10,10 +10,11 @@ import AutoStartPositionView from './views/AutoStartPositionView'
 export default function App() {
   return (
     <View style={styles.container}>
-      <AutoStartPositionView/>
       <PageHeader title='Autonomous' pageNumber='2/4' />
 
       <NavButton text="Back" pageName="" />
+
+      <AutoStartPositionView/>
 
       <ReefAlgaeView />
 
