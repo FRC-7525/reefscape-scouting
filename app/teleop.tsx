@@ -8,27 +8,27 @@ import EndgameView from './views/EndgameView';
 import PageHeader from './components/Header';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <PageHeader title='Teleop' pageNumber='3/4' />
+    return (
+        <View style={styles.container}>
+            <PageHeader title='Teleop' pageNumber='3/4' />
 
-      <NavButton text="Back" pageName="auto" />
+            <NavButton text="Back" pageName="auto" />
 
-      <ReefAlgaeView />
-      <EndgameView/>
+            <ReefAlgaeView />
+            <EndgameView/>
 
-      <StatusBar style="auto" />
-    </View>
-  );
+            <StatusBar style="auto" />
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 15,
-    flex: 1,
-    backgroundColor: '#fff',
-    rowGap: 15
-    // alignItems: 'center',
-    // justifyContent: 'center',
-  },
+    container: {
+        padding: 15,
+        flex: 1,
+        backgroundColor: '#fff',
+        rowGap: 15
+        // alignItems: 'center',
+        // justifyContent: 'center',
+    },
 });

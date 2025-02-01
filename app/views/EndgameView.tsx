@@ -1,7 +1,7 @@
 import { Text, View } from "react-native";
 import React from "react";
 import RadioButtonComponent from "../components/RadioButtonComponent";
-import Separator from "../components/Separator";
+import HorizontalLine from "../components/HorizontalLine";
 
 function EndgameView() {
     const data = [
@@ -15,7 +15,7 @@ function EndgameView() {
         <View>
             <Text> {"Climb?:"}</Text>
             <RadioButtonComponent data={data} />
-            <Separator />
+            <HorizontalLine />
         </View>
     );
 }
