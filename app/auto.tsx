@@ -4,13 +4,12 @@ import PageHeader from './components/Header';
 import NavButton from './components/NavButton';
 import ReefAlgaeView from './views/ReefAlgaeView';
 import AutoStartPositionView from './views/AutoStartPositionView'
+import PageNavigation from './components/PageNavigation';
 
 export default function App() {
     return (
         <View style={styles.container}>
             <PageHeader title='Autonomous' pageNumber='2/4' />
-
-            <NavButton text="Back" pageName="" />
 
             <AutoStartPositionView/>
 
@@ -18,7 +17,7 @@ export default function App() {
 
             <StatusBar style="auto" />
 
-            <NavButton text="Next" pageName="teleop" />
+            <PageNavigation next="teleop" />
         </View>
     );
 }
