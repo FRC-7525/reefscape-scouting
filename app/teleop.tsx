@@ -1,7 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, Switch } from 'react-native';
-import Dropdown from './components/Dropdown';
-import TextInput from './components/TextInputComponent';
 import NavButton from './components/NavButton';
 import ReefAlgaeView from './views/ReefAlgaeView';
 import EndgameView from './views/EndgameView';
