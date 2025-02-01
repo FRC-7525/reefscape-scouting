@@ -1,19 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, TextInput } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Dropdown from './components/Dropdown';
 import TextInputComponent from './components/TextInputComponent';
 import NavButton from './components/NavButton';
 import PageHeader from './components/Header';
+import LabeledTextInput from './components/LabeledTextInput';
 
 export default function App() {
   return (
     <View style={styles.container}>
       <PageHeader title='Main' pageNumber='1/4' />
-      <Dropdown label="Name" id="nameSelect" items={["Name 1", "Name 2", "Name 3", "Name 4"]} placeholder="[Select your name]"></Dropdown>
-      <TextInputComponent label="Team number" editable={false}/>
-      <TextInputComponent label="Match number" editable={false}/>
-      <Dropdown label="Driver Station Location" id="nameSelect" items={["Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"]} placeholder="[Select location]"></Dropdown>
-      <NavButton text="Go" pageName="auto"></NavButton>
+      <Dropdown label="Name" id="nameSelect" items={["Name 1", "Name 2", "Name 3", "Name 4"]} placeholder="[Select your name]" />
+      <LabeledTextInput placeholder="Team number" editable={true} />
+      <LabeledTextInput placeholder="Match number" editable={true} />
+      <Dropdown label="Driver Station Location" id="nameSelect" items={["Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"]} placeholder="[Select location]" />
+      <NavButton text="Go" pageName="auto" />
 
       <StatusBar style="auto" />
     </View>
