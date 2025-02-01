@@ -1,8 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
-import PageHeader from './components/Header';
+import { StyleSheet, View, Switch } from 'react-native';
+import Dropdown from './components/Dropdown';
+import TextInput from './components/TextInputComponent';
 import NavButton from './components/NavButton';
 import ReefAlgaeView from './views/ReefAlgaeView';
+import EndgameView from './views/EndgameView';
+import PageHeader from './components/Header';
 
 export default function App() {
   return (
@@ -12,6 +15,7 @@ export default function App() {
       <NavButton text="Back" pageName="auto" />
 
       <ReefAlgaeView />
+      <EndgameView/>
 
       <StatusBar style="auto" />
     </View>
