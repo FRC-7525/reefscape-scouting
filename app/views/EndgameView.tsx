@@ -13,7 +13,7 @@ function EndgameView() {
 
     return (
         <View>
-            <Text> {"Climb?:"}</Text>
+            <Text>{"Climb?:"}</Text>
             <RadioButtonComponent data={data} />
             <HorizontalLine />
         </View>
