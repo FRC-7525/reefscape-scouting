@@ -4,12 +4,11 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface DropdownProps {
     label?: string;
-    id?: string;
     items: Array<string>;
     placeholder?: string;
 }
 
-function Dropdown({ label, id, items, placeholder }: DropdownProps) {
+function Dropdown({ label, items, placeholder }: DropdownProps) {
     var hideLabel = false
 
     if (label == undefined) {
@@ -19,16 +18,14 @@ function Dropdown({ label, id, items, placeholder }: DropdownProps) {
     return (
         <View>
             
-            { !hideLabel &&
-                <Text>{label}</Text>
-            }
+            { !hideLabel && <Text>{label}</Text> }
 
             <SelectDropdown
                 data={items}
                 onSelect={(selectedItem, index) => {
                     console.log(selectedItem, index);
                 }}
-                renderButton={(selectedItem, isOpened) => {
+                renderButton={(selectedItem, _isOpened) => {
                     return (
                         <View style={styles.dropdownButtonStyle}>
                                 { !selectedItem &&
@@ -45,7 +42,7 @@ function Dropdown({ label, id, items, placeholder }: DropdownProps) {
                         </View>
                     );
                 }}
-                renderItem={(item, index, isSelected) => {
+                renderItem={(item, _index, isSelected) => {
                     return (
                         <View style={{ ...styles.dropdownItemStyle, ...(isSelected && { backgroundColor: '#D2D9DF' }) }}>
                             <Text style={styles.dropdownItemTxtStyle}>{item}</Text>
