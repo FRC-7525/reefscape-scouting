@@ -10,10 +10,10 @@ export default function App() {
     return (
         <View style={styles.container}>
             <PageHeader title='Main' pageNumber='1/4' />
-            <Dropdown label="Name" id="nameSelect" items={["Name 1", "Name 2", "Name 3", "Name 4"]} placeholder="[Select your name]" />
+            <Dropdown label="Name" items={["Name 1", "Name 2", "Name 3", "Name 4"]} placeholder="[Select your name]" />
             <LabeledTextInput placeholder="Team number" editable={true} />
             <LabeledTextInput placeholder="Match number" editable={true} />
-            <Dropdown label="Driver Station Location" id="nameSelect" items={["Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"]} placeholder="[Select location]" />
+            <Dropdown label="Driver Station Location" items={["Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"]} placeholder="[Select location]" />
             <NavButton text="Go" pageName="auto" />
 
             <StatusBar style="auto" />
