@@ -10,11 +10,10 @@ interface LabeledTextInputProps {
 function LabeledTextInput({ label, id, editable, placeholder }: LabeledTextInputProps) {
     return (
         <View>
-            { (label !== undefined) &&
-                <Text>{label} </Text>
-            }
+            { (label !== undefined) && <Text>{label}</Text> }
 
-            <TextInput editable={editable} style={styles.input} placeholder={placeholder} placeholderTextColor={"#bbb"}/>
+            <TextInput editable={editable} style={styles.input}
+                       placeholder={placeholder} placeholderTextColor={"#bbb"}/>
         </View>
     )
 }
