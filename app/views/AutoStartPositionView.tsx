@@ -15,7 +15,7 @@ function AutoStartPositionView () {
 
     return (
         <View>
-            <HorizontalLine />
+
             <Text>{'Left start line:'}</Text>
             <Switch
                 trackColor={{ false: '#151E26', true: '#E9ECEF' }}

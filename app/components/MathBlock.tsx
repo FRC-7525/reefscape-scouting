@@ -16,9 +16,9 @@ function MathBlock({ min, max, label, showNumber }: MathBlockProps) {
 
     return (
         <View style={styles.container}>
-            <MathButton operation="-" count={count} setCount={setCount} min={min} />
+            <MathButton operation="-" count={count} setCount={setCount} min={min} flexSize={2} />
             <Text style={styles.text}>{ label }{ showNumber && <Text>{count}</Text> }</Text>
-            <MathButton operation="+" count={count} setCount={setCount} max={max} />
+            <MathButton operation="+" count={count} setCount={setCount} max={max} flexSize={3} />
         </View>
     )
 }
