@@ -1,4 +1,4 @@
-import { Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import MathButton from "./MathButton";
 import { useState } from "react";
 
@@ -15,13 +15,24 @@ function MathBlock({ min, max, label, showNumber }: MathBlockProps) {
     const [ count, setCount ] = useState(0);
 
     return (
-        <Text>
+        <View style={styles.container}>
             <MathButton operation="-" count={count} setCount={setCount} min={min} />
-            { label }
-            { showNumber && <Text>{count}</Text> }
+            <Text style={styles.text}>{ label }{ showNumber && <Text>{count}</Text> }</Text>
             <MathButton operation="+" count={count} setCount={setCount} max={max} />
-        </Text>
+        </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        margin: 2,
+        flexDirection: "row",
+        alignItems: "center"
+    },
+    text: {
+        flex: 1,
+        textAlign: "center",
+    }
+})
 
 export default MathBlock;

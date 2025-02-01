@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { Button } from "react-native";
+import { Text, StyleSheet, TouchableOpacity, View } from "react-native";
 
 interface MathButtonProps {
     operation: "+" | "-";
@@ -11,22 +11,40 @@ interface MathButtonProps {
 
 function MathButton({ operation, count, setCount, min, max }: MathButtonProps) {
     return (
-        <Button title={operation} onPress={() => {
-            if (operation == "-") {
-                setCount(count - 1);
+        <View style={[{flex: 3}]}>
+            <TouchableOpacity style={styles.button} onPress={() => {
+                if (operation == "-") {
+                    setCount(count - 1);
 
-                if (min !== undefined && count <= min) {
-                    setCount(min); 
-                }
-            } else {
-                setCount(count + 1);
+                    if (min !== undefined && count <= min) {
+                        setCount(min); 
+                    }
+                } else {
+                    setCount(count + 1);
 
-                if (max !== undefined && count >= max) {
-                    setCount(max);
+                    if (max !== undefined && count >= max) {
+                        setCount(max);
+                    }
                 }
-            }
-        }} />
+            }}>
+                <Text style={styles.text}>{operation}</Text>
+            </TouchableOpacity>
+        </View>
     )
 }
+
+const styles = StyleSheet.create({
+    button: {
+        backgroundColor: "#2c2c2c",
+        borderRadius: 8,
+        height: 37,
+        justifyContent: "center"
+    },
+    text: {
+        color: "#f5f5f5",
+        fontSize: 20,
+        textAlign: "center"
+    }
+});
 
 export default MathButton;
