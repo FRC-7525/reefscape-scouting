@@ -11,10 +11,10 @@ function RadioButtonComponent({ data }: RadioButtonComponentProps) {
     return (
         <View>
             { data.map((element, i) =>
-                <View style={[{ flexDirection: "row", alignItems: "center" }]}>
+                <View key={element} style={[{ flexDirection: "row", alignItems: "center" }]}>
                     <RadioButton.Android key={i} value={element}
                         status={checked == element ? "checked" : "unchecked"}
-                        onPress={() => setChecked(element) } />    
+                        onPress={() => setChecked(element)} />    
                     <Text>{element}</Text>
                 </View>
             ) }
