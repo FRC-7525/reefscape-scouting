@@ -1,19 +1,20 @@
-import { Text, View, StyleSheet, TextInput } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
+import { TextInput } from "react-native-paper";
 
 interface LabeledTextInputProps {
     label?: string;
-    id?: string;
     editable?: boolean;
     placeholder?: string;
 }
 
-function LabeledTextInput({ label, id, editable, placeholder }: LabeledTextInputProps) {
+function LabeledTextInput({ label, editable, placeholder }: LabeledTextInputProps) {
     return (
         <View>
             { (label !== undefined) && <Text>{label}</Text> }
 
             <TextInput editable={editable} style={styles.input}
-                       placeholder={placeholder} placeholderTextColor={"#bbb"}/>
+                       placeholder={placeholder} placeholderTextColor={"#bbb"}
+                       mode="outlined" />
         </View>
     )
 }
