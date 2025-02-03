@@ -2,7 +2,6 @@ import { Text, View, StyleSheet } from 'react-native';
 import { useState } from 'react';
 import { Switch } from 'react-native-paper';
 import RadioButtonComponent from '../components/RadioButtonComponent';
-import HorizontalLine from '../components/HorizontalLine';
 
 function AutoStartPositionView () {
     const [isEnabled, setIsEnabled] = useState(false);
