@@ -4,17 +4,17 @@ import NavButton from './components/NavButton';
 import ReefAlgaeView from './views/ReefAlgaeView';
 import EndgameView from './views/EndgameView';
 import PageHeader from './components/Header';
-import PageNavigation from './components/PageNavigation';
+import AlgaeView from './views/AlgaeView';
 
 export default function App() {
     return (
         <View style={styles.container}>
-            <PageHeader title='Teleop' pageNumber='3/4' />
+            <PageHeader title='Teleop' pageNumber='3/4' previous="auto" />
 
             <ReefAlgaeView />
+            <AlgaeView />
             <EndgameView/>
 
-            <PageNavigation previous="auto" next="summary" />
             <StatusBar style="auto" />
         </View>
     );

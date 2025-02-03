@@ -4,7 +4,7 @@ import PageHeader from './components/Header';
 import NavButton from './components/NavButton';
 import ReefAlgaeView from './views/ReefAlgaeView';
 import AutoStartPositionView from './views/AutoStartPositionView'
-import PageNavigation from './components/PageNavigation';
+import AlgaeView from './views/AlgaeView';
 
 export default function App() {
     return (
@@ -14,10 +14,9 @@ export default function App() {
             <AutoStartPositionView/>
 
             <ReefAlgaeView />
+            <AlgaeView />
 
             <StatusBar style="auto" />
-
-            <PageNavigation next="teleop" />
         </View>
     );
 }
