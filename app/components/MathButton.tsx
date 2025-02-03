@@ -7,12 +7,11 @@ interface MathButtonProps {
     setCount: Dispatch<SetStateAction<number>>;
     min?: number;
     max?: number;
-    flexSize: number;
 };
 
-function MathButton({ operation, count, setCount, min, max, flexSize }: MathButtonProps) {
+function MathButton({ operation, count, setCount, min, max }: MathButtonProps) {
     return (
-        <View style={[{flex: flexSize}]}>
+        <View style={[{ flex: 2 }]}>
             <TouchableOpacity style={styles.button} onPress={() => {
                 if (operation == "-") {
                     setCount(count - 1);
