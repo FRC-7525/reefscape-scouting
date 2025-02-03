@@ -2,7 +2,7 @@ import { Stack } from 'expo-router';
 
 export default function RootLayout() {
     return (
-        <Stack>
+        <Stack screenOptions={{ gestureEnabled: false }}>
             <Stack.Screen name="index" options={{ headerShown: false }} />
             <Stack.Screen name="teleop" options={{ headerShown: false }} />
             <Stack.Screen name="auto" options={{ headerShown: false }} />
