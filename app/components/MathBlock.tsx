@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     text: {
-        flex: 1,
+        flex: 3,
         textAlign: "center",
         margin: 3
     }

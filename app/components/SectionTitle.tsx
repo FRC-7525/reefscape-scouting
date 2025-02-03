@@ -11,7 +11,7 @@ function SectionTitle({ children }: SectionTitleProps) {
 
 const styles = StyleSheet.create({
     title: {
-        marginTop: 5,
+        marginVertical: 5,
         fontSize: 17,
         textAlign: "center"
     }
