@@ -9,8 +9,8 @@ function AlgaeView() {
             <HorizontalLine />
             <SectionTitle>Algae</SectionTitle>
 
-            <MathBlock min={0} label="In Net" />
-            <MathBlock min={0} label="In Processor" />
+            <MathBlock min={0} label="Net" />
+            <MathBlock min={0} label="Processor" />
         </View>
     )
 }
