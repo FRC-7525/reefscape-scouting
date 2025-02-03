@@ -12,8 +12,8 @@ function RadioButtonComponent({ data }: RadioButtonComponentProps) {
         <View>
             { data.map((element, i) =>
                 <View key={element} style={[{ flexDirection: "row", alignItems: "center" }]}>
-                    <RadioButton.Android key={i} value={element}
-                        status={checked == element ? "checked" : "unchecked"}
+                    <RadioButton.Android value={element}
+                        status={checked === element ? "checked" : "unchecked"}
                         onPress={() => setChecked(element)} />    
                     <Text>{element}</Text>
                 </View>
