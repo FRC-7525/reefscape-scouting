@@ -10,9 +10,9 @@ function RadioButtonComponent({ data }: RadioButtonComponentProps) {
     const [ checked, setChecked ] = useState(data[0]);
     return (
         <View>
-            { data.map((element, i) =>
+            { data.map((element) =>
                 <View key={element} style={[{ flexDirection: "row", alignItems: "center" }]}>
-                    <RadioButton.Android value={element}
+                    <RadioButton.Android color="#2c2c2c" value={element}
                         status={checked === element ? "checked" : "unchecked"}
                         onPress={() => setChecked(element)} />    
                     <Text>{element}</Text>

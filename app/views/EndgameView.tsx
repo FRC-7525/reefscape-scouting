@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 import React from "react";
-import RadioButtonComponent from "../components/RadioButtonComponent";
+import RadioButtonComponent from "../components/RadioButton";
 import { Divider } from "react-native-paper";
 
 function EndgameView() {
