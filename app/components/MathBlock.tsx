@@ -25,7 +25,7 @@ function MathBlock({ min, max, label, showNumber }: MathBlockProps) {
 
 const styles = StyleSheet.create({
     container: {
-        margin: 2,
+        marginVertical: 4,
         flexDirection: "row",
         alignItems: "center"
     },

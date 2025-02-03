@@ -13,20 +13,22 @@ interface MathButtonProps {
 function MathButton({ operation, count, setCount, min, max }: MathButtonProps) {
     return (
         <View style={[{ flex: 4 }]}>
-            <Button textColor="#f5f5f5" buttonColor="#2c2c2c" onPress={() => {
-                if (operation == "-") {
-                    setCount(count - 1);
+            <Button textColor="#f5f5f5" buttonColor="#2c2c2c"
+                contentStyle={{ height: 45 }}
+                onPress={() => {
+                    if (operation == "-") {
+                        setCount(count - 1);
 
-                    if (min !== undefined && count <= min) {
-                        setCount(min); 
-                    }
-                } else {
-                    setCount(count + 1);
+                        if (min !== undefined && count <= min) {
+                            setCount(min); 
+                        }
+                    } else {
+                        setCount(count + 1);
 
-                    if (max !== undefined && count >= max) {
-                        setCount(max);
+                        if (max !== undefined && count >= max) {
+                            setCount(max);
+                        }
                     }
-                }
             }}>{operation}</Button>
         </View>
     )

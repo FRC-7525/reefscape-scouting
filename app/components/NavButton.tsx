@@ -14,7 +14,8 @@ function NavButton({ text, pageName }: NavButtonProps) {
     return (
         <SafeAreaView style={styles.nav}>
             <Link href={"/" + pageName} asChild>
-                <Button textColor="#f5f5f5" buttonColor="#2c2c2c">{text}</Button>
+                <Button textColor="#f5f5f5" buttonColor="#2c2c2c"
+                    contentStyle={{ height: 80, width: 80 }}>{text}</Button>
             </Link>
         </SafeAreaView>
     )
