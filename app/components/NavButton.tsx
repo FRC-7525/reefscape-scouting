@@ -1,5 +1,7 @@
 import { Link } from 'expo-router';
-import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { Button } from 'react-native-paper';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface NavButtonProps {
     text: string;
@@ -10,26 +12,19 @@ function NavButton({ text, pageName }: NavButtonProps) {
     pageName ??= ""
 
     return (
-        <View>
+        <SafeAreaView style={styles.nav}>
             <Link href={"/" + pageName} asChild>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.text}>{text}</Text>
-                </TouchableOpacity>
+                <Button textColor="#f5f5f5" buttonColor="#2c2c2c">{text}</Button>
             </Link>
-        </View>
+        </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
-    button: {
-        backgroundColor: "#2c2c2c",
-        borderRadius: 8,
-        justifyContent: "center",
-        height: 27
-    },
-    text: {
-        color: "#f5f5f5",
-        textAlign: "center"
+    nav: {
+        position: 'absolute',
+        bottom: 10,
+        right: 20,
     }
 })
 
