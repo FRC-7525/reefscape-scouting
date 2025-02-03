@@ -1,5 +1,5 @@
 import { Link } from 'expo-router';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Button } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -12,19 +12,21 @@ function NavButton({ text, pageName }: NavButtonProps) {
     pageName ??= ""
 
     return (
-        <SafeAreaView style={styles.nav}>
-            <Link href={"/" + pageName} asChild>
-                <Button textColor="#f5f5f5" buttonColor="#2c2c2c"
-                    contentStyle={{ height: 80, width: 80 }}>{text}</Button>
-            </Link>
-        </SafeAreaView>
+        <View style={styles.nav}>
+            <SafeAreaView >
+                <Link href={"/" + pageName} asChild>
+                    <Button textColor="#f5f5f5" buttonColor="#2c2c2c"
+                        contentStyle={{ height: 80, width: 80 }}>{text}</Button>
+                </Link>
+            </SafeAreaView>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
     nav: {
         position: 'absolute',
-        bottom: 10,
+        bottom: 20,
         right: 20,
     }
 })
