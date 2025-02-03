@@ -1,22 +1,23 @@
-import RadioForm from 'react-native-simple-radio-button';
-import { View } from 'react-native'
-import { useState } from 'react'
+import { View, Text } from 'react-native'
+import { useState } from 'react';
+import { RadioButton } from 'react-native-paper';
 
 interface RadioButtonComponentProps {
-    data: {
-        label: string;
-        value: number
-    }[];
+    data: string[];
 }
 
 function RadioButtonComponent({ data }: RadioButtonComponentProps) {
-    const [value, setValue] = useState<number>(data[0]?.value || 0);
+    const [ checked, setChecked ] = useState(data[0]);
     return (
         <View>
-            <RadioForm
-                radio_props={data}
-                initial={value}
-                onPress={(value) => setValue(value)} />
+            { data.map((element, i) =>
+                <View key={element} style={[{ flexDirection: "row", alignItems: "center" }]}>
+                    <RadioButton.Android value={element}
+                        status={checked === element ? "checked" : "unchecked"}
+                        onPress={() => setChecked(element)} />    
+                    <Text>{element}</Text>
+                </View>
+            ) }
         </View>
     );
 } 

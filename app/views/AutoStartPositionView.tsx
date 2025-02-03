@@ -7,11 +7,6 @@ import HorizontalLine from '../components/HorizontalLine';
 function AutoStartPositionView () {
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(!isEnabled);
-    const data = [
-        { label: 'Scoring Table Side', value: 0 },
-        { label: 'Center', value: 1 },
-        { label: 'Audience Side', value: 2 },
-    ];
 
     return (
         <View>
@@ -26,7 +21,7 @@ function AutoStartPositionView () {
             <Text>{isEnabled ? 'Yes' : 'No'}</Text>
 
             <Text> {'Starting Position:'}</Text>
-            <RadioButtonComponent data= {data} />
+            <RadioButtonComponent data={["Scoring Table Side", "Center", "Audience Side"]} />
             
             <HorizontalLine />
         </View>   
