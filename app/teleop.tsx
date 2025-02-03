@@ -9,9 +9,7 @@ import AlgaeView from './views/AlgaeView';
 export default function App() {
     return (
         <View style={styles.container}>
-            <PageHeader title='Teleop' pageNumber='3/4' />
-
-            <NavButton text="Back" pageName="auto" />
+            <PageHeader title='Teleop' pageNumber='3/4' previous="auto" />
 
             <ReefAlgaeView />
             <AlgaeView />
