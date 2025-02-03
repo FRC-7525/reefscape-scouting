@@ -23,20 +23,4 @@ function PageHeader({ title, pageNumber, previous }: PageHeaderProps) {
     )
 }
 
-const styles = StyleSheet.create({
-    header: {
-        display: "flex",
-        justifyContent: "space-between",
-        flexDirection: "row"
-    },
-    centerText: {
-        textAlign: "center",
-        fontSize: 22
-    },
-    rightText: {
-        textAlign: "right",
-        fontSize: 22
-    },
-})
-
 export default PageHeader;
