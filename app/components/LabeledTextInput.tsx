@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, NativeSyntheticEvent, TextInputEndEditingEventData } from "react-native";
+import { Text, TouchableWithoutFeedback, Keyboard, StyleSheet, NativeSyntheticEvent, TextInputEndEditingEventData, View } from "react-native";
 import { TextInput } from "react-native-paper";
 
 interface LabeledTextInputProps {
@@ -12,14 +12,16 @@ interface LabeledTextInputProps {
 function LabeledTextInput({ label, editable, placeholder, inputMode, submit }: LabeledTextInputProps) {
     inputMode ??= "text";
     return (
-        <View>
-            { (label !== undefined) && <Text>{label}</Text> }
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View>
+                { (label !== undefined) && <Text>{label}</Text> }
 
-            <TextInput editable={editable} style={styles.input}
-                       placeholder={placeholder} placeholderTextColor={"#bbb"}
-                       mode="outlined" onEndEditing={submit}
-                       inputMode={inputMode} />
-        </View>
+                <TextInput editable={editable} style={styles.input}
+                        placeholder={placeholder} placeholderTextColor={"#bbb"}
+                        mode="outlined" onEndEditing={submit}
+                        inputMode={inputMode} />
+            </View>
+        </TouchableWithoutFeedback>
     )
 }
 
