@@ -10,7 +10,7 @@ function AutoStartPositionView () {
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => {
         setIsEnabled(!isEnabled);
-        updateLeftStart(isEnabled);
+        updateLeftStart(!isEnabled);
     }
 
     return (
