@@ -19,6 +19,10 @@ export function saveMatchData(data: MatchData): Promise<void> {
     return AsyncStorage.setItem("matchData", JSON.stringify(data));
 }
 
+export function deleteMatchData(): Promise<void> {
+    return AsyncStorage.removeItem("matchData");
+}
+
 function modifyMatchData(modifier: (data: MatchData) => MatchData): Promise<void> {
     return new Promise((resolve, reject) => {
         getMatchData().then((data) => {
