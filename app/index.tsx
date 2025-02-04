@@ -4,8 +4,9 @@ import Dropdown from './components/Dropdown';
 import NavButton from './components/NavButton';
 import PageHeader from './components/Header';
 import LabeledTextInput from './components/LabeledTextInput';
-import { getMatchData, updateMatchNumber, updateName, updateTeamNumber } from './api/data';
+import { getMatchData, updateMatchNumber, updateName, updateTeamNumber, updateDriverStation } from './api/data';
 import { Button } from 'react-native-paper';
+import { DRIVER_STATION } from './api/data_types';
 
 export default function App() {
     return (
@@ -24,11 +25,12 @@ export default function App() {
                 inputMode='numeric' submit={(e) => {
                     updateMatchNumber(Number(e.nativeEvent.text));
                 }}/>
-            <Dropdown label="Driver Station Location" items={["Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"]} placeholder="[Select location]" />
+
+            <Dropdown label="Driver Station Location"
+                items={["Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"]} placeholder="[Select location]"
+                onChange={(selected: string) => { updateDriverStation(selected as DRIVER_STATION) }} />
+            
             <NavButton text="Go" pageName="auto" />
-            <Button onPress={() => {
-                getMatchData().then((data) => console.log(data));
-            }}>Get Data</Button>
 
             <StatusBar style="auto" />
         </View>

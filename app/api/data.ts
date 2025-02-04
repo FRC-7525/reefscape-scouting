@@ -1,4 +1,4 @@
-import { MatchData } from "./data_types";
+import { DRIVER_STATION, MatchData } from "./data_types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export function getMatchData(): Promise<MatchData> {
@@ -44,5 +44,12 @@ export function updateTeamNumber(teamNumber: number): Promise<void> {
     return modifyMatchData((data) => {
         data.teamNumber = teamNumber;
         return data;
+    });
+}
+
+export function updateDriverStation(station: DRIVER_STATION): Promise<void> {
+    return modifyMatchData((data) => {
+        data.driverStation = station;
+        return data
     });
 }
