@@ -7,10 +7,10 @@ export function getMatchData(): Promise<MatchData> {
             .then((res) => {
                 if (res !== null) {
                     resolve(JSON.parse(res) as MatchData);
+                } else {
+                    console.warn("No match data found - Returning empty object.");
+                    resolve(new MatchData());
                 }
-                
-                console.warn("No match data found - Returning empty object.");
-                resolve(new MatchData());
             }).catch((err) => reject(err));
     })
 }

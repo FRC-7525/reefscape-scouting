@@ -18,7 +18,7 @@ function MathBlock({ min, max, label, showNumber, onPress }: MathBlockProps) {
 
     const mathButtonOnPress = (newCount: number) => {
         setCount(newCount)
-        onPress(count);
+        onPress(newCount);
     }
 
     return (

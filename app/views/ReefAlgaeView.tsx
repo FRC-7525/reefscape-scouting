@@ -16,9 +16,11 @@ function ReefAlgaeView({ phase }: ReefAlgaeViewProps) {
             <MathBlock label="L3" min={0} max={10} onPress={(count: number) => {
                 updateReefScores(phase, "L3", count);
             }} />
+
             <MathBlock label="L2" min={0} max={10} onPress={(count: number) => {
                 updateReefScores(phase, "L2", count);
             }} />
+            
             <MathBlock label="L1" min={0} max={10} onPress={(count: number) => {
                 updateReefScores(phase, "L1", count);
             }} />
