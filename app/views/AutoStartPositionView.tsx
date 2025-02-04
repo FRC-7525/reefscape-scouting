@@ -4,7 +4,7 @@ import { Switch } from 'react-native-paper';
 import React from 'react';
 import RadioButtonComponent from '../components/RadioButtonComponent';
 import HorizontalLine from '../components/HorizontalLine';
-import { updateLeftStart, updateStartPosition } from '../api/data';
+import { getMatchData, updateLeftStart, updateStartPosition } from '../api/data';
 import { START_POSITION } from '../api/data_types';
 
 function AutoStartPositionView () {
@@ -29,7 +29,8 @@ function AutoStartPositionView () {
             <RadioButtonComponent data={["Scoring Table Side", "Center", "Audience Side"]} 
                 onSelect={(option: string) => {
                     updateStartPosition(option as START_POSITION);
-                }} />
+                }}
+                oldSelected={getMatchData().then((data) => data["autonomous"]["startPosition"])} />
             
             <HorizontalLine />
         </View>   

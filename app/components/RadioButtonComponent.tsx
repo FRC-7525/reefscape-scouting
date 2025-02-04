@@ -1,16 +1,26 @@
 import { View, Text, GestureResponderEvent } from 'react-native'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RadioButton } from 'react-native-paper';
 
 interface RadioButtonComponentProps {
     data: string[];
     onSelect?: (option: string) => void;
+    oldSelected?: Promise<string>;
 }
 
-function RadioButtonComponent({ data, onSelect }: RadioButtonComponentProps) {
+function RadioButtonComponent({ data, onSelect, oldSelected }: RadioButtonComponentProps) {
     onSelect ??= () => {};
 
-    const [ checked, setChecked ] = useState(data[0]);
+    const [ checked, setChecked ] = useState("");
+
+    useEffect(() => {
+        const getChecked = async () => {
+            setChecked(await oldSelected ?? data[0]);
+        }
+
+        getChecked();
+    }, [])
+
     const onOptionSelect = (option: string) => {
         setChecked(option);
         onSelect(option);
