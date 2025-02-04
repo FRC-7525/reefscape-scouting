@@ -17,9 +17,6 @@ export default function App() {
 
             <ReefAlgaeView phase="autonomous" />
             <AlgaeView phase="autonomous" />
-            <Button onPress={() => {
-                getMatchData().then((data) => console.log(data));
-            }}>get match data</Button>
 
             <StatusBar style="auto" />
 

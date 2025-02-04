@@ -5,6 +5,8 @@ import ReefAlgaeView from './views/ReefAlgaeView';
 import EndgameView from './views/EndgameView';
 import PageHeader from './components/Header';
 import AlgaeView from './views/AlgaeView';
+import { getMatchData } from './api/data';
+import { Button } from 'react-native-paper';
 
 export default function App() {
     return (
@@ -14,6 +16,9 @@ export default function App() {
             <ReefAlgaeView phase="teleop" />
             <AlgaeView phase="teleop" />
             <EndgameView/>
+            <Button onPress={() => {
+                getMatchData().then((data) => console.log(data));
+            }}>get match data</Button>
 
             <StatusBar style="auto" />
         </View>
