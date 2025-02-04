@@ -12,25 +12,27 @@ interface MathButtonProps {
 };
 
 function MathButton({ operation, count, setCount, min, max }: MathButtonProps) {
+    const handlePress = () => {
+        if (operation == "-") {
+            setCount(count - 1);
+
+            if (min !== undefined && count <= min) {
+                setCount(min);
+            }
+        } else {
+            setCount(count + 1);
+
+            if (max !== undefined && count >= max) {
+                setCount(max);
+            }
+        }
+    }
+
     return (
         <View style={[{ flex: 4 }]}>
             <Button textColor={TEXT_COLOR} buttonColor={BACKGROUND_COLOR}
                 contentStyle={{ height: 45 }}
-                onPress={() => {
-                    if (operation == "-") {
-                        setCount(count - 1);
-
-                        if (min !== undefined && count <= min) {
-                            setCount(min); 
-                        }
-                    } else {
-                        setCount(count + 1);
-
-                        if (max !== undefined && count >= max) {
-                            setCount(max);
-                        }
-                    }
-            }}>{operation}</Button>
+                onPress={handlePress}>{operation}</Button>
         </View>
     )
 }
