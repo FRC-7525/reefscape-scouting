@@ -4,16 +4,23 @@ import Dropdown from './components/Dropdown';
 import NavButton from './components/NavButton';
 import PageHeader from './components/Header';
 import LabeledTextInput from './components/LabeledTextInput';
+import { getMatchData, updateName } from './api/data';
+import { Button } from 'react-native-paper';
 
 export default function App() {
     return (
         <View style={styles.container}>
             <PageHeader title='Main' pageNumber='1/4' />
-            <LabeledTextInput placeholder="Name" editable={true} />
-            <LabeledTextInput placeholder="Team number" editable={true} />
-            <LabeledTextInput placeholder="Match number" editable={true} />
+            <LabeledTextInput placeholder="Name" editable={true} submit={(e) => {
+                updateName(e.nativeEvent.text);
+            }}/>
+            <LabeledTextInput placeholder="Team number" editable={true} inputMode='numeric' />
+            <LabeledTextInput placeholder="Match number" editable={true} inputMode='numeric' />
             <Dropdown label="Driver Station Location" items={["Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"]} placeholder="[Select location]" />
             <NavButton text="Go" pageName="auto" />
+            <Button onPress={() => {
+                getMatchData().then((data) => console.log(data));
+            }}>Get Data</Button>
 
             <StatusBar style="auto" />
         </View>
