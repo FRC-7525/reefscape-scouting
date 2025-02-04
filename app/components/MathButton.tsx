@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { Button } from "react-native-paper";
+import { BACKGROUND_COLOR, TEXT_COLOR } from "../consts";
 
 interface MathButtonProps {
     operation: "+" | "-";
@@ -13,7 +14,7 @@ interface MathButtonProps {
 function MathButton({ operation, count, setCount, min, max }: MathButtonProps) {
     return (
         <View style={[{ flex: 4 }]}>
-            <Button textColor="#f5f5f5" buttonColor="#2c2c2c"
+            <Button textColor={TEXT_COLOR} buttonColor={BACKGROUND_COLOR}
                 contentStyle={{ height: 45 }}
                 onPress={() => {
                     if (operation == "-") {

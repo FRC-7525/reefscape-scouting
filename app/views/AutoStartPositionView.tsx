@@ -2,6 +2,7 @@ import { Text, View, StyleSheet } from 'react-native';
 import { useState } from 'react';
 import { Switch } from 'react-native-paper';
 import RadioButtonComponent from '../components/RadioButton';
+import { BACKGROUND_COLOR } from '../consts';
 
 function AutoStartPositionView () {
     const [isEnabled, setIsEnabled] = useState(false);
@@ -12,7 +13,7 @@ function AutoStartPositionView () {
             <View style={styles.side}>
                 <Text>{'Left start line:'}</Text>
                 <Switch
-                    color="#2c2c2c"
+                    color={BACKGROUND_COLOR}
                     onValueChange={toggleSwitch}
                     value={isEnabled} /> 
             </View>
