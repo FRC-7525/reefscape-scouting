@@ -1,9 +1,11 @@
 import MathBlock from '../components/MathBlock';
 import { View } from 'react-native';
+import SectionTitle from '../components/SectionTitle';
 
 function ReefAlgaeView() {
     return (
         <View>
+            <SectionTitle>Reef</SectionTitle>
             <MathBlock label="L4" min={0} max={10} />
             <MathBlock label="L3" min={0} max={10} />
             <MathBlock label="L2" min={0} max={10} />

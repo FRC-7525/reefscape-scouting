@@ -1,6 +1,5 @@
-import { Text, View, StyleSheet } from "react-native";
-import HorizontalLine from "./HorizontalLine";
-import { Appbar } from "react-native-paper";
+import { View } from "react-native";
+import { Appbar, Divider } from "react-native-paper";
 import { Link } from "expo-router";
 
 interface PageHeaderProps {
@@ -18,7 +17,7 @@ function PageHeader({ title, pageNumber, previous }: PageHeaderProps) {
                 </Link> }
                 <Appbar.Content title={`${title} (${pageNumber})`} />
             </Appbar.Header>
-            <HorizontalLine />
+            <Divider />
         </View>
     )
 }
