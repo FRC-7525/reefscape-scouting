@@ -12,12 +12,10 @@ export default function App() {
         <View style={styles.container}>
             <PageHeader title="Summary" pageNumber="4/4" previous='teleop' />
             <LabeledTextInput label="Notes" editable={true} multiline={true} 
-                submit={(e) => { updateNotes(e.nativeEvent.text); }}/>
+                submit={(e) => {
+                    updateNotes(e.nativeEvent.text);
+                }} oldValue={getMatchData().then((data) => data["notes"])} />
             <Dropdown label="Tags" items={["tag 1", "tag 2"]} placeholder="tag"></Dropdown>
-
-            <Button onPress={() => {
-                getMatchData().then((res) => console.log(res));
-            }} >Get matchData</Button>
             <StatusBar style="auto" />
         </View>
     );
