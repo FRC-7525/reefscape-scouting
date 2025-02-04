@@ -7,19 +7,26 @@ interface MathBlockProps {
     max?: number;
     label?: string;
     showNumber?: boolean;
+    onPress?: (count: number) => void;
 };
 
-function MathBlock({ min, max, label, showNumber }: MathBlockProps) {
+function MathBlock({ min, max, label, showNumber, onPress }: MathBlockProps) {
     label = (label !== undefined) ? label + " " : "";
+    onPress ??= () => {};
     showNumber ??= true;
     const [ count, setCount ] = useState(0);
 
+    const mathButtonOnPress = (newCount: number) => {
+        setCount(newCount)
+        onPress(count);
+    }
+
     return (
         <Text>
-            <MathButton operation="-" count={count} setCount={setCount} min={min} />
+            <MathButton operation="-" count={count} setCount={mathButtonOnPress} min={min} />
             { label }
             { showNumber && <Text>{count}</Text> }
-            <MathButton operation="+" count={count} setCount={setCount} max={max} />
+            <MathButton operation="+" count={count} setCount={mathButtonOnPress} max={max} />
         </Text>
     )
 }

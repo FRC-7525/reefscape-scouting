@@ -5,6 +5,8 @@ import NavButton from './components/NavButton';
 import ReefAlgaeView from './views/ReefAlgaeView';
 import AutoStartPositionView from './views/AutoStartPositionView'
 import AlgaeView from './views/AlgaeView';
+import { Button } from 'react-native-paper';
+import { getMatchData } from './api/data';
 
 export default function App() {
     return (
@@ -13,8 +15,11 @@ export default function App() {
 
             <AutoStartPositionView/>
 
-            <ReefAlgaeView />
+            <ReefAlgaeView phase="autonomous" />
             <AlgaeView />
+            <Button onPress={() => {
+                getMatchData().then((data) => console.log(data));
+            }}>get match data</Button>
 
             <StatusBar style="auto" />
 

@@ -30,6 +30,7 @@ export default function App() {
                 items={["Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"]} placeholder="[Select location]"
                 onChange={(selected: string) => { updateDriverStation(selected as DRIVER_STATION) }} />
             
+            
             <NavButton text="Go" pageName="auto" />
 
             <StatusBar style="auto" />
