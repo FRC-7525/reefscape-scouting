@@ -17,7 +17,7 @@ export enum CLIMB_TYPE {
     DEEP_CLIMB = "Deep Climb",
     SHALLOW_CLIMB = "Shallow Climb",
     PARK = "Park",
-    NO_CLIMB = "No Climb",
+    NO_CLIMB = "Nothing",
 };
 
 
@@ -36,11 +36,11 @@ class PhaseData {
 
 export class AutoData extends PhaseData {
     leftStart: boolean = false;
-    startPosition: START_POSITION = START_POSITION.AUDIENCE;
+    startPosition: START_POSITION = START_POSITION.SCORING_TABLE;
 }
 
 export class TeleopData extends PhaseData {
-    climb: CLIMB_TYPE = CLIMB_TYPE.NO_CLIMB;
+    climb: CLIMB_TYPE = CLIMB_TYPE.DEEP_CLIMB;
 }
 
 export class MatchData {
