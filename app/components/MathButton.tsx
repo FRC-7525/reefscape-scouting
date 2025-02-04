@@ -4,7 +4,7 @@ import { Button } from "react-native";
 interface MathButtonProps {
     operation: "+" | "-";
     count: number;
-    setCount: Dispatch<SetStateAction<number>>;
+    setCount: (newCount: number) => void;
     min?: number;
     max?: number;
 };
@@ -13,17 +13,21 @@ function MathButton({ operation, count, setCount, min, max }: MathButtonProps) {
     return (
         <Button title={operation} onPress={() => {
             if (operation == "-") {
-                setCount(count - 1);
+                let newCount = count - 1
 
                 if (min !== undefined && count <= min) {
-                    setCount(min); 
+                    newCount = min;
                 }
+
+                setCount(newCount);
             } else {
-                setCount(count + 1);
+                let newCount = count + 1
 
                 if (max !== undefined && count >= max) {
-                    setCount(max);
+                    newCount = max;
                 }
+
+                setCount(newCount);
             }
         }} />
     )
