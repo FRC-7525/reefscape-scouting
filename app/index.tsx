@@ -4,7 +4,7 @@ import Dropdown from './components/Dropdown';
 import NavButton from './components/NavButton';
 import PageHeader from './components/Header';
 import LabeledTextInput from './components/LabeledTextInput';
-import { getMatchData, updateName } from './api/data';
+import { getMatchData, updateMatchNumber, updateName, updateTeamNumber } from './api/data';
 import { Button } from 'react-native-paper';
 
 export default function App() {
@@ -14,8 +14,16 @@ export default function App() {
             <LabeledTextInput placeholder="Name" editable={true} submit={(e) => {
                 updateName(e.nativeEvent.text);
             }}/>
-            <LabeledTextInput placeholder="Team number" editable={true} inputMode='numeric' />
-            <LabeledTextInput placeholder="Match number" editable={true} inputMode='numeric' />
+            
+            <LabeledTextInput placeholder="Team number" editable={true}
+                inputMode='numeric' submit={(e) => {
+                    updateTeamNumber(Number(e.nativeEvent.text));
+                }} />
+
+            <LabeledTextInput placeholder="Match number" editable={true}
+                inputMode='numeric' submit={(e) => {
+                    updateMatchNumber(Number(e.nativeEvent.text));
+                }}/>
             <Dropdown label="Driver Station Location" items={["Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"]} placeholder="[Select location]" />
             <NavButton text="Go" pageName="auto" />
             <Button onPress={() => {
