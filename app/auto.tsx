@@ -11,16 +11,15 @@ import { getMatchData } from './api/data';
 export default function App() {
     return (
         <View style={styles.container}>
-            <PageHeader title='Autonomous' pageNumber='2/4' previous="" />
+            <PageHeader title='Autonomous' pageNumber='2/4' previous='' />
 
             <AutoStartPositionView/>
 
             <ReefAlgaeView phase="autonomous" />
             <AlgaeView phase="autonomous" />
 
-            <StatusBar style="auto" />
-
             <NavButton text="Next" pageName="teleop" />
+            <StatusBar style="auto" />
         </View>
     );
 }

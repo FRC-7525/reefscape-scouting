@@ -1,6 +1,7 @@
-import { Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import MathButton from "./MathButton";
 import { useEffect, useState } from "react";
+import { Chip } from "react-native-paper";
 
 interface MathBlockProps {
     min?: number;
@@ -31,13 +32,28 @@ function MathBlock({ min, max, label, showNumber, onPress, oldCount }: MathBlock
     }
 
     return (
-        <Text>
+        <View style={styles.container}>
             <MathButton operation="-" count={count} setCount={mathButtonOnPress} min={min} />
-            { label }
-            { showNumber && <Text>{count}</Text> }
+            <Text style={styles.text}>{ label }</Text>
+            { showNumber && <Chip style={styles.chip}>{count}</Chip> }
             <MathButton operation="+" count={count} setCount={mathButtonOnPress} max={max} />
-        </Text>
+        </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        marginVertical: 4,
+        flexDirection: "row",
+        alignItems: "center",
+        columnGap: 10
+    },
+    text: {
+        flex: 3,
+        textAlign: "center",
+    },
+    chip: {
+    }
+})
 
 export default MathBlock;

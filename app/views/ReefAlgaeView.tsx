@@ -1,6 +1,7 @@
 import { getMatchData, updateReefScores } from '../api/data';
 import MathBlock from '../components/MathBlock';
 import { View } from 'react-native';
+import SectionTitle from '../components/SectionTitle';
 
 interface ReefAlgaeViewProps {
     phase: "teleop" | "autonomous";
@@ -13,6 +14,7 @@ function ReefAlgaeView({ phase }: ReefAlgaeViewProps) {
 
     return (
         <View>
+            <SectionTitle>Reef</SectionTitle>
             <MathBlock label="L4" min={0} max={10} onPress={(count: number) => {
                 updateReefScores(phase, "L4", count);
             }} oldCount={getLevelData("L4")} />
