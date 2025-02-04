@@ -89,3 +89,10 @@ export function updateClimb(climbType: CLIMB_TYPE): Promise<void> {
         return data;
     });
 }
+
+export function updateNotes(notes: string): Promise<void> {
+    return modifyMatchData((data) => {
+        data["notes"] = notes;
+        return data;
+    });
+}

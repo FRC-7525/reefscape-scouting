@@ -6,10 +6,11 @@ interface LabeledTextInputProps {
     editable?: boolean;
     placeholder?: string;
     inputMode?: "text" | "numeric";
+    multiline?: boolean;
     submit?: (e: NativeSyntheticEvent<TextInputEndEditingEventData>) => void;
 }
 
-function LabeledTextInput({ label, editable, placeholder, inputMode, submit }: LabeledTextInputProps) {
+function LabeledTextInput({ label, editable, placeholder, inputMode, multiline, submit }: LabeledTextInputProps) {
     inputMode ??= "text";
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -19,7 +20,7 @@ function LabeledTextInput({ label, editable, placeholder, inputMode, submit }: L
                 <TextInput editable={editable} style={styles.input}
                         placeholder={placeholder} placeholderTextColor={"#bbb"}
                         mode="outlined" onEndEditing={submit}
-                        inputMode={inputMode} />
+                        inputMode={inputMode} multiline={multiline} />
             </View>
         </TouchableWithoutFeedback>
     )
