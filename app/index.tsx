@@ -14,17 +14,23 @@ export default function App() {
             <PageHeader title='Main' pageNumber='1/4' />
             <LabeledTextInput placeholder="Name" editable={true} submit={(e) => {
                 updateName(e.nativeEvent.text);
-            }}/>
+            }} oldValue={
+                getMatchData().then((data) => data["scouterName"])
+            } />
             
             <LabeledTextInput placeholder="Team number" editable={true}
                 inputMode='numeric' submit={(e) => {
                     updateTeamNumber(Number(e.nativeEvent.text));
-                }} />
+                }} oldValue={
+                    getMatchData().then((data) => data["teamNumber"].toString())
+                } />
 
             <LabeledTextInput placeholder="Match number" editable={true}
                 inputMode='numeric' submit={(e) => {
                     updateMatchNumber(Number(e.nativeEvent.text));
-                }}/>
+                }} oldValue={
+                    getMatchData().then((data) => data["matchNumber"].toString())
+                } />
 
             <Dropdown label="Driver Station Location"
                 items={["Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"]} placeholder="[Select location]"
