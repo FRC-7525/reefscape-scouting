@@ -1,6 +1,6 @@
 import { Text } from "react-native";
 import MathButton from "./MathButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface MathBlockProps {
     min?: number;
@@ -8,13 +8,22 @@ interface MathBlockProps {
     label?: string;
     showNumber?: boolean;
     onPress?: (count: number) => void;
+    oldCount?: Promise<number>;
 };
 
-function MathBlock({ min, max, label, showNumber, onPress }: MathBlockProps) {
+function MathBlock({ min, max, label, showNumber, onPress, oldCount }: MathBlockProps) {
     label = (label !== undefined) ? label + " " : "";
     onPress ??= () => {};
     showNumber ??= true;
     const [ count, setCount ] = useState(0);
+
+    useEffect(() => {
+        const getOldCount = async () => {
+            setCount(await oldCount ?? 0);
+        }
+
+        getOldCount();
+    }, []);
 
     const mathButtonOnPress = (newCount: number) => {
         setCount(newCount)
