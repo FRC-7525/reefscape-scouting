@@ -61,3 +61,10 @@ export function updateReefScores(phase: "teleop" | "autonomous", level: "L4" | "
         return data;
     });
 }
+
+export function updateLeftStart(leftStart: boolean): Promise<void> {
+    return modifyMatchData((data) => {
+        data["autonomous"]["leftStart"] = leftStart;
+        return data;
+    });
+}

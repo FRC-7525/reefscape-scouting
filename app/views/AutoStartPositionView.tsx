@@ -4,10 +4,14 @@ import { Switch } from 'react-native-paper';
 import React from 'react';
 import RadioButtonComponent from '../components/RadioButtonComponent';
 import HorizontalLine from '../components/HorizontalLine';
+import { updateLeftStart } from '../api/data';
 
 function AutoStartPositionView () {
     const [isEnabled, setIsEnabled] = useState(false);
-    const toggleSwitch = () => setIsEnabled(!isEnabled);
+    const toggleSwitch = () => {
+        setIsEnabled(!isEnabled);
+        updateLeftStart(isEnabled);
+    }
 
     return (
         <View>
