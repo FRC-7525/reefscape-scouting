@@ -12,7 +12,7 @@ export default function App() {
             <PageHeader title='Teleop' pageNumber='3/4' previous="auto" />
 
             <ReefAlgaeView phase="teleop" />
-            <AlgaeView />
+            <AlgaeView phase="teleop" />
             <EndgameView/>
 
             <StatusBar style="auto" />

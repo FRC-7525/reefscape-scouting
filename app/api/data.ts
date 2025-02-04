@@ -1,4 +1,4 @@
-import { DRIVER_STATION, MatchData } from "./data_types";
+import { DRIVER_STATION, MatchData, START_POSITION } from "./data_types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export function getMatchData(): Promise<MatchData> {
@@ -65,6 +65,20 @@ export function updateReefScores(phase: "teleop" | "autonomous", level: "L4" | "
 export function updateLeftStart(leftStart: boolean): Promise<void> {
     return modifyMatchData((data) => {
         data["autonomous"]["leftStart"] = leftStart;
+        return data;
+    });
+}
+
+export function updateStartPosition(position: START_POSITION): Promise<void> {
+    return modifyMatchData((data) => {
+        data["autonomous"]["startPosition"] = position;
+        return data;
+    });
+}
+
+export function updateAlgaeScore(phase: "teleop" | "autonomous", location: "processor" | "net", score: number): Promise<void> {
+    return modifyMatchData((data) => {
+        data[phase]["algae"][location] = score;
         return data;
     });
 }

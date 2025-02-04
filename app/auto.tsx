@@ -16,7 +16,7 @@ export default function App() {
             <AutoStartPositionView/>
 
             <ReefAlgaeView phase="autonomous" />
-            <AlgaeView />
+            <AlgaeView phase="autonomous" />
             <Button onPress={() => {
                 getMatchData().then((data) => console.log(data));
             }}>get match data</Button>
