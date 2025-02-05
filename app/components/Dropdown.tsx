@@ -4,11 +4,13 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface DropdownProps {
     label?: string;
-    items: Array<string>;
+    items: string[];
     placeholder?: string;
+    onChange?: (selected: string) => void;
 }
 
-function Dropdown({ label, items, placeholder }: DropdownProps) {
+function Dropdown({ label, items, placeholder, onChange }: DropdownProps) {
+    onChange ??= () => {};
     var hideLabel = false
 
     if (label == undefined) {
@@ -22,9 +24,10 @@ function Dropdown({ label, items, placeholder }: DropdownProps) {
 
             <SelectDropdown
                 data={items}
-                onSelect={(selectedItem, index) => {
-                    console.log(selectedItem, index);
+                onSelect={(selected: string) => {
+                    onChange(selected);
                 }}
+
                 renderButton={(selectedItem, _isOpened) => {
                     return (
                         <View style={styles.dropdownButtonStyle}>

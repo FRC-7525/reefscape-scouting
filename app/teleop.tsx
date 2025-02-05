@@ -11,10 +11,12 @@ export default function App() {
         <View style={styles.container}>
             <PageHeader title='Teleop' pageNumber='3/4' previous="auto" />
 
-            <ReefAlgaeView />
-            <AlgaeView />
+            <ReefAlgaeView phase="teleop" />
+            <AlgaeView phase="teleop" />
             <EndgameView/>
+            
 
+            <NavButton pageName='summary' text='Next' />
             <StatusBar style="auto" />
         </View>
     );

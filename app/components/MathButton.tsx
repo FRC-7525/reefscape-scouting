@@ -6,7 +6,7 @@ import { BACKGROUND_COLOR, TEXT_COLOR } from "../consts";
 interface MathButtonProps {
     operation: "+" | "-";
     count: number;
-    setCount: Dispatch<SetStateAction<number>>;
+    setCount: (newCount: number) => void;
     min?: number;
     max?: number;
 };

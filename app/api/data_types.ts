@@ -17,34 +17,41 @@ export enum CLIMB_TYPE {
     DEEP_CLIMB = "Deep Climb",
     SHALLOW_CLIMB = "Shallow Climb",
     PARK = "Park",
-    NO_CLIMB = "No Climb",
+    NO_CLIMB = "Nothing",
 };
 
-export interface Score {
-    reef: number[];
-    algae: number[];
+
+class PhaseData {
+    reef: {
+        L4: number,
+        L3: number,
+        L2: number,
+        L1: number,
+    } = { L4: 0, L3: 0, L2: 0, L1: 0 };
+    algae: {
+        net: number,
+        processor: number,
+    } = { net: 0, processor: 0 };
+};
+
+export class AutoData extends PhaseData {
+    leftStart: boolean = false;
+    startPosition: START_POSITION = START_POSITION.SCORING_TABLE;
 }
 
-export interface AutoData {
-    left_start: boolean;
-    start_position: START_POSITION;
-    score: Score;
+export class TeleopData extends PhaseData {
+    climb: CLIMB_TYPE = CLIMB_TYPE.DEEP_CLIMB;
 }
 
-export interface TeleopData {
-    climb: CLIMB_TYPE;
-    score: Score;
-}
-
-export interface MatchData {
-    scouter_name: string;
-    team_number: number;
-    match_number: number;
-    driver_station: DRIVER_STATION;
-    autonomous: AutoData;
-    teleop: TeleopData;
-    notes: string;
-    tags: Tag[];
+export class MatchData {
+    scouterName: string = "";
+    teamNumber: number = 0;
+    matchNumber: number = 0;
+    driverStation: DRIVER_STATION = DRIVER_STATION.BLUE_ONE;
+    autonomous: AutoData = new AutoData();
+    teleop: TeleopData = new TeleopData();
+    notes: string = "";
+    tags: Tag[] = [];
 }
 
 export type GamePhase = "teleop" | "autonomous";
