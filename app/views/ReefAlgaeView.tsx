@@ -12,6 +12,7 @@ function ReefAlgaeView({ phase }: ReefAlgaeViewProps) {
         return getMatchData().then((data) => data[phase]["reef"][level]);
     };
 
+
     return (
         <View>
             <SectionTitle>Reef</SectionTitle>

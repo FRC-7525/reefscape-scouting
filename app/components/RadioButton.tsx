@@ -20,7 +20,7 @@ function RadioButtonComponent({ data, onSelect, oldSelected }: RadioButtonCompon
         }
 
         getChecked();
-    }, [])
+    }, []);
 
     const onOptionSelect = (option: string) => {
         setChecked(option);

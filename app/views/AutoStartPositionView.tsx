@@ -6,6 +6,7 @@ import { BACKGROUND_COLOR } from '../consts';
 import { getMatchData, updateLeftStart, updateStartPosition } from '../api/data';
 import { START_POSITION } from '../api/data_types';
 
+
 function AutoStartPositionView () {
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => {

@@ -5,6 +5,7 @@ import { Divider } from "react-native-paper";
 import { getMatchData, updateClimb } from "../api/data";
 import { CLIMB_TYPE } from "../api/data_types";
 
+
 function EndgameView() {
     return (
         <View>
