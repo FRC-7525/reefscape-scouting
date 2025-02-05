@@ -10,7 +10,7 @@ function EndgameView() {
     return (
         <View>
             <Divider />
-            <SectionTitle>{"Climb?:"}</SectionTitle>
+            <SectionTitle>{"Climb"}</SectionTitle>
            
             <View style={styles.container}>
                 <View style={styles.centerRadioButtons}>
