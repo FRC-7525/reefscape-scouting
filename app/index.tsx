@@ -5,10 +5,13 @@ import NavButton from './components/NavButton';
 import PageHeader from './components/Header';
 import LabeledTextInput from './components/LabeledTextInput';
 import { getMatchData, updateMatchNumber, updateName, updateTeamNumber, updateDriverStation } from './api/data';
-import { Button } from 'react-native-paper';
+import { Button, SegmentedButtons } from 'react-native-paper';
 import { DRIVER_STATION } from './api/data_types';
+import { useState } from 'react';
+import RadioButtonComponent from './components/RadioButton';
 
 export default function App() {
+    const [ v, settV] = useState("");
     return (
         <View style={styles.container}>
             <PageHeader title='Main' pageNumber='1/4' />
@@ -32,9 +35,10 @@ export default function App() {
                     getMatchData().then((data) => data["matchNumber"].toString())
                 } />
 
-            <Dropdown label="Driver Station Location"
-                items={["Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"]} placeholder="[Select location]"
-                onChange={(selected: string) => { updateDriverStation(selected as DRIVER_STATION) }} />
+            <RadioButtonComponent
+                data={["Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"]}
+                onSelect={(selected: string) => { updateDriverStation(selected as DRIVER_STATION) }}
+                oldSelected={getMatchData().then((data) => data["driverStation"])} />
             
             <NavButton text="Go" pageName="auto" />
 
