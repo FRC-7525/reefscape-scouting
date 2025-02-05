@@ -1,17 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
-import Dropdown from './components/Dropdown';
 import NavButton from './components/NavButton';
 import PageHeader from './components/Header';
 import LabeledTextInput from './components/LabeledTextInput';
 import { getMatchData, updateMatchNumber, updateName, updateTeamNumber, updateDriverStation } from './api/data';
-import { Button, SegmentedButtons } from 'react-native-paper';
 import { DRIVER_STATION } from './api/data_types';
 import { useState } from 'react';
 import RadioButtonComponent from './components/RadioButton';
 
 export default function App() {
-    const [ v, settV] = useState("");
     return (
         <View style={styles.container}>
             <PageHeader title='Main' pageNumber='1/4' />
