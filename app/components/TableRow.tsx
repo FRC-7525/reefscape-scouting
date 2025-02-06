@@ -5,17 +5,15 @@ import { DataTable } from "react-native-paper";
 
 interface TableRowProps {
     label: string;
-    data: [ Promise<string>, Promise<string>? ];
+    data: Promise<string>;
 }
 
 function TableRow({ label, data }: TableRowProps) {
     const [ firstEntry, setFirstEntry ] = useState("");
-    const [ secondEntry, setSecondEntry ] = useState("");
 
     useEffect(() => {
         const getEntries = async () => {
-            setFirstEntry(await data[0] ?? "");
-            setSecondEntry(await data[1] ?? "");
+            setFirstEntry(await data ?? "");
         }
 
         getEntries();
@@ -26,11 +24,9 @@ function TableRow({ label, data }: TableRowProps) {
             <DataTable.Cell>
                 {label}
             </DataTable.Cell>
+
             <DataTable.Cell>
                 {firstEntry}
-            </DataTable.Cell>
-            <DataTable.Cell>
-                {secondEntry}
             </DataTable.Cell>
         </DataTable.Row>
     )

@@ -8,7 +8,7 @@ function TableHeader({ titles }: TableHeaderProps) {
     return (
         <DataTable.Header>
             { titles.map((title) => 
-                <DataTable.Title key={title}>{title}</DataTable.Title>
+                <DataTable.Title style={{justifyContent: "center", flex: 1}} key={title}>{title}</DataTable.Title>
             )}
         </DataTable.Header>
     )

@@ -1,4 +1,4 @@
-import { CLIMB_TYPE, DRIVER_STATION, MatchData, START_POSITION } from "./data_types";
+import { AlgaeLevel, CLIMB_TYPE, DRIVER_STATION, GamePhase, MatchData, ReefLevel, START_POSITION } from "./data_types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export function getMatchData(): Promise<MatchData> {
@@ -59,7 +59,7 @@ export function updateDriverStation(station: DRIVER_STATION): Promise<void> {
     });
 }
 
-export function updateReefScores(phase: "teleop" | "autonomous", level: "L4" | "L3" | "L2" | "L1", score: number): Promise<void> {
+export function updateReefScores(phase: GamePhase, level: ReefLevel, score: number): Promise<void> {
     return modifyMatchData((data) => {
         data[phase]["reef"][level] = score;
         return data;
@@ -80,7 +80,7 @@ export function updateStartPosition(position: START_POSITION): Promise<void> {
     });
 }
 
-export function updateAlgaeScore(phase: "teleop" | "autonomous", location: "processor" | "net", score: number): Promise<void> {
+export function updateAlgaeScore(phase: GamePhase, location: AlgaeLevel, score: number): Promise<void> {
     return modifyMatchData((data) => {
         data[phase]["algae"][location] = score;
         return data;
