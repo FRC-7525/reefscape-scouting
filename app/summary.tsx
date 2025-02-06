@@ -5,7 +5,9 @@ import NavButton from './components/NavButton';
 import LabeledTextInput from './components/LabeledTextInput';
 import { getMatchData, updateNotes } from './api/data';
 import PageHeader from './components/Header';
-import { Button } from 'react-native-paper';
+import { Button, DataTable } from 'react-native-paper';
+import TableHeader from './components/TableHeader';
+import TableRow from './components/TableRow';
 
 export default function App() {
     return (
@@ -17,6 +19,10 @@ export default function App() {
                 }} oldValue={getMatchData().then((data) => data["notes"])} />
             <Dropdown label="Tags" items={["tag 1", "tag 2"]} placeholder="tag"></Dropdown>
             <StatusBar style="auto" />
+
+            <DataTable>
+                <TableHeader titles={[ "Location", "Autonomous", "Teleop" ]} />
+            </DataTable>
         </View>
     );
 }
