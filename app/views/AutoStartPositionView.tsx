@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet } from 'react-native';
 import { useState } from 'react';
-import RadioButtonComponent from '../components/RadioButton';
+import RadioButton from '../components/RadioButton';
 import { getMatchData, updateLeftStart, updateStartPosition } from '../api/data';
 import { START_POSITION } from '../api/data_types';
 import Switch from '../components/Switch';
@@ -20,7 +20,7 @@ function AutoStartPositionView () {
             
             <View style={styles.side}>
                 <Text> {'Starting Position:'}</Text>
-                <RadioButtonComponent data={["Scoring Table Side", "Center", "Audience Side"]}  
+                <RadioButton data={["Scoring Table Side", "Center", "Audience Side"]}  
                     onSelect={(option: string) => {
                         updateStartPosition(option as START_POSITION);
                     }}
