@@ -7,6 +7,7 @@ import { getMatchData, updateNotes } from './api/data';
 import PageHeader from './components/Header';
 import { Button } from 'react-native-paper';
 
+
 export default function App() {
     return (
         <View style={styles.container}>
