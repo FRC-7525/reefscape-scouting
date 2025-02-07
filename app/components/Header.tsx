@@ -12,7 +12,7 @@ interface PageHeaderProps {
 }
 
 function PageHeader({ title, pageNumber, previous }: PageHeaderProps) {
-    const [ teamNumber, setTeamNumber ] = useState("7525");
+    const [ teamNumber, setTeamNumber ] = useState("");
     const [ chipColor, setChipColor ] = useState(BACKGROUND_COLOR);
 
     useEffect(() => {
