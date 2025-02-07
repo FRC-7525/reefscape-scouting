@@ -2,13 +2,14 @@ import { getMatchData, updateReefScores } from '../api/data';
 import MathBlock from '../components/MathBlock';
 import { View } from 'react-native';
 import SectionTitle from '../components/SectionTitle';
+import { GamePhase, ReefLevel } from '../api/data_types';
 
 interface ReefAlgaeViewProps {
-    phase: "teleop" | "autonomous";
+    phase: GamePhase;
 };
 
 function ReefAlgaeView({ phase }: ReefAlgaeViewProps) {
-    const getLevelData = async (level: "L4" | "L3" | "L2" | "L1") => {
+    const getLevelData = async (level: ReefLevel) => {
         return getMatchData().then((data) => data[phase]["reef"][level]);
     };
 

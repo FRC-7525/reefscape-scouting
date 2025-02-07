@@ -3,13 +3,14 @@ import MathBlock from "../components/MathBlock";
 import SectionTitle from "../components/SectionTitle";
 import { Divider } from "react-native-paper";
 import { getMatchData, updateAlgaeScore } from "../api/data";
+import { AlgaeLevel, GamePhase } from "../api/data_types";
 
 interface AlgaeViewProps {
-    phase: "teleop" | "autonomous";
+    phase: GamePhase;
 }
 
 function AlgaeView({ phase }: AlgaeViewProps) {
-    const getOldCount = (location: "net" | "processor") => {
+    const getOldCount = (location: AlgaeLevel) => {
         return getMatchData().then((data) => data[phase]["algae"][location]);
     }
 
