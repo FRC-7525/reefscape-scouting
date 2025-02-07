@@ -15,7 +15,7 @@ export default function App() {
             <LabeledTextInput label="Notes" editable={true} multiline={true} 
                 submit={(e) => {
                     updateNotes(e.nativeEvent.text);
-                }} oldValue={getMatchData().then((data) => data["notes"])} />
+                }} oldValue={getMatchData().then((data) => data["notes"])} required />
             <Dropdown label="Tags" items={["tag 1", "tag 2"]} placeholder="tag"></Dropdown>
             <StatusBar style="auto" />
         </View>

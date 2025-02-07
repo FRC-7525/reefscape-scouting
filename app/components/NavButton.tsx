@@ -7,10 +7,12 @@ import { BACKGROUND_COLOR, TEXT_COLOR } from '../consts';
 interface NavButtonProps {
     text: string;
     pageName?: string;
+    disabled?: boolean;
 }
 
-function NavButton({ text, pageName }: NavButtonProps) {
-    pageName ??= ""
+function NavButton({ text, pageName, disabled }: NavButtonProps) {
+    pageName ??= "";
+    disabled ??= false;
     const insets = useSafeAreaInsets();
 
     return (
@@ -20,8 +22,8 @@ function NavButton({ text, pageName }: NavButtonProps) {
             right: 20 + insets.right
         }]}>
             <Link href={"/" + pageName} asChild>
-                <Button textColor={TEXT_COLOR} buttonColor={BACKGROUND_COLOR}
-                    contentStyle={{ height: 80, width: 80 }}>{text}</Button>
+                <Button textColor={TEXT_COLOR} buttonColor={BACKGROUND_COLOR} mode="contained"
+                    contentStyle={{ height: 80, width: 80 }} disabled={disabled}>{text}</Button>
             </Link>
         </View>
     )
