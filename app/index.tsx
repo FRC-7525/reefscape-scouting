@@ -28,28 +28,28 @@ export default function App() {
     return (
         <View style={styles.container}>
             <PageHeader title='Main' pageNumber='1/4' />
-            <LabeledTextInput placeholder="Name" editable={true} submit={(e) => {
+            <LabeledTextInput label="Name" editable={true} submit={(e) => {
                 updateName(e.nativeEvent.text);
                 setNameFilled(e.nativeEvent.text !== "");
             }} oldValue={
                 getMatchData().then((data) => data["scouterName"])
-            } />
+            } required />
             
-            <LabeledTextInput placeholder="Team number" editable={true}
+            <LabeledTextInput label="Team Number" editable={true}
                 inputMode='numeric' submit={(e) => {
                     updateTeamNumber(Number(e.nativeEvent.text));
                     setTeamNumberFilled(e.nativeEvent.text !== "" && e.nativeEvent.text !== "0");
                 }} oldValue={
                     getMatchData().then((data) => data["teamNumber"].toString())
-                } />
+                } required />
 
-            <LabeledTextInput placeholder="Match number" editable={true}
+            <LabeledTextInput label="Match number" editable={true}
                 inputMode='numeric' submit={(e) => {
                     updateMatchNumber(Number(e.nativeEvent.text));
                     setMatchFilled(e.nativeEvent.text !== "" && e.nativeEvent.text !== "0");
                 }} oldValue={
                     getMatchData().then((data) => data["matchNumber"].toString())
-                } />
+                } required />
 
             <RadioButton
                 data={["Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"]}
