@@ -1,8 +1,9 @@
 import { View } from "react-native";
-import { Appbar, Divider } from "react-native-paper";
+import { Appbar, Chip, Divider, Icon, Title } from "react-native-paper";
 import { Link } from "expo-router";
 import { useEffect, useState } from "react";
 import { getMatchData } from "../api/data";
+import { BACKGROUND_COLOR, TEXT_COLOR } from "../consts";
 
 interface PageHeaderProps {
     title: string;
@@ -11,8 +12,8 @@ interface PageHeaderProps {
 }
 
 function PageHeader({ title, pageNumber, previous }: PageHeaderProps) {
-    const [ teamNumber, setTeamNumber ] = useState("");
-    const [ iconColor, setIconColor ] = useState("");
+    const [ teamNumber, setTeamNumber ] = useState("7525");
+    const [ chipColor, setChipColor ] = useState(BACKGROUND_COLOR);
 
     useEffect(() => {
         getMatchData().then((data) => {
@@ -21,9 +22,9 @@ function PageHeader({ title, pageNumber, previous }: PageHeaderProps) {
             }
 
             if (data["driverStation"].includes("Red")) {
-                setIconColor("#f54242");
+                setChipColor("#f54242");
             } else {
-                setIconColor("#4242f5");
+                setChipColor("#5252aa");
             }
         });
     }, []);
@@ -35,8 +36,11 @@ function PageHeader({ title, pageNumber, previous }: PageHeaderProps) {
                     <Appbar.BackAction />
                 </Link> }
                 <Appbar.Content title={`${title} (${pageNumber})`} />
-                <Appbar.Content title={teamNumber} />
-                <Appbar.Action icon="robot" color={iconColor} />
+                <Appbar.Content style={{alignItems: "center"}} title={
+                    <Chip style={{ backgroundColor: chipColor }} textStyle={{ color: TEXT_COLOR }}>
+                        {teamNumber}
+                    </Chip>
+                } />
             </Appbar.Header>
             <Divider />
         </View>
