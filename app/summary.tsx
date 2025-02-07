@@ -6,6 +6,7 @@ import LabeledTextInput from './components/LabeledTextInput';
 import { getMatchData, updateNotes } from './api/data';
 import PageHeader from './components/Header';
 import { Button } from 'react-native-paper';
+import Checkbox from './components/Checkbox';
 
 export default function App() {
     return (
@@ -15,7 +16,7 @@ export default function App() {
                 submit={(e) => {
                     updateNotes(e.nativeEvent.text);
                 }} oldValue={getMatchData().then((data) => data["notes"])} />
-            <Dropdown label="Tags" items={["tag 1", "tag 2"]} placeholder="tag"></Dropdown>
+
             <StatusBar style="auto" />
         </View>
     );
