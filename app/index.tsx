@@ -6,7 +6,7 @@ import LabeledTextInput from './components/LabeledTextInput';
 import { getMatchData, updateMatchNumber, updateName, updateTeamNumber, updateDriverStation } from './api/data';
 import { DRIVER_STATION } from './api/data_types';
 import { useState } from 'react';
-import RadioButtonComponent from './components/RadioButton';
+import RadioButton from './components/RadioButton';
 
 export default function App() {
     return (
@@ -32,7 +32,7 @@ export default function App() {
                     getMatchData().then((data) => data["matchNumber"].toString())
                 } />
 
-            <RadioButtonComponent
+            <RadioButton
                 data={["Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"]}
                 onSelect={(selected: string) => { updateDriverStation(selected as DRIVER_STATION) }}
                 oldSelected={getMatchData().then((data) => data["driverStation"])} />

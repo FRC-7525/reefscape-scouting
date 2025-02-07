@@ -1,44 +1,42 @@
-import { View, Text, GestureResponderEvent } from 'react-native'
+import { View, Text } from 'react-native'
 import { useEffect, useState } from 'react';
-import { RadioButton } from 'react-native-paper';
+import { RadioButton as PaperRadioButton } from 'react-native-paper';
 import { BACKGROUND_COLOR } from '../consts';
 
-interface RadioButtonComponentProps {
+interface RadioButton {
     data: string[];
     onSelect?: (option: string) => void;
     oldSelected?: Promise<string>;
 }
 
-function RadioButtonComponent({ data, onSelect, oldSelected }: RadioButtonComponentProps) {
+function RadioButton({ data, onSelect, oldSelected }: RadioButton) {
     onSelect ??= () => {};
 
-    const [ checked, setChecked ] = useState("");
+    const [ selectedOption, setSelectedOption ] = useState("");
 
     useEffect(() => {
-        const getChecked = async () => {
-            setChecked(await oldSelected ?? data[0]);
+        const getPreviousSelected = async () => {
+            setSelectedOption(await oldSelected ?? data[0]);
         }
 
-        getChecked();
+        getPreviousSelected();
     }, []);
 
     const onOptionSelect = (option: string) => {
-        setChecked(option);
+        setSelectedOption(option);
         onSelect(option);
     }
 
     return (
-        <View>
-            { data.map((element) =>
-                <View key={element} style={[{ flexDirection: "row", alignItems: "center" }]}>
-                    <RadioButton.Android color={BACKGROUND_COLOR} value={element}
-                        status={checked === element ? "checked" : "unchecked"}
-                        onPress={() => onOptionSelect(element)} />    
+        <PaperRadioButton.Group onValueChange={(option) => onOptionSelect(option)} value={selectedOption}>
+            { data.map((element) => 
+                <View key={element} style={{ flexDirection: "row", alignItems: "center" }}>
+                    <PaperRadioButton.Android color={BACKGROUND_COLOR} value={element} />
                     <Text>{element}</Text>
                 </View>
             ) }
-        </View>
+        </PaperRadioButton.Group>
     );
 } 
 
-export default RadioButtonComponent;
+export default RadioButton;
