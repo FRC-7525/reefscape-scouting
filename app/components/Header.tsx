@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import { Appbar, Chip, Divider, Icon, Title } from "react-native-paper";
+import { Appbar, Chip, Divider } from "react-native-paper";
 import { Link } from "expo-router";
 import { useEffect, useState } from "react";
 import { getMatchData } from "../api/data";
