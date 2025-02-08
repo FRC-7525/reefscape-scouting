@@ -1,4 +1,4 @@
-import { CLIMB_TYPE, DRIVER_STATION, MatchData, START_POSITION } from "./data_types";
+import { CLIMB_TYPE, DRIVER_STATION, MatchData, START_POSITION, Tag } from "./data_types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export function getMatchData(): Promise<MatchData> {
@@ -97,6 +97,13 @@ export function updateClimb(climbType: CLIMB_TYPE): Promise<void> {
 export function updateNotes(notes: string): Promise<void> {
     return modifyMatchData((data) => {
         data["notes"] = notes;
+        return data;
+    });
+}
+
+export function updateTags(tags: Tag[]): Promise<void> {
+    return modifyMatchData((data) => {
+        data["tags"] = tags;
         return data;
     });
 }
