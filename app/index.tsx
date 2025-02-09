@@ -11,7 +11,7 @@ import RadioButton from './components/RadioButton';
 export default function App() {
     return (
         <View style={styles.container}>
-            <PageHeader title='Main' pageNumber='1/4' />
+            <PageHeader title='Main' pageNumber='1/4' showTeam={false} />
             <LabeledTextInput placeholder="Name" editable={true} submit={(e) => {
                 updateName(e.nativeEvent.text);
             }} oldValue={

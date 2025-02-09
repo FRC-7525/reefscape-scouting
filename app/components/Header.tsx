@@ -9,9 +9,11 @@ interface PageHeaderProps {
     title: string;
     pageNumber: string;
     previous?: string;
+    showTeam?: boolean;
 }
 
-function PageHeader({ title, pageNumber, previous }: PageHeaderProps) {
+function PageHeader({ title, pageNumber, previous, showTeam }: PageHeaderProps) {
+    showTeam ??= true;
     const [ teamNumber, setTeamNumber ] = useState("");
     const [ chipColor, setChipColor ] = useState(BACKGROUND_COLOR);
 
@@ -36,11 +38,11 @@ function PageHeader({ title, pageNumber, previous }: PageHeaderProps) {
                     <Appbar.BackAction />
                 </Link> }
                 <Appbar.Content title={`${title} (${pageNumber})`} />
-                <Appbar.Content style={{alignItems: "center"}} title={
+                { showTeam && <Appbar.Content style={{alignItems: "center"}} title={
                     <Chip style={{ backgroundColor: chipColor }} textStyle={{ color: TEXT_COLOR }}>
                         {teamNumber}
-                    </Chip>
-                } />
+                    </Chip> }
+                /> }
             </Appbar.Header>
             <Divider />
         </View>
