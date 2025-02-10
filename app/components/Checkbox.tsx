@@ -3,18 +3,19 @@ import { Checkbox as PaperCheckbox } from 'react-native-paper';
 import { View, Text } from 'react-native';
 import { BACKGROUND_COLOR } from '../consts';
 import { Tag } from '../api/data_types';
-import { updateTags } from '../api/data';
+import { getMatchData, updateTags } from '../api/data';
 
 interface CheckboxProps {
   tag: Tag;
-  oldChecked?: Promise<boolean>;
 }
 
-function Checkbox({ tag, oldChecked }: CheckboxProps) {
+function Checkbox({ tag }: CheckboxProps) {
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    oldChecked?.then((val) => setChecked(!val));
+    getMatchData().then((data) => {
+      setChecked(!(data["tags"].includes(tag)));
+    });
   }, []);
 
   return (
