@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import Dropdown from './components/Dropdown';
 import NavButton from './components/NavButton';
 import LabeledTextInput from './components/LabeledTextInput';
-import { getMatchData, updateNotes } from './api/data';
+import { getMatchData, updateNotes, updateTags } from './api/data';
 import PageHeader from './components/Header';
 import { Button } from 'react-native-paper';
 import Checkbox from './components/Checkbox';
@@ -16,8 +16,14 @@ export default function App() {
                 submit={(e) => {
                     updateNotes(e.nativeEvent.text);
                 }} oldValue={getMatchData().then((data) => data["notes"])} />
-            <Checkbox label= "tag 1" tag = 'tag1'/>
-            <Checkbox label= "tag 2" tag = 'tag2'/>
+            <Checkbox tag='tag1' onCheck={(checkState) => {
+                updateTags("tag1", checkState);
+                getMatchData().then((data) => console.log(data));
+            }} oldChecked={getMatchData().then((data) => {
+                console.log(data["tags"] + " " + data["tags"].includes("tag1"))
+                return data["tags"].includes("tag1");
+            })} />
+            <Checkbox tag='tag2'/>
 
             <StatusBar style="auto" />
         </View>

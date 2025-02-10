@@ -101,9 +101,17 @@ export function updateNotes(notes: string): Promise<void> {
     });
 }
 
-export function updateTags(tags: Tag[]): Promise<void> {
+export function updateTags(tag: Tag, removeTag?: boolean): Promise<void> {
     return modifyMatchData((data) => {
-        data["tags"] = tags;
+        const tags = new Set(data["tags"]);
+
+        if (removeTag) {
+            tags.delete(tag);
+        } else {
+            tags.add(tag);
+        }
+
+        data["tags"] = [...tags];
         return data;
     });
 }
