@@ -5,8 +5,23 @@ import LabeledTextInput from './components/LabeledTextInput';
 import { getMatchData, updateNotes } from './api/data';
 import PageHeader from './components/Header';
 import SummaryTableView from './views/SummaryTableView';
+import NavButton from './components/NavButton';
+import { getDatabase, ref, set } from 'firebase/database';
+import { useEffect, useState } from 'react';
 
 export default function App() {
+    const [ scouterName, setScouterName ] = useState("");
+    const [ matchNumber, setMatchNumber ] = useState(0);
+    const [ matchData, setMatchData ] = useState({});
+
+    useEffect(() => {
+        getMatchData().then((data) => {
+            setScouterName(data["scouterName"]);
+            setMatchNumber(data["matchNumber"]);
+            setMatchData(data);
+        });
+    }, []);
+
     return (
         <View style={styles.container}>
             <PageHeader title="Summary" pageNumber="4/4" previous='teleop' />
@@ -17,6 +32,11 @@ export default function App() {
                     updateNotes(e.nativeEvent.text);
                 }} oldValue={getMatchData().then((data) => data["notes"])} required />
             <Dropdown label="Tags" items={["tag 1", "tag 2"]} placeholder="tag"></Dropdown>
+
+            <NavButton text="End" onClick={() => {
+                const db = getDatabase();
+                set(ref(db, `${matchNumber}_${scouterName}`), matchData);
+            }} />
             <StatusBar style="auto" />
         </View>
     );
