@@ -8,16 +8,19 @@ import SummaryTableView from './views/SummaryTableView';
 import NavButton from './components/NavButton';
 import { getDatabase, ref, set } from 'firebase/database';
 import { useEffect, useState } from 'react';
+import { firebase, db } from '../firebaseConfig';
 
 export default function App() {
     const [ scouterName, setScouterName ] = useState("");
     const [ matchNumber, setMatchNumber ] = useState(0);
+    const [ teamNumber, setTeamNumber ] = useState(0);
     const [ matchData, setMatchData ] = useState({});
 
     useEffect(() => {
         getMatchData().then((data) => {
             setScouterName(data["scouterName"]);
             setMatchNumber(data["matchNumber"]);
+            setTeamNumber(data["teamNumber"]);
             setMatchData(data);
         });
     }, []);
@@ -34,8 +37,7 @@ export default function App() {
             <Dropdown label="Tags" items={["tag 1", "tag 2"]} placeholder="tag"></Dropdown>
 
             <NavButton text="End" onClick={() => {
-                const db = getDatabase();
-                set(ref(db, `${matchNumber}_${scouterName}`), matchData);
+                set(ref(db, `team_${teamNumber}/${matchNumber}_${scouterName}`), matchData);
             }} />
             <StatusBar style="auto" />
         </View>
