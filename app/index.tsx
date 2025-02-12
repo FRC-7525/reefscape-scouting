@@ -5,7 +5,7 @@ import PageHeader from './components/Header';
 import LabeledTextInput from './components/LabeledTextInput';
 import { getMatchData, updateMatchNumber, updateName, updateTeamNumber, updateDriverStation } from './api/data';
 import { DRIVER_STATION } from './api/data_types';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import RadioButton from './components/RadioButton';
 
 export default function App() {
@@ -28,6 +28,7 @@ export default function App() {
     return (
         <View style={styles.container}>
             <PageHeader title='Main' pageNumber='1/4' showTeam={false} />
+            
             <LabeledTextInput label="Name" editable={true} submit={(e) => {
                 updateName(e.nativeEvent.text);
                 setNameFilled(e.nativeEvent.text !== "");
