@@ -55,4 +55,6 @@ export class MatchData {
 }
 
 export type GamePhase = "teleop" | "autonomous";
-export type Tag = "Caught on fire" | "Stuck on gamepiece" | "Broke" | "Tipped over" | "Gamepiece stuck";
+export type Tag = "tag1" | "tag2";
+export type ReefLevel = "L4" | "L3" | "L2" | "L1";
+export type AlgaeLevel = "net" | "processor";

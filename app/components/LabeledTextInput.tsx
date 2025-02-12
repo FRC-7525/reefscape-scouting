@@ -9,11 +9,13 @@ interface LabeledTextInputProps {
     inputMode?: "text" | "numeric";
     multiline?: boolean;
     oldValue?: Promise<string>;
+    required?: boolean;
     submit?: (e: NativeSyntheticEvent<TextInputEndEditingEventData>) => void;
 }
 
-function LabeledTextInput({ label, editable, placeholder, inputMode, multiline, oldValue, submit }: LabeledTextInputProps) {
+function LabeledTextInput({ label, editable, placeholder, inputMode, multiline, oldValue, required, submit }: LabeledTextInputProps) {
     inputMode ??= "text";
+    required ??= false;
     const [ value, setValue ] = useState("");
 
     useEffect(() => {
@@ -33,9 +35,7 @@ function LabeledTextInput({ label, editable, placeholder, inputMode, multiline, 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View>
-                { (label !== undefined) && <Text>{label}</Text> }
-
-                <TextInput editable={editable} style={styles.input}
+                <TextInput label={`${label ?? ""}${required ? "*" : ""}`} editable={editable} style={styles.input}
                         placeholder={placeholder} placeholderTextColor={"#bbb"}
                         mode="outlined" onEndEditing={submit}
                         inputMode={inputMode} multiline={multiline}

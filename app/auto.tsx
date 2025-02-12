@@ -5,13 +5,11 @@ import NavButton from './components/NavButton';
 import ReefAlgaeView from './views/ReefAlgaeView';
 import AutoStartPositionView from './views/AutoStartPositionView'
 import AlgaeView from './views/AlgaeView';
-import { Button } from 'react-native-paper';
-import { getMatchData } from './api/data';
 
 export default function App() {
     return (
         <View style={styles.container}>
-            <PageHeader title='Autonomous' pageNumber='2/4' previous='' />
+            <PageHeader title='Auto' pageNumber='2/4' previous='' />
 
             <AutoStartPositionView/>
 

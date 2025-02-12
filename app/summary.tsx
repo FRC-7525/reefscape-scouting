@@ -1,17 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
 import Dropdown from './components/Dropdown';
-import NavButton from './components/NavButton';
 import LabeledTextInput from './components/LabeledTextInput';
 import { getMatchData, updateNotes, updateTags } from './api/data';
 import PageHeader from './components/Header';
-import { Button } from 'react-native-paper';
+
 import Checkbox from './components/Checkbox';
+import SummaryTableView from './views/SummaryTableView';
 
 export default function App() {
     return (
         <View style={styles.container}>
             <PageHeader title="Summary" pageNumber="4/4" previous='teleop' />
+            <SummaryTableView />
+
             <LabeledTextInput label="Notes" editable={true} multiline={true} 
                 submit={(e) => {
                     updateNotes(e.nativeEvent.text);
@@ -21,7 +23,6 @@ export default function App() {
             <Checkbox tag='Broke'/>
             <Checkbox tag='Tipped over'/>
             <Checkbox tag='Gamepiece stuck'/>
-
             <StatusBar style="auto" />
         </View>
     );
