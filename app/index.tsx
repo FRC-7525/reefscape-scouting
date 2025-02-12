@@ -3,12 +3,13 @@ import { StyleSheet, View, Text } from 'react-native';
 import NavButton from './components/NavButton';
 import PageHeader from './components/Header';
 import LabeledTextInput from './components/LabeledTextInput';
-import { getMatchData, updateMatchNumber, updateName, updateTeamNumber, updateDriverStation } from './api/data';
-import { DRIVER_STATION } from './api/data_types';
+import { getMatchData, updateMatchNumber, updateName, updateTeamNumber, updateDriverStation, addUnsyncedData } from './api/data';
+import { DRIVER_STATION, MatchData } from './api/data_types';
 import { useEffect, useState } from 'react';
 import RadioButton from './components/RadioButton';
-import { child, get, onValue, ref, set } from 'firebase/database';
+import { onValue, ref, set } from 'firebase/database';
 import { db } from '../firebaseConfig';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App() {
     const [ nameFilled, setNameFilled ] = useState(false);
@@ -25,8 +26,21 @@ export default function App() {
 
         onValue(ref(db, "eventCode"), (code) => {
             setEventCode(code.val());
-        }, { onlyOnce: true });
-    }, [])
+
+            // this is nested in here to ensure that the eventCode is properly set, there may be a nicer way to do this that i dont know
+            AsyncStorage.getItem("unsynced").then((res) => {
+                if (res === null) return;
+    
+                const unsyncedData = JSON.parse(res) as MatchData[];
+                AsyncStorage.removeItem("unsynced");
+    
+                unsyncedData.forEach((data) => {
+                    set(ref(db, `${code.val()}/${data["teamNumber"]}/${data["matchNumber"]}/${data["scouterName"]}`), data)
+                        .catch(() => addUnsyncedData(data));
+                });
+            });
+        }, { onlyOnce: true }); 
+    })
 
     return (
         <View style={styles.container}>
