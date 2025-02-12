@@ -1,12 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { Keyboard, StyleSheet, View } from 'react-native';
-import Dropdown from './components/Dropdown';
 import LabeledTextInput from './components/LabeledTextInput';
-import { getMatchData, updateNotes, updateTags } from './api/data';
+import { getMatchData, updateNotes } from './api/data';
 import PageHeader from './components/Header';
-
-import Checkbox from './components/Checkbox';
 import SummaryTableView from './views/SummaryTableView';
+import Checkbox from './components/Checkbox';
 
 export default function App() {
     return (
@@ -17,8 +15,13 @@ export default function App() {
                 submit={(e) => {
                     updateNotes(e.nativeEvent.text);
                 }} oldValue={getMatchData().then((data) => data["notes"])} />
+
             <SummaryTableView />
-            <Dropdown label="Tags" items={["tag 1", "tag 2"]} placeholder="tag"></Dropdown>
+            <Checkbox tag='Caught on fire'/>
+            <Checkbox tag='Stuck on gamepiece'/>
+            <Checkbox tag='Broke'/>
+            <Checkbox tag='Tipped over'/>
+            <Checkbox tag='Gamepiece stuck'/>
             <StatusBar style="auto" />
         </View>
     );
