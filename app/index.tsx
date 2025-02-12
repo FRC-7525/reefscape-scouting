@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import NavButton from './components/NavButton';
 import PageHeader from './components/Header';
 import LabeledTextInput from './components/LabeledTextInput';
@@ -7,27 +7,31 @@ import { getMatchData, updateMatchNumber, updateName, updateTeamNumber, updateDr
 import { DRIVER_STATION } from './api/data_types';
 import { useEffect, useState } from 'react';
 import RadioButton from './components/RadioButton';
+import { child, get, onValue, ref, set } from 'firebase/database';
+import { db } from '../firebaseConfig';
 
 export default function App() {
     const [ nameFilled, setNameFilled ] = useState(false);
     const [ teamNumberFilled, setTeamNumberFilled ] = useState(false);
     const [ matchFilled, setMatchFilled ] = useState(false);
+    const [ eventCode, setEventCode ] = useState("");
 
     useEffect(() => {
-        const initializeRequirements = () => {
-            getMatchData().then((data) => {
-                setNameFilled(data["scouterName"] !== "");
-                setTeamNumberFilled(data["teamNumber"] !== 0);
-                setMatchFilled(data["matchNumber"] !== 0);
-            })
-        }
+        getMatchData().then((data) => {
+            setNameFilled(data["scouterName"] !== "");
+            setTeamNumberFilled(data["teamNumber"] !== 0);
+            setMatchFilled(data["matchNumber"] !== 0);
+        })
 
-        initializeRequirements();
+        onValue(ref(db, "eventCode"), (code) => {
+            setEventCode(code.val());
+        }, { onlyOnce: true });
     }, [])
 
     return (
         <View style={styles.container}>
             <PageHeader title='Main' pageNumber='1/4' showTeam={false} />
+            <Text>Event Code: {eventCode}</Text>
             <LabeledTextInput label="Name" editable={true} submit={(e) => {
                 updateName(e.nativeEvent.text);
                 setNameFilled(e.nativeEvent.text !== "");
