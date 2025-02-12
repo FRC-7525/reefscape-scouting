@@ -10,9 +10,7 @@ function SummaryTableView() {
              <DataTable>
                 <TableHeader titles={[ "Match Summary" ]} />
                 <TableRow label="Scouter" data={ getMatchData().then((data) => data["scouterName"]) } />
-                <TableRow label="Team Number" data={getMatchData().then((data) => data["teamNumber"].toString())} />
                 <TableRow label="Match Number" data={getMatchData().then((data) => data["matchNumber"].toString())} />
-                <TableRow label="Driver Station" data={getMatchData().then((data) => data["driverStation"])} />
                 <TableRow label="Start Position" data={getMatchData().then((data) => data["autonomous"]["startPosition"])} />
                 <TableRow label="Left Start" data={getMatchData().then((data) => data["autonomous"]["leftStart"].toString())} />
                 <TableRow label="Climb Type" data={getMatchData().then((data) => data["teleop"]["climb"].toString())} />
