@@ -16,8 +16,11 @@ export default function App() {
                 submit={(e) => {
                     updateNotes(e.nativeEvent.text);
                 }} oldValue={getMatchData().then((data) => data["notes"])} />
-            <Checkbox tag='tag1' />
-            <Checkbox tag='tag2'/>
+            <Checkbox tag='Caught on fire'/>
+            <Checkbox tag='Stuck on gamepiece'/>
+            <Checkbox tag='Broke'/>
+            <Checkbox tag='Tipped over'/>
+            <Checkbox tag='Gamepiece stuck'/>
 
             <StatusBar style="auto" />
         </View>

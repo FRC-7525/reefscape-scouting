@@ -55,4 +55,4 @@ export class MatchData {
 }
 
 export type GamePhase = "teleop" | "autonomous";
-export type Tag = "tag1" | "tag2";
+export type Tag = "Caught on fire" | "Stuck on gamepiece" | "Broke" | "Tipped over" | "Gamepiece stuck";
