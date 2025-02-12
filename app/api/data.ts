@@ -100,3 +100,17 @@ export function updateNotes(notes: string): Promise<void> {
         return data;
     });
 }
+
+export function addUnsyncedData(data: MatchData): Promise<void> {
+    return new Promise((resolve, reject) => {
+        AsyncStorage.getItem("unsynced")
+        .then((res) => {
+            if (res !== null) {
+                const unsynced = JSON.parse(res) as MatchData[];
+                resolve(AsyncStorage.setItem("unsynced", JSON.stringify([ ...unsynced, data ])));
+            } else {
+                resolve(AsyncStorage.setItem("unsynced", JSON.stringify([ data ])));
+            }
+        }).catch((err) => reject(`Failed to save unsynced match data: ${err}`));
+    })
+}

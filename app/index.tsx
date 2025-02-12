@@ -23,7 +23,7 @@ export default function App() {
         }
 
         initializeRequirements();
-    })
+    }, [])
 
     return (
         <View style={styles.container}>

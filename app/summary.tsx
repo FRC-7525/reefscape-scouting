@@ -2,29 +2,12 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
 import Dropdown from './components/Dropdown';
 import LabeledTextInput from './components/LabeledTextInput';
-import { getMatchData, updateNotes } from './api/data';
+import { addUnsyncedData, getMatchData, updateNotes } from './api/data';
 import PageHeader from './components/Header';
 import SummaryTableView from './views/SummaryTableView';
 import NavButton from './components/NavButton';
-import { getDatabase, ref, set } from 'firebase/database';
-import { useEffect, useState } from 'react';
-import { firebase, db } from '../firebaseConfig';
 
 export default function App() {
-    const [ scouterName, setScouterName ] = useState("");
-    const [ matchNumber, setMatchNumber ] = useState(0);
-    const [ teamNumber, setTeamNumber ] = useState(0);
-    const [ matchData, setMatchData ] = useState({});
-
-    useEffect(() => {
-        getMatchData().then((data) => {
-            setScouterName(data["scouterName"]);
-            setMatchNumber(data["matchNumber"]);
-            setTeamNumber(data["teamNumber"]);
-            setMatchData(data);
-        });
-    }, []);
-
     return (
         <View style={styles.container}>
             <PageHeader title="Summary" pageNumber="4/4" previous='teleop' />
@@ -37,7 +20,9 @@ export default function App() {
             <Dropdown label="Tags" items={["tag 1", "tag 2"]} placeholder="tag"></Dropdown>
 
             <NavButton text="End" onClick={() => {
-                set(ref(db, `team_${teamNumber}/${matchNumber}_${scouterName}`), matchData);
+                getMatchData().then((data) => {
+                    addUnsyncedData(data);
+                }).catch((err) => console.error(err));
             }} />
             <StatusBar style="auto" />
         </View>
