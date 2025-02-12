@@ -1,4 +1,4 @@
-import { AlgaeLevel, CLIMB_TYPE, DRIVER_STATION, GamePhase, MatchData, ReefLevel, START_POSITION } from "./data_types";
+import { AlgaeLevel, CLIMB_TYPE, DRIVER_STATION, GamePhase, MatchData, ReefLevel, START_POSITION, Tag } from "./data_types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export function getMatchData(): Promise<MatchData> {
@@ -97,6 +97,21 @@ export function updateClimb(climbType: CLIMB_TYPE): Promise<void> {
 export function updateNotes(notes: string): Promise<void> {
     return modifyMatchData((data) => {
         data["notes"] = notes;
+        return data;
+    });
+}
+
+export function updateTags(tag: Tag, removeTag?: boolean): Promise<void> {
+    return modifyMatchData((data) => {
+        const tags = new Set(data["tags"]);
+
+        if (removeTag) {
+            tags.delete(tag);
+        } else {
+            tags.add(tag);
+        }
+
+        data["tags"] = [...tags];
         return data;
     });
 }
