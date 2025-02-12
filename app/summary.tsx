@@ -10,12 +10,13 @@ export default function App() {
     return (
         <View style={styles.container} onTouchStart={Keyboard.dismiss}>
             <PageHeader title="Summary" pageNumber="4/4" previous='teleop' />
-            <SummaryTableView />
 
             <LabeledTextInput label="Notes" editable={true} multiline={true} 
                 submit={(e) => {
                     updateNotes(e.nativeEvent.text);
-                }} oldValue={getMatchData().then((data) => data["notes"])} required />
+                }} oldValue={getMatchData().then((data) => data["notes"])} />
+
+            <SummaryTableView />
             <Dropdown label="Tags" items={["tag 1", "tag 2"]} placeholder="tag"></Dropdown>
             <StatusBar style="auto" />
         </View>
