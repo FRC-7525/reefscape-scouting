@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, Keyboard } from 'react-native'
 import { useEffect, useState } from 'react';
 import { RadioButton as PaperRadioButton } from 'react-native-paper';
 import { BACKGROUND_COLOR } from '../consts';

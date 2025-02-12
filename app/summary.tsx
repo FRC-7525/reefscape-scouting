@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { Keyboard, StyleSheet, View } from 'react-native';
 import Dropdown from './components/Dropdown';
 import LabeledTextInput from './components/LabeledTextInput';
 import { getMatchData, updateNotes } from './api/data';
@@ -8,7 +8,7 @@ import SummaryTableView from './views/SummaryTableView';
 
 export default function App() {
     return (
-        <View style={styles.container}>
+        <View style={styles.container} onTouchStart={Keyboard.dismiss}>
             <PageHeader title="Summary" pageNumber="4/4" previous='teleop' />
             <SummaryTableView />
 
