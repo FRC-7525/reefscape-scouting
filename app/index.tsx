@@ -10,6 +10,7 @@ import RadioButton from './components/RadioButton';
 import { onValue, ref, set } from 'firebase/database';
 import { db } from '../firebaseConfig';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as FileSystem from "expo-file-system";
 
 export default function App() {
     const [ nameFilled, setNameFilled ] = useState(false);
@@ -24,23 +25,29 @@ export default function App() {
             setMatchFilled(data["matchNumber"] !== 0);
         })
 
-        onValue(ref(db, "eventCode"), (code) => {
-            setEventCode(code.val());
+        onValue(ref(db, ".info/connected"), (snap) => {
+            if (snap.val() === false) return;
 
-            // this is nested in here to ensure that the eventCode is properly set, there may be a nicer way to do this that i dont know
-            AsyncStorage.getItem("unsynced").then((res) => {
-                if (res === null) return;
+            onValue(ref(db, "eventCode"), (code) => {
+                setEventCode(code.val());
     
-                const unsyncedData = JSON.parse(res) as MatchData[];
-                AsyncStorage.removeItem("unsynced");
+                // this is nested in here to ensure that the eventCode is properly set, there may be a nicer way to do this that i dont know
+                AsyncStorage.getItem("unsynced").then((res) => {
+                    if (res === null) return; 
     
-                unsyncedData.forEach((data) => {
-                    set(ref(db, `${code.val()}/${data["teamNumber"]}/${data["matchNumber"]}/${data["scouterName"]}`), data)
-                        .catch(() => addUnsyncedData(data));
+                    const unsyncedData = JSON.parse(res) as MatchData[];
+                    AsyncStorage.removeItem("unsynced");
+        
+                    unsyncedData.forEach((data) => {
+                        const path = `${code.val()}/${data["teamNumber"]}/${data["matchNumber"]}/${data["scouterName"]}`;
+                        set(ref(db, path), data);
+                        FileSystem.writeAsStringAsync((FileSystem.documentDirectory ?? "") + path.replaceAll("/", "_"), JSON.stringify(data))
+                            .catch((err) => console.error(err));
+                    });
                 });
-            });
-        }, { onlyOnce: true }); 
-    })
+            }, { onlyOnce: true }); 
+        });
+    }, [])
 
     return (
         <View style={styles.container}>
