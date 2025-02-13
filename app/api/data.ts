@@ -113,6 +113,7 @@ export function addUnsyncedData(data: MatchData): Promise<void> {
                 }
             }).catch((err) => reject(`Failed to save unsynced match data: ${err}`));
     })
+}
 
 export function updateTags(tag: Tag, removeTag?: boolean): Promise<void> {
     return modifyMatchData((data) => {
