@@ -18,11 +18,7 @@ function NavButton({ text, pageName, disabled, onClick }: NavButtonProps) {
     const insets = useSafeAreaInsets();
 
     return (
-        <View style={[{
-            position: "absolute",
-            bottom: 20 + insets.bottom,
-            right: 20 + insets.right
-        }]}>
+        <View style={[{ flexDirection: 'row-reverse' }]}>
             <Link href={"/" + pageName} asChild>
                 <Button textColor={TEXT_COLOR} buttonColor={BACKGROUND_COLOR} mode="contained"
                     contentStyle={{ height: 80, width: 80 }} onPress={onClick} disabled={disabled}>{text}</Button>

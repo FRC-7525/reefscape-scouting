@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Keyboard, StyleSheet, View, Text } from 'react-native';
+import { Keyboard, StyleSheet, View, Text, ScrollView } from 'react-native';
 import NavButton from './components/NavButton';
 import PageHeader from './components/Header';
 import LabeledTextInput from './components/LabeledTextInput';
@@ -52,39 +52,41 @@ export default function App() {
     return (
         <View style={styles.container} onTouchStart={Keyboard.dismiss}>
             <PageHeader title='Main' pageNumber='1/4' showTeam={false} />
-            <Text>Event Code: {eventCode}</Text>
-            <LabeledTextInput label="Name" editable={true} submit={(e) => {
-                updateName(e.nativeEvent.text);
-                setNameFilled(e.nativeEvent.text !== "");
-            }} oldValue={
-                getMatchData().then((data) => data["scouterName"])
-            } required />
-            
-            <LabeledTextInput label="Team Number" editable={true}
-                inputMode='numeric' submit={(e) => {
-                    updateTeamNumber(Number(e.nativeEvent.text));
-                    setTeamNumberFilled(e.nativeEvent.text !== "" && e.nativeEvent.text !== "0");
+            <ScrollView>
+                <Text>Event Code: {eventCode}</Text>
+                <LabeledTextInput label="Name" editable={true} submit={(e) => {
+                    updateName(e.nativeEvent.text);
+                    setNameFilled(e.nativeEvent.text !== "");
                 }} oldValue={
-                    getMatchData().then((data) => data["teamNumber"].toString())
+                    getMatchData().then((data) => data["scouterName"])
                 } required />
 
-            <LabeledTextInput label="Match number" editable={true}
-                inputMode='numeric' submit={(e) => {
-                    updateMatchNumber(Number(e.nativeEvent.text));
-                    setMatchFilled(e.nativeEvent.text !== "" && e.nativeEvent.text !== "0");
-                }} oldValue={
-                    getMatchData().then((data) => data["matchNumber"].toString())
-                } required />
+                <LabeledTextInput label="Team Number" editable={true}
+                    inputMode='numeric' submit={(e) => {
+                        updateTeamNumber(Number(e.nativeEvent.text));
+                        setTeamNumberFilled(e.nativeEvent.text !== "" && e.nativeEvent.text !== "0");
+                    }} oldValue={
+                        getMatchData().then((data) => data["teamNumber"].toString())
+                    } required />
 
-            <RadioButton
-                data={["Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"]}
-                onSelect={(selected: string) => { updateDriverStation(selected as DRIVER_STATION) }}
-                oldSelected={getMatchData().then((data) => data["driverStation"])} />
-            
-            <NavButton text="Go" pageName="auto"
-                disabled={ !(nameFilled && teamNumberFilled && matchFilled) } />
+                <LabeledTextInput label="Match number" editable={true}
+                    inputMode='numeric' submit={(e) => {
+                        updateMatchNumber(Number(e.nativeEvent.text));
+                        setMatchFilled(e.nativeEvent.text !== "" && e.nativeEvent.text !== "0");
+                    }} oldValue={
+                        getMatchData().then((data) => data["matchNumber"].toString())
+                    } required />
 
-            <StatusBar style="auto" />
+                <RadioButton
+                    data={["Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"]}
+                    onSelect={(selected: string) => { updateDriverStation(selected as DRIVER_STATION) }}
+                    oldSelected={getMatchData().then((data) => data["driverStation"])} />
+
+                <NavButton text="Go" pageName="auto"
+                    disabled={ !(nameFilled && teamNumberFilled && matchFilled) } />
+
+                <StatusBar style="auto" />
+            </ScrollView>
         </View>
     );
 }

@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Keyboard, StyleSheet, View } from 'react-native';
+import { Keyboard, ScrollView, StyleSheet, View } from 'react-native';
 import LabeledTextInput from './components/LabeledTextInput';
 import { addUnsyncedData, getMatchData, updateNotes } from './api/data';
 import PageHeader from './components/Header';
@@ -11,6 +11,9 @@ export default function App() {
     return (
         <View style={styles.container} onTouchStart={Keyboard.dismiss}>
             <PageHeader title="Summary" pageNumber="4/4" previous='teleop' />
+
+            <ScrollView> 
+            <SummaryTableView />
 
             <LabeledTextInput label="Notes" editable={true} multiline={true} 
                 submit={(e) => {
@@ -29,6 +32,7 @@ export default function App() {
                 }).catch((err) => console.error(err));
             }} />
             <StatusBar style="auto" />
+            </ScrollView>
         </View>
     );
 }
