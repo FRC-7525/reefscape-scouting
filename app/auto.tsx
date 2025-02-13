@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { Keyboard, ScrollView, StyleSheet, View } from 'react-native';
 import PageHeader from './components/Header';
 import NavButton from './components/NavButton';
 import ReefAlgaeView from './views/ReefAlgaeView';
@@ -8,7 +8,7 @@ import AlgaeView from './views/AlgaeView';
 
 export default function App() {
     return (
-        <View style={styles.container}>
+        <View style={styles.container} onTouchStart={Keyboard.dismiss}>
             <PageHeader title='Auto' pageNumber='2/4' previous='' />
             <ScrollView>
 
