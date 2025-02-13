@@ -5,6 +5,8 @@ import ReefAlgaeView from './views/ReefAlgaeView';
 import EndgameView from './views/EndgameView';
 import PageHeader from './components/Header';
 import AlgaeView from './views/AlgaeView';
+import Stopwatch from './components/Timer';
+import { Divider } from 'react-native-paper';
 
 export default function App() {
     return (
@@ -12,9 +14,13 @@ export default function App() {
             <PageHeader title='Teleop' pageNumber='3/4' previous="auto" />
             <ScrollView>
 
+            <Stopwatch/>
+            <Divider />
+            
             <ReefAlgaeView phase="teleop" />
             <AlgaeView phase="teleop" />
             <EndgameView/>
+           
             
 
             <StatusBar style="auto" />
