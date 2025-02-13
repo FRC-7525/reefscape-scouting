@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { Keyboard, ScrollView, StyleSheet, View } from 'react-native';
 import NavButton from './components/NavButton';
 import ReefAlgaeView from './views/ReefAlgaeView';
 import EndgameView from './views/EndgameView';
@@ -10,8 +10,9 @@ import { Divider } from 'react-native-paper';
 
 export default function App() {
     return (
-        <View style={styles.container}>
+        <View style={styles.container} onTouchStart={Keyboard.dismiss}>
             <PageHeader title='Teleop' pageNumber='3/4' previous="auto" />
+            <ScrollView>
 
             <Stopwatch/>
             <Divider />
@@ -22,9 +23,9 @@ export default function App() {
            
             
 
-            <NavButton pageName='summary' text='Next' />
             <StatusBar style="auto" />
-            
+            <NavButton pageName='summary' text='Next' />
+            </ScrollView>
         </View>
     );
 }

@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { Keyboard, ScrollView, StyleSheet, View } from 'react-native';
 import NavButton from './components/NavButton';
 import PageHeader from './components/Header';
 import LabeledTextInput from './components/LabeledTextInput';
@@ -26,9 +26,10 @@ export default function App() {
     })
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container} onTouchStart={Keyboard.dismiss}>
             <PageHeader title='Main' pageNumber='1/4' showTeam={false} />
-            
+            <ScrollView>
+
             <LabeledTextInput label="Name" editable={true} submit={(e) => {
                 updateName(e.nativeEvent.text);
                 setNameFilled(e.nativeEvent.text !== "");
@@ -61,6 +62,7 @@ export default function App() {
                 disabled={ !(nameFilled && teamNumberFilled && matchFilled) } />
 
             <StatusBar style="auto" />
+            </ScrollView>
         </View>
     );
 }

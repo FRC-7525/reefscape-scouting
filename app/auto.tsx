@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { Keyboard, ScrollView, StyleSheet, View } from 'react-native';
 import PageHeader from './components/Header';
 import NavButton from './components/NavButton';
 import ReefAlgaeView from './views/ReefAlgaeView';
@@ -13,7 +13,7 @@ export default function App() {
              
             <PageHeader title='Auto' pageNumber='2/4' previous='' />
         
-
+            <ScrollView>
             <AutoStartPositionView/>
 
             <ReefAlgaeView phase="autonomous" />
@@ -21,8 +21,7 @@ export default function App() {
 
             <NavButton text="Next" pageName="teleop" />
             <StatusBar style="auto" />
-
-            
+            </ScrollView>
         </View>
     );
 }
