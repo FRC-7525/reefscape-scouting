@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, Text } from 'react-native';
+import { Keyboard, StyleSheet, View, Text } from 'react-native';
 import NavButton from './components/NavButton';
 import PageHeader from './components/Header';
 import LabeledTextInput from './components/LabeledTextInput';
@@ -50,7 +50,7 @@ export default function App() {
     }, [])
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container} onTouchStart={Keyboard.dismiss}>
             <PageHeader title='Main' pageNumber='1/4' showTeam={false} />
             <Text>Event Code: {eventCode}</Text>
             <LabeledTextInput label="Name" editable={true} submit={(e) => {
