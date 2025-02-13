@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Keyboard, StyleSheet, View } from 'react-native';
+import { Keyboard, ScrollView, StyleSheet, View } from 'react-native';
 import NavButton from './components/NavButton';
 import ReefAlgaeView from './views/ReefAlgaeView';
 import EndgameView from './views/EndgameView';
@@ -10,14 +10,16 @@ export default function App() {
     return (
         <View style={styles.container} onTouchStart={Keyboard.dismiss}>
             <PageHeader title='Teleop' pageNumber='3/4' previous="auto" />
+            <ScrollView>
 
             <ReefAlgaeView phase="teleop" />
             <AlgaeView phase="teleop" />
             <EndgameView/>
             
 
-            <NavButton pageName='summary' text='Next' />
             <StatusBar style="auto" />
+            <NavButton pageName='summary' text='Next' />
+            </ScrollView>
         </View>
     );
 }
