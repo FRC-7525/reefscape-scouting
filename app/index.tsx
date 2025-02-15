@@ -7,7 +7,7 @@ import { getMatchData, updateMatchNumber, updateName, updateTeamNumber, updateDr
 import { DRIVER_STATION, MatchData } from './api/data_types';
 import { useEffect, useState } from 'react';
 import RadioButton from './components/RadioButton';
-import { onValue, ref, set } from 'firebase/database';
+import { child, onValue, push, ref, set, update } from 'firebase/database';
 import { db } from '../firebaseConfig';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as FileSystem from "expo-file-system";
@@ -36,25 +36,18 @@ export default function App() {
                 AsyncStorage.getItem("unsynced").then(async (res) => {
                     if (res === null) return; 
     
-                    let unsyncedData = JSON.parse(res) as MatchData[];
-        
-                    // basically just an async filter function
-                    unsyncedData = (await Promise.all(unsyncedData.map(async (data) => {
+                    const unsyncedMatches = JSON.parse(res) as MatchData[];
+                    const updates: { [key: string]: MatchData } = {};
+
+                    unsyncedMatches.forEach((data) => {
                         const path = `${code.val()}/${data["teamNumber"]}/${data["matchNumber"]}/${data["scouterName"]}`;
-                        const writeFailed = await FileSystem.writeAsStringAsync((FileSystem.documentDirectory ?? "") + path.replaceAll("/", "_"), JSON.stringify(data))
-                            .then(() => false)
-                            .catch(() => true);
+                        FileSystem.writeAsStringAsync((FileSystem.documentDirectory ?? "") + path.replaceAll("/", "_"), JSON.stringify(data))
+                            .catch((err) => { console.error(`Failed to write match: ${err}`) });
 
-                        const setFailed = await set(ref(db, path), data)
-                            .then(() => false)
-                            .catch(() => true);
-                        
-                        return (writeFailed || setFailed) ? data : null;
-                    }))).filter((data) => data !== null);
+                        updates[path] = data;
+                    });
 
-                    setUnsyncedMatches(unsyncedData.length);
-                    await AsyncStorage.removeItem("unsynced");
-                    AsyncStorage.setItem("unsynced", JSON.stringify(unsyncedData));
+                    update(ref(db), updates).then(() => AsyncStorage.setItem("unsynced", "[]"));
                 });
             }, { onlyOnce: true }); 
         });
