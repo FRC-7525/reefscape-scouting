@@ -8,8 +8,8 @@ function Stopwatch() {
     const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
     const startStop = () => {
-        if (isRunning) {
-            if (intervalRef.current) clearInterval(intervalRef.current);
+        if (isRunning && intervalRef.current) {
+            clearInterval(intervalRef.current);
         } else {
             intervalRef.current = setInterval(() => {
                 setTime((prevTime: number) => prevTime + 10);
@@ -17,13 +17,6 @@ function Stopwatch() {
         }
         
         setIsRunning(!isRunning);
-    };
-
-
-    const reset = () => {
-        if (intervalRef.current) clearInterval(intervalRef.current);
-        setTime(0);
-        setIsRunning(false);
     };
 
     
@@ -37,11 +30,9 @@ function Stopwatch() {
     return (
         <View style={styles.container}>
             <Text style={styles.time}>{formatTime(time)}</Text>
-            <View style={styles.buttons}>
-                <Button mode="contained" onPress={startStop}>
-                    {isRunning ? 'Stop' : 'Start'}
-                </Button>
-            </View>
+            <Button mode="contained" onPress={startStop}>
+                {isRunning ? 'Stop' : 'Start'}
+            </Button>
         </View>
     );
 };
@@ -55,11 +46,7 @@ const styles = StyleSheet.create({
   time: {
     fontSize: 15,
     marginBottom: 10,
-  },
-  buttons: {
-    flexDirection: 'row',
-    gap: 10,
-  },
+  }
 });
 
 export default Stopwatch;
