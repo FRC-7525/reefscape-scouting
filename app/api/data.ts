@@ -115,3 +115,10 @@ export function updateTags(tag: Tag, removeTag?: boolean): Promise<void> {
         return data;
     });
 }
+
+export function updateDefenseTime(time: number): Promise<void> {
+    return modifyMatchData((data) => {
+        data["teleop"]["defenseTime"] = time;
+        return data;
+    });
+}

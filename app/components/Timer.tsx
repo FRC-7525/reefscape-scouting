@@ -1,15 +1,25 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';  
+import { getMatchData, updateDefenseTime } from '../api/data';
+import SectionTitle from './SectionTitle';
+import { BACKGROUND_COLOR, TEXT_COLOR } from '../consts';
 
 function Stopwatch() {
     const [time, setTime] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
     const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
+    useEffect(() => {
+        getMatchData().then((data) => {
+            setTime(data["teleop"]["defenseTime"] ?? 0);
+        });
+    }, []);
+
     const startStop = () => {
-        if (isRunning) {
-            if (intervalRef.current) clearInterval(intervalRef.current);
+        if (isRunning && intervalRef.current) {
+            clearInterval(intervalRef.current);
+            updateDefenseTime(time + 10);
         } else {
             intervalRef.current = setInterval(() => {
                 setTime((prevTime: number) => prevTime + 10);
@@ -17,13 +27,6 @@ function Stopwatch() {
         }
         
         setIsRunning(!isRunning);
-    };
-
-
-    const reset = () => {
-        if (intervalRef.current) clearInterval(intervalRef.current);
-        setTime(0);
-        setIsRunning(false);
     };
 
     
@@ -36,15 +39,11 @@ function Stopwatch() {
 
     return (
         <View style={styles.container}>
+            <SectionTitle>Defense Time</SectionTitle>
             <Text style={styles.time}>{formatTime(time)}</Text>
-            <View style={styles.buttons}>
-                <Button mode="contained" onPress={startStop}>
-                    {isRunning ? 'Stop' : 'Start'}
-                </Button>
-                <Button mode="outlined" onPress={reset}>
-                    Reset
-                </Button>
-            </View>
+            <Button mode="contained" onPress={startStop} textColor={TEXT_COLOR} buttonColor={BACKGROUND_COLOR}>
+                {isRunning ? 'Stop' : 'Start'}
+            </Button>
         </View>
     );
 };
@@ -58,11 +57,7 @@ const styles = StyleSheet.create({
   time: {
     fontSize: 15,
     marginBottom: 10,
-  },
-  buttons: {
-    flexDirection: 'row',
-    gap: 10,
-  },
+  }
 });
 
 export default Stopwatch;

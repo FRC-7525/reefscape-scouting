@@ -41,6 +41,7 @@ export class AutoData extends PhaseData {
 
 export class TeleopData extends PhaseData {
     climb: CLIMB_TYPE = CLIMB_TYPE.DEEP_CLIMB;
+    defenseTime: number = 0;
 }
 
 export class MatchData {
