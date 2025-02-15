@@ -1,15 +1,23 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';  
+import { getMatchData, updateDefenseTime } from '../api/data';
 
 function Stopwatch() {
     const [time, setTime] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
     const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
+    useEffect(() => {
+        getMatchData().then((data) => {
+            setTime(data["teleop"]["defenseTime"] ?? 0);
+        });
+    }, []);
+
     const startStop = () => {
         if (isRunning && intervalRef.current) {
             clearInterval(intervalRef.current);
+            updateDefenseTime(time + 10);
         } else {
             intervalRef.current = setInterval(() => {
                 setTime((prevTime: number) => prevTime + 10);
