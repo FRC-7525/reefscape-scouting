@@ -32,18 +32,27 @@ export default function App() {
                 setEventCode(code.val());
     
                 // this is nested in here to ensure that the eventCode is properly set, there may be a nicer way to do this that i dont know
-                AsyncStorage.getItem("unsynced").then((res) => {
+                AsyncStorage.getItem("unsynced").then(async (res) => {
                     if (res === null) return; 
     
-                    const unsyncedData = JSON.parse(res) as MatchData[];
-                    AsyncStorage.removeItem("unsynced");
+                    let unsyncedData = JSON.parse(res) as MatchData[];
         
-                    unsyncedData.forEach((data) => {
+                    // basically just an async filter function
+                    unsyncedData = (await Promise.all(unsyncedData.map(async (data) => {
                         const path = `${code.val()}/${data["teamNumber"]}/${data["matchNumber"]}/${data["scouterName"]}`;
-                        set(ref(db, path), data);
-                        FileSystem.writeAsStringAsync((FileSystem.documentDirectory ?? "") + path.replaceAll("/", "_"), JSON.stringify(data))
-                            .catch((err) => console.error(err));
-                    });
+                        const writeFailed = await FileSystem.writeAsStringAsync((FileSystem.documentDirectory ?? "") + path.replaceAll("/", "_"), JSON.stringify(data))
+                            .then(() => false)
+                            .catch(() => true);
+
+                        const setFailed = await set(ref(db, path), data)
+                            .then(() => false)
+                            .catch(() => true);
+                        
+                        return (writeFailed || setFailed) ? data : null;
+                    }))).filter((data) => data !== null);
+
+                    await AsyncStorage.removeItem("unsynced");
+                    AsyncStorage.setItem("unsynced", JSON.stringify(unsyncedData));
                 });
             }, { onlyOnce: true }); 
         });
