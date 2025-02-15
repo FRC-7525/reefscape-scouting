@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';  
 import { getMatchData, updateDefenseTime } from '../api/data';
+import SectionTitle from './SectionTitle';
+import { BACKGROUND_COLOR, TEXT_COLOR } from '../consts';
 
 function Stopwatch() {
     const [time, setTime] = useState(0);
@@ -37,8 +39,9 @@ function Stopwatch() {
 
     return (
         <View style={styles.container}>
+            <SectionTitle>Defense Time</SectionTitle>
             <Text style={styles.time}>{formatTime(time)}</Text>
-            <Button mode="contained" onPress={startStop}>
+            <Button mode="contained" onPress={startStop} textColor={TEXT_COLOR} buttonColor={BACKGROUND_COLOR}>
                 {isRunning ? 'Stop' : 'Start'}
             </Button>
         </View>
