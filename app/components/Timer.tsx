@@ -41,9 +41,6 @@ function Stopwatch() {
                 <Button mode="contained" onPress={startStop}>
                     {isRunning ? 'Stop' : 'Start'}
                 </Button>
-                <Button mode="outlined" onPress={reset}>
-                    Reset
-                </Button>
             </View>
         </View>
     );
