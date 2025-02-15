@@ -3,7 +3,7 @@ import { Keyboard, StyleSheet, View, Text, ScrollView } from 'react-native';
 import NavButton from './components/NavButton';
 import PageHeader from './components/Header';
 import LabeledTextInput from './components/LabeledTextInput';
-import { getMatchData, updateMatchNumber, updateName, updateTeamNumber, updateDriverStation, addUnsyncedData } from './api/data';
+import { getMatchData, updateMatchNumber, updateName, updateTeamNumber, updateDriverStation } from './api/data';
 import { DRIVER_STATION, MatchData } from './api/data_types';
 import { useEffect, useState } from 'react';
 import RadioButton from './components/RadioButton';
@@ -17,6 +17,7 @@ export default function App() {
     const [ teamNumberFilled, setTeamNumberFilled ] = useState(false);
     const [ matchFilled, setMatchFilled ] = useState(false);
     const [ eventCode, setEventCode ] = useState("");
+    const [ unsyncedMatches, setUnsyncedMatches ] = useState(0);
 
     useEffect(() => {
         getMatchData().then((data) => {
@@ -51,6 +52,7 @@ export default function App() {
                         return (writeFailed || setFailed) ? data : null;
                     }))).filter((data) => data !== null);
 
+                    setUnsyncedMatches(unsyncedData.length);
                     await AsyncStorage.removeItem("unsynced");
                     AsyncStorage.setItem("unsynced", JSON.stringify(unsyncedData));
                 });
@@ -63,6 +65,7 @@ export default function App() {
             <PageHeader title='Main' pageNumber='1/4' showTeam={false} />
             <ScrollView>
                 <Text>Event Code: {eventCode}</Text>
+                <Text>Unsynced Matches: {unsyncedMatches}</Text>
                 <LabeledTextInput label="Name" editable={true} submit={(e) => {
                     updateName(e.nativeEvent.text);
                     setNameFilled(e.nativeEvent.text !== "");
