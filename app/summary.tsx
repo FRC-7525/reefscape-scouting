@@ -11,9 +11,7 @@ export default function App() {
     return (
         <View style={styles.container} onTouchStart={Keyboard.dismiss}>
             <PageHeader title="Summary" pageNumber="4/4" previous='teleop' />
-
             <ScrollView> 
-            <SummaryTableView />
 
             <LabeledTextInput label="Notes" editable={true} multiline={true} 
                 submit={(e) => {
