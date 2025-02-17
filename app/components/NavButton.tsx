@@ -8,18 +8,20 @@ interface NavButtonProps {
     text: string;
     pageName?: string;
     disabled?: boolean;
+    onClick?: () => void;
 }
 
-function NavButton({ text, pageName, disabled }: NavButtonProps) {
+function NavButton({ text, pageName, disabled, onClick }: NavButtonProps) {
     pageName ??= "";
     disabled ??= false;
+    onClick ??= () => {};
     const insets = useSafeAreaInsets();
 
     return (
         <View style={[{ flexDirection: 'row-reverse' }]}>
             <Link href={"/" + pageName} asChild>
                 <Button textColor={TEXT_COLOR} buttonColor={BACKGROUND_COLOR} mode="contained"
-                    contentStyle={{ height: 80, width: 80 }} disabled={disabled}>{text}</Button>
+                    contentStyle={{ height: 80, width: 80 }} onPress={onClick} disabled={disabled}>{text}</Button>
             </Link>
         </View>
     )
