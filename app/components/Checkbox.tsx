@@ -14,7 +14,7 @@ function Checkbox({ tag }: CheckboxProps) {
 
   useEffect(() => {
     getMatchData().then((data) => {
-      setChecked(!(data["tags"].includes(tag)));
+      setChecked(data["tags"].includes(tag));
     });
   }, []);
 
@@ -25,8 +25,8 @@ function Checkbox({ tag }: CheckboxProps) {
       color={BACKGROUND_COLOR}
       status={checked ? 'checked' : 'unchecked'}
       onPress={() => {
+        updateTags(tag, checked);
         setChecked(!checked);
-        updateTags(tag, !checked);
       }}
     />
     <Text>{tag}</Text>
