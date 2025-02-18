@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { Keyboard, ScrollView, StyleSheet, View } from 'react-native';
 import LabeledTextInput from './components/LabeledTextInput';
-import { addUnsyncedData, getMatchData, updateNotes } from './api/data';
+import { addUnsyncedData, deleteMatchData, getMatchData, updateNotes } from './api/data';
 import PageHeader from './components/Header';
 import SummaryTableView from './views/SummaryTableView';
 import Checkbox from './components/Checkbox';
@@ -26,11 +26,7 @@ export default function App() {
             <Checkbox tag='Broke'/>
             <Checkbox tag='Tipped over'/>
             <Checkbox tag='Gamepiece stuck'/>
-            <NavButton text="End" onClick={() => {
-                getMatchData().then((data) => {
-                    addUnsyncedData(data);
-                }).catch((err) => console.error(err));
-            }} />
+            <NavButton text="End" pageName='submit'/>
             <StatusBar style="auto" />
             </ScrollView>
         </View>
