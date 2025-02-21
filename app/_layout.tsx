@@ -7,6 +7,7 @@ export default function RootLayout() {
             <Stack.Screen name="teleop" options={{ headerShown: false }} />
             <Stack.Screen name="auto" options={{ headerShown: false }} />
             <Stack.Screen name="summary" options={{ headerShown: false }} />
+            <Stack.Screen name="submit" options={{ headerShown: false }} />
         </Stack>
     );
 }
