@@ -11,9 +11,7 @@ export default function App() {
     return (
         <View style={styles.container} onTouchStart={Keyboard.dismiss}>
             <PageHeader title="Summary" pageNumber="4/4" previous='teleop' />
-
-            <ScrollView> 
-            <SummaryTableView />
+            <ScrollView style={{flex: 1}}> 
 
             <LabeledTextInput label="Notes" editable={true} multiline={true} 
                 submit={(e) => {
@@ -39,6 +37,7 @@ const styles = StyleSheet.create({
             flex: 1,
             backgroundColor: '#fff',
             rowGap: 15
+
             // alignItems: 'center',
             // justifyContent: 'center',
         },

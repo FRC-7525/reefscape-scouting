@@ -1,8 +1,10 @@
 import { getMatchData, updateReefScores } from '../api/data';
 import MathBlock from '../components/MathBlock';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import SectionTitle from '../components/SectionTitle';
 import { GamePhase, ReefLevel } from '../api/data_types';
+import React from 'react';
+import AlgaeView from './AlgaeView';
 
 interface ReefAlgaeViewProps {
     phase: GamePhase;
@@ -16,6 +18,7 @@ function ReefAlgaeView({ phase }: ReefAlgaeViewProps) {
 
     return (
         <View>
+
             <SectionTitle>Reef</SectionTitle>
             <MathBlock label="L4" min={0} max={10} onPress={(count: number) => {
                 updateReefScores(phase, "L4", count);
@@ -32,10 +35,12 @@ function ReefAlgaeView({ phase }: ReefAlgaeViewProps) {
             <MathBlock label="L1" min={0} max={10} onPress={(count: number) => {
                 updateReefScores(phase, "L1", count);
             }} oldCount={getLevelData("L1")} />
+
         </View>
         
     )
 
-}
+} 
+
 
 export default ReefAlgaeView;
