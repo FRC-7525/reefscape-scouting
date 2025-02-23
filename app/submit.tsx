@@ -8,15 +8,13 @@ export default function App() {
     const [ animating, setAnimating ] = useState(true);
 
     useEffect(() => {
-        getMatchData().then((data) => {
-            const deleted = deleteMatchData();
-            const saved = addUnsyncedData(data);
-
-            Promise.all([deleted, saved]).then(() => {
+        getMatchData()
+            .then(addUnsyncedData)
+            .then(deleteMatchData)
+            .then(() => {
                 setAnimating(false);
-                router.navigate("");
+                router.push("");
             });
-        })
     }, []);
 
     return (
