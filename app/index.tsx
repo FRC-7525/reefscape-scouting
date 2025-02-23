@@ -24,21 +24,24 @@ export default function App() {
             setNameFilled(data["scouterName"] !== "");
             setTeamNumberFilled(data["teamNumber"] !== 0);
             setMatchFilled(data["matchNumber"] !== 0);
-        })
+        });
 
-        onValue(ref(db, ".info/connected"), (snap) => {
-            if (snap.val() === false) return;
+        
+        
+        AsyncStorage.getItem("unsynced").then(async (res) => {
+            if (res === null) return; 
 
-            onValue(ref(db, "eventCode"), (code) => {
-                setEventCode(code.val());
-    
-                // this is nested in here to ensure that the eventCode is properly set, there may be a nicer way to do this that i dont know
-                AsyncStorage.getItem("unsynced").then(async (res) => {
-                    if (res === null) return; 
-    
-                    const unsyncedMatches = JSON.parse(res) as MatchData[];
+            const unsyncedMatches = JSON.parse(res) as MatchData[];
+            
+            setUnsyncedMatches(unsyncedMatches.length);
+            
+            onValue(ref(db, ".info/connected"), (snap) => {
+                if (snap.val() === false) return;
+                
+                onValue(ref(db, "eventCode"), (code) => {
+                    setEventCode(code.val());
+                    
                     const updates: { [key: string]: MatchData } = {};
-
                     unsyncedMatches.forEach((data) => {
                         const path = `${code.val()}/${data["teamNumber"]}/${data["matchNumber"]}/${data["scouterName"]}`;
                         FileSystem.writeAsStringAsync((FileSystem.documentDirectory ?? "") + path.replaceAll("/", "_"), JSON.stringify(data))
@@ -46,10 +49,13 @@ export default function App() {
 
                         updates[path] = data;
                     });
-
-                    update(ref(db), updates).then(() => AsyncStorage.setItem("unsynced", "[]"));
+                        
+                    update(ref(db), updates).then(() => {
+                        AsyncStorage.setItem("unsynced", "[]");
+                        setUnsyncedMatches(0);
+                    });
                 });
-            }, { onlyOnce: true }); 
+             }, { onlyOnce: true }); 
         });
     }, [])
 
