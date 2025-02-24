@@ -19,15 +19,7 @@ export default function App() {
     const [ eventCode, setEventCode ] = useState("");
     const [ unsyncedMatches, setUnsyncedMatches ] = useState(0);
 
-    useEffect(() => {
-        getMatchData().then((data) => {
-            setNameFilled(data["scouterName"] !== "");
-            setTeamNumberFilled(data["teamNumber"] !== 0);
-            setMatchFilled(data["matchNumber"] !== 0);
-        });
-
-        
-        
+    const sync = () => {
         AsyncStorage.getItem("unsynced").then(async (res) => {
             if (res === null) return; 
 
@@ -57,7 +49,17 @@ export default function App() {
                 });
              }, { onlyOnce: true }); 
         });
-    }, [])
+    }
+
+    useEffect(() => {
+        getMatchData().then((data) => {
+            setNameFilled(data["scouterName"] !== "");
+            setTeamNumberFilled(data["teamNumber"] !== 0);
+            setMatchFilled(data["matchNumber"] !== 0);
+        });
+
+        sync();
+   }, [])
 
     return (
         <View style={styles.container} onTouchStart={Keyboard.dismiss}>
@@ -95,6 +97,7 @@ export default function App() {
 
                 <NavButton text="Go" pageName="auto"
                     disabled={ !(nameFilled && teamNumberFilled && matchFilled) } />
+                { unsyncedMatches > 0 && <NavButton text="Sync" onClick={sync} /> }
 
                 <StatusBar style="auto" />
             </ScrollView>
