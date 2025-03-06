@@ -14,10 +14,11 @@ import * as FileSystem from "expo-file-system";
 
 export default function App() {
     const [ nameFilled, setNameFilled ] = useState(false);
-    const [ teamNumberFilled, setTeamNumberFilled ] = useState(false);
-    const [ matchFilled, setMatchFilled ] = useState(false);
     const [ eventCode, setEventCode ] = useState("");
     const [ unsyncedMatches, setUnsyncedMatches ] = useState(0);
+    const [ driverStation, setDriverStation ] = useState("");
+    const [ matchNumber, setMatchNumber ] = useState(0);
+    const [ teamNumber, setTeamNumber ] = useState(0);
 
     const sync = () => {
         AsyncStorage.getItem("unsynced").then(async (res) => {
@@ -54,49 +55,73 @@ export default function App() {
     useEffect(() => {
         getMatchData().then((data) => {
             setNameFilled(data["scouterName"] !== "");
-            setTeamNumberFilled(data["teamNumber"] !== 0);
-            setMatchFilled(data["matchNumber"] !== 0);
+            setDriverStation(data["driverStation"]);
+            setMatchNumber(data["matchNumber"]);
         });
 
         sync();
-   }, [])
+   }, []);
+
+    useEffect(() => {
+        if (matchNumber !== 0) {
+            const apiKey = process.env.EXPO_PUBLIC_TBA_API_KEY;
+
+            fetch(`https://www.thebluealliance.com/api/v3/event/2025week0/matches/simple?X-TBA-Auth-Key=${apiKey}`)
+                .then(res => res.json())
+                .then(json => {
+                    json.forEach((match: any) => {
+                        if (match.comp_level == "qm" && match.match_number == matchNumber) {
+                            const [ teamColor, position ] = driverStation.split(" ");
+                            const alliance = match["alliances"][teamColor.toLocaleLowerCase()];
+                            const teamCode = alliance["team_keys"][Number(position) - 1];
+                            const team = teamCode.split("frc")[1]; // every teamCode has "frc" prepended, this just gets rid of it
+
+                            setTeamNumber(team); 
+                            updateTeamNumber(team);
+                        }
+                    })
+                }).catch(err => console.error(err));
+        } else {
+            setTeamNumber(0);
+        }
+    }, [ driverStation, matchNumber ]);
 
     return (
         <View style={styles.container} onTouchStart={Keyboard.dismiss}>
             <PageHeader title='Main' pageNumber='1/4' showTeam={false} />
             <ScrollView>
-                <Text>Event Code: {eventCode}</Text>
-                <Text>Unsynced Matches: {unsyncedMatches}</Text>
+                { eventCode !== "" && <Text>Event Code: {eventCode}</Text> }
+                { unsyncedMatches !== 0 && <Text>Unsynced Matches: {unsyncedMatches}</Text> }
+                { teamNumber !== 0 && <Text>Team Number: {teamNumber}</Text> }
                 <LabeledTextInput label="Name" editable={true} submit={(e) => {
-                    updateName(e.nativeEvent.text);
-                    setNameFilled(e.nativeEvent.text !== "");
-                }} oldValue={
-                    getMatchData().then((data) => data["scouterName"])
-                } required />
-
-                <LabeledTextInput label="Team Number" editable={true}
-                    inputMode='numeric' submit={(e) => {
-                        updateTeamNumber(Number(e.nativeEvent.text));
-                        setTeamNumberFilled(e.nativeEvent.text !== "" && e.nativeEvent.text !== "0");
+                        updateName(e.nativeEvent.text);
+                        setNameFilled(e.nativeEvent.text !== "");
                     }} oldValue={
-                        getMatchData().then((data) => data["teamNumber"].toString())
+                        getMatchData().then((data) => data["scouterName"])
                     } required />
+
 
                 <LabeledTextInput label="Match number" editable={true}
                     inputMode='numeric' submit={(e) => {
-                        updateMatchNumber(Number(e.nativeEvent.text));
-                        setMatchFilled(e.nativeEvent.text !== "" && e.nativeEvent.text !== "0");
+                        const matchNumber = Number(e.nativeEvent.text);
+                        updateMatchNumber(matchNumber);
+                        setMatchNumber(matchNumber);
                     }} oldValue={
                         getMatchData().then((data) => data["matchNumber"].toString())
                     } required />
 
                 <RadioButton
                     data={["Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"]}
-                    onSelect={(selected: string) => { updateDriverStation(selected as DRIVER_STATION) }}
+                    onSelect={(selected: string) => {
+                        updateDriverStation(selected as DRIVER_STATION);
+                        setDriverStation(selected);
+                    }}
                     oldSelected={getMatchData().then((data) => data["driverStation"])} />
 
+
                 <NavButton text="Go" pageName="auto"
-                    disabled={ !(nameFilled && teamNumberFilled && matchFilled) } />
+                    disabled={ !(nameFilled && teamNumber !== 0 && matchNumber !== 0) } />
+                
                 { unsyncedMatches > 0 && <NavButton text="Sync" onClick={sync} /> }
 
                 <StatusBar style="auto" />
