@@ -27,28 +27,23 @@ export default function App() {
             const unsyncedMatches = JSON.parse(res) as MatchData[];
             
             setUnsyncedMatches(unsyncedMatches.length);
-            
-            onValue(ref(db, ".info/connected"), (snap) => {
-                if (snap.val() === false) return;
+            onValue(ref(db, "eventCode"), (code) => {
+                setEventCode(code.val());
                 
-                onValue(ref(db, "eventCode"), (code) => {
-                    setEventCode(code.val());
-                    
-                    const updates: { [key: string]: MatchData } = {};
-                    unsyncedMatches.forEach((data) => {
-                        const path = `${code.val()}/${data["teamNumber"]}/${data["matchNumber"]}/${data["scouterName"]}`;
-                        FileSystem.writeAsStringAsync((FileSystem.documentDirectory ?? "") + path.replaceAll("/", "_"), JSON.stringify(data))
-                            .catch((err) => { console.error(`Failed to write match: ${err}`) });
+                const updates: { [key: string]: MatchData } = {};
+                unsyncedMatches.forEach((data) => {
+                    const path = `${code.val()}/${data["teamNumber"]}/${data["matchNumber"]}/${data["scouterName"]}`;
+                    FileSystem.writeAsStringAsync((FileSystem.documentDirectory ?? "") + path.replaceAll("/", "_"), JSON.stringify(data))
+                        .catch((err) => { console.error(`Failed to write match: ${err}`) });
 
-                        updates[path] = data;
-                    });
-                        
-                    update(ref(db), updates).then(() => {
-                        AsyncStorage.setItem("unsynced", "[]");
-                        setUnsyncedMatches(0);
-                    });
+                    updates[path] = data;
                 });
-             }, { onlyOnce: true }); 
+                    
+                update(ref(db), updates).then(() => {
+                    AsyncStorage.setItem("unsynced", "[]");
+                    setUnsyncedMatches(0);
+                });
+            });
         });
     }
 
@@ -63,9 +58,9 @@ export default function App() {
    }, []);
 
     useEffect(() => {
-        if (matchNumber !== 0) {
+        if (matchNumber !== 0 && eventCode !== "") {
             onValue(ref(db, "/apiKey"), (snap) => {
-                fetch(`https://www.thebluealliance.com/api/v3/event/2025week0/matches/simple?X-TBA-Auth-Key=${snap.val()}`)
+                fetch(`https://www.thebluealliance.com/api/v3/event/${eventCode}/matches/simple?X-TBA-Auth-Key=${snap.val()}`)
                 .then(res => res.json())
                 .then(json => {
                     json.forEach((match: any) => {
@@ -84,7 +79,7 @@ export default function App() {
         } else {
             setTeamNumber(0);
         }
-    }, [ driverStation, matchNumber ]);
+    }, [ driverStation, matchNumber, eventCode ]);
 
     return (
         <View style={styles.container} onTouchStart={Keyboard.dismiss}>
