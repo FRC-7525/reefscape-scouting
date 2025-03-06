@@ -64,9 +64,8 @@ export default function App() {
 
     useEffect(() => {
         if (matchNumber !== 0) {
-            const apiKey = process.env.EXPO_PUBLIC_TBA_API_KEY;
-
-            fetch(`https://www.thebluealliance.com/api/v3/event/2025week0/matches/simple?X-TBA-Auth-Key=${apiKey}`)
+            onValue(ref(db, "/apiKey"), (snap) => {
+                fetch(`https://www.thebluealliance.com/api/v3/event/2025week0/matches/simple?X-TBA-Auth-Key=${snap.val()}`)
                 .then(res => res.json())
                 .then(json => {
                     json.forEach((match: any) => {
@@ -80,7 +79,8 @@ export default function App() {
                             updateTeamNumber(team);
                         }
                     })
-                }).catch(err => console.error(err));
+                }).catch(err => console.warn(err));
+            }, { onlyOnce: true });
         } else {
             setTeamNumber(0);
         }
