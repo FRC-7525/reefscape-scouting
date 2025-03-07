@@ -22,14 +22,15 @@ export default function App() {
 
     const sync = () => {
         AsyncStorage.getItem("unsynced").then(async (res) => {
-            if (res === null) return; 
-
-            const unsyncedMatches = JSON.parse(res) as MatchData[];
+            
+            const unsyncedMatches = JSON.parse(res ?? "[]") as MatchData[];
             
             setUnsyncedMatches(unsyncedMatches.length);
+
             onValue(ref(db, "eventCode"), (code) => {
                 setEventCode(code.val());
                 
+                if (unsyncedMatches.length === 0) return;
                 const updates: { [key: string]: MatchData } = {};
                 unsyncedMatches.forEach((data) => {
                     const path = `${code.val()}/${data["teamNumber"]}/${data["matchNumber"]}/${data["scouterName"]}`;
