@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Keyboard, ScrollView, StyleSheet, View } from 'react-native';
+import { Dimensions, Keyboard, ScrollView, StyleSheet, View } from 'react-native';
 import LabeledTextInput from './components/LabeledTextInput';
 import { addUnsyncedData, deleteMatchData, getMatchData, updateNotes } from './api/data';
 import PageHeader from './components/Header';
@@ -7,6 +7,8 @@ import SummaryTableView from './views/SummaryTableView';
 import Checkbox from './components/Checkbox';
 import NavButton from './components/NavButton';
 import { Divider } from 'react-native-paper';
+
+const {height, width} = Dimensions.get("window");
 
 export default function App() {
     return (
@@ -21,7 +23,7 @@ export default function App() {
 
             <SummaryTableView />
             
-            <View style={styles.container}>
+            <View style={styles.checkboxes}>
                 <Checkbox tag='Caught on fire'/>
                 <Checkbox tag='Stuck on gamepiece'/>
                 <Checkbox tag='Broke'/>
@@ -40,9 +42,14 @@ const styles = StyleSheet.create({
             padding: 15,
             flex: 1,
             backgroundColor: '#fff',
-            rowGap: 15
+            rowGap: 20,
 
             // alignItems: 'center',
             // justifyContent: 'center',
         },
+
+        checkboxes: {
+            flex: 1,
+            marginLeft: width * 0.25
+        }
     });

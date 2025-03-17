@@ -118,7 +118,7 @@ export default function App() {
                     <NavButton text="Go" pageName="auto"
                         disabled={!(nameFilled && teamNumber !== 0 && matchNumber !== 0)} />
 
-                    {unsyncedMatches == 0 && <NavButton text="Sync" onClick={sync} />}
+                    {unsyncedMatches > 0 && <NavButton text="Sync" onClick={sync} />}
                 </View>
 
                 <StatusBar style="auto" />
