@@ -51,7 +51,7 @@ function Stopwatch() {
 
             <Text style={styles.time}>{formatTime(time)}</Text>
             <View style={styles.buttons}>
-                <Button mode="contained" onPress={startStop} textColor={TEXT_COLOR} buttonColor={BACKGROUND_COLOR}>
+                <Button mode="contained" onPress={startStop}>
                     {isRunning ? 'Stop' : 'Start'}
                 </Button>
                 <Button mode="outlined" onPress={reset}>
