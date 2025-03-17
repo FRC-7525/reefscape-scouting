@@ -25,7 +25,7 @@ export default function App() {
             <Checkbox tag='Broke'/>
             <Checkbox tag='Tipped over'/>
             <Checkbox tag='Gamepiece stuck'/>
-            <Checkbox tag='Failure to climb' />
+            <Checkbox tag= 'Climb failure' />
             <StatusBar style="auto" />
             </ScrollView>
         </View>
