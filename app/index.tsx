@@ -86,6 +86,7 @@ export default function App() {
         <View style={styles.container} onTouchStart={Keyboard.dismiss}>
             <PageHeader title='Main' pageNumber='1/4' showTeam={false} />
             <ScrollView>
+
                 { eventCode !== "" && <Text>Event Code: {eventCode}</Text> }
                 { unsyncedMatches !== 0 && <Text>Unsynced Matches: {unsyncedMatches}</Text> }
                 { teamNumber !== 0 && <Text>Team Number: {teamNumber}</Text> }
@@ -119,6 +120,7 @@ export default function App() {
                     disabled={ !(nameFilled && teamNumber !== 0 && matchNumber !== 0) } />
                 
                 { unsyncedMatches > 0 && <NavButton text="Sync" onClick={sync} /> }
+
 
                 <StatusBar style="auto" />
             </ScrollView>

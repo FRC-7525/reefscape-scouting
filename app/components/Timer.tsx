@@ -5,6 +5,7 @@ import { getMatchData, updateDefenseTime } from '../api/data';
 import SectionTitle from './SectionTitle';
 import { BACKGROUND_COLOR, TEXT_COLOR } from '../consts';
 
+
 function Stopwatch() {
     const [time, setTime] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
@@ -20,6 +21,7 @@ function Stopwatch() {
         if (isRunning && intervalRef.current) {
             clearInterval(intervalRef.current);
             updateDefenseTime(time + 10);
+
         } else {
             intervalRef.current = setInterval(() => {
                 setTime((prevTime: number) => prevTime + 10);
@@ -27,6 +29,13 @@ function Stopwatch() {
         }
         
         setIsRunning(!isRunning);
+    };
+
+
+    const reset = () => {
+        if (intervalRef.current) clearInterval(intervalRef.current);
+        setTime(0);
+        setIsRunning(false);
     };
 
     
@@ -39,11 +48,17 @@ function Stopwatch() {
 
     return (
         <View style={styles.container}>
-            <SectionTitle>Defense Time</SectionTitle>
+
             <Text style={styles.time}>{formatTime(time)}</Text>
-            <Button mode="contained" onPress={startStop} textColor={TEXT_COLOR} buttonColor={BACKGROUND_COLOR}>
-                {isRunning ? 'Stop' : 'Start'}
-            </Button>
+            <View style={styles.buttons}>
+                <Button mode="contained" onPress={startStop}>
+                    {isRunning ? 'Stop' : 'Start'}
+                </Button>
+                <Button mode="outlined" onPress={reset}>
+                    Reset
+                </Button>
+            </View>
+
         </View>
     );
 };
@@ -57,7 +72,13 @@ const styles = StyleSheet.create({
   time: {
     fontSize: 15,
     marginBottom: 10,
-  }
+
+  },
+  buttons: {
+    flexDirection: 'row',
+    gap: 10,
+  },
+
 });
 
 export default Stopwatch;

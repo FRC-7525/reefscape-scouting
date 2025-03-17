@@ -1,3 +1,4 @@
+
 import { StatusBar } from 'expo-status-bar';
 import { Keyboard, ScrollView, StyleSheet, View } from 'react-native';
 import PageHeader from './components/Header';
@@ -12,8 +13,9 @@ export default function App() {
         <View style={styles.container}>
              
             <PageHeader title='Auto' pageNumber='2/4' previous='' />
+        
             <ScrollView>
-                
+
             <AutoStartPositionView/>
 
             <ReefAlgaeView phase="autonomous" />

@@ -24,7 +24,9 @@ export default function App() {
             <Checkbox tag='Broke'/>
             <Checkbox tag='Tipped over'/>
             <Checkbox tag='Gamepiece stuck'/>
+            <Checkbox tag= 'Climb failure' />
             <NavButton text="End" pageName='submit'/>
+
             <StatusBar style="auto" />
             </ScrollView>
         </View>
