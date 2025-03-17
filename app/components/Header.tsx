@@ -26,7 +26,7 @@ function PageHeader({ title, pageNumber, previous, showTeam }: PageHeaderProps) 
             if (data["driverStation"].includes("Red")) {
                 setChipColor("#f54242");
             } else {
-                setChipColor("#5252aa");
+                setChipColor("#2149a6");
             }
         });
     }, []);

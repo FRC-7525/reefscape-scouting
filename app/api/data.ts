@@ -101,6 +101,17 @@ export function updateNotes(notes: string): Promise<void> {
     });
 }
 
+export function addUnsyncedData(data: MatchData): Promise<void> {
+    return new Promise((resolve, reject) => {
+        AsyncStorage.getItem("unsynced")
+            .then((res) => {
+                const unsynced = new Set(JSON.parse(res ?? "[]"));
+                unsynced.add(data);
+                resolve(AsyncStorage.setItem("unsynced", JSON.stringify([ ...unsynced ])));
+            }).catch((err) => reject(`Failed to save unsynced match data: ${err}`));
+    })
+}
+
 export function updateTags(tag: Tag, removeTag?: boolean): Promise<void> {
     return modifyMatchData((data) => {
         const tags = new Set(data["tags"]);
@@ -112,6 +123,13 @@ export function updateTags(tag: Tag, removeTag?: boolean): Promise<void> {
         }
 
         data["tags"] = [...tags];
+        return data;
+    });
+}
+
+export function updateDefenseTime(time: number): Promise<void> {
+    return modifyMatchData((data) => {
+        data["teleop"]["defenseTime"] = time;
         return data;
     });
 }
