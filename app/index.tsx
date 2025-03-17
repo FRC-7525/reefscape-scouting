@@ -22,7 +22,6 @@ export default function App() {
 
     const sync = () => {
         AsyncStorage.getItem("unsynced").then(async (res) => {
-            
             const unsyncedMatches = JSON.parse(res ?? "[]") as MatchData[];
             
             setUnsyncedMatches(unsyncedMatches.length);
@@ -55,6 +54,7 @@ export default function App() {
             setMatchNumber(data["matchNumber"]);
         });
 
+        console.log(process.env.EXPO_PUBLIC_SHA)
         sync();
    }, []);
 
