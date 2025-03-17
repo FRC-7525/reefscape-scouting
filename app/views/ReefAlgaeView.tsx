@@ -4,7 +4,7 @@ import { View, StyleSheet } from 'react-native';
 import SectionTitle from '../components/SectionTitle';
 import { GamePhase, ReefLevel } from '../api/data_types';
 import React from 'react';
-import AlgaeView from './AlgaeView';
+import { Divider } from 'react-native-paper';
 
 interface ReefAlgaeViewProps {
     phase: GamePhase;
@@ -17,8 +17,7 @@ function ReefAlgaeView({ phase }: ReefAlgaeViewProps) {
 
 
     return (
-        <View>
-
+        <View style={styles.container}>
             <SectionTitle>Reef</SectionTitle>
             <MathBlock label="L4" min={0} max={10} onPress={(count: number) => {
                 updateReefScores(phase, "L4", count);
@@ -41,6 +40,12 @@ function ReefAlgaeView({ phase }: ReefAlgaeViewProps) {
     )
 
 } 
+
+const styles = StyleSheet.create({
+    container: {
+        paddingBottom: 10
+    }
+})
 
 
 export default ReefAlgaeView;

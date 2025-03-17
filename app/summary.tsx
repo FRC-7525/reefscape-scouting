@@ -6,6 +6,7 @@ import PageHeader from './components/Header';
 import SummaryTableView from './views/SummaryTableView';
 import Checkbox from './components/Checkbox';
 import NavButton from './components/NavButton';
+import { Divider } from 'react-native-paper';
 
 export default function App() {
     return (
@@ -19,11 +20,14 @@ export default function App() {
                 }} oldValue={getMatchData().then((data) => data["notes"])} />
 
             <SummaryTableView />
-            <Checkbox tag='Caught on fire'/>
-            <Checkbox tag='Stuck on gamepiece'/>
-            <Checkbox tag='Broke'/>
-            <Checkbox tag='Tipped over'/>
-            <Checkbox tag='Gamepiece stuck'/>
+            
+            <View style={styles.container}>
+                <Checkbox tag='Caught on fire'/>
+                <Checkbox tag='Stuck on gamepiece'/>
+                <Checkbox tag='Broke'/>
+                <Checkbox tag='Tipped over'/>
+                <Checkbox tag='Gamepiece stuck'/>
+            </View>
             <NavButton text="End" pageName='submit'/>
             <StatusBar style="auto" />
             </ScrollView>

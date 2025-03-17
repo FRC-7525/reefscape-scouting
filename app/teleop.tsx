@@ -18,10 +18,11 @@ export default function App() {
             <Divider />
             
             <ReefAlgaeView phase="teleop" />
+            <Divider />
             <AlgaeView phase="teleop" />
-            <EndgameView/>
-           
-            
+            <Divider />
+            <EndgameView/>  
+            <Divider />
 
             <StatusBar style="auto" />
             <NavButton pageName='summary' text='Next' />
