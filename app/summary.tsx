@@ -12,7 +12,7 @@ const {height, width} = Dimensions.get("window");
 
 export default function App() {
     return (
-        <View style={styles.container} onTouchStart={Keyboard.dismiss}>
+        <View style={styles.container}>
             <PageHeader title="Summary" pageNumber="4/4" previous='teleop' />
             <ScrollView style={{flex: 1}}> 
 
