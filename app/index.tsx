@@ -19,6 +19,7 @@ export default function App() {
     const [ driverStation, setDriverStation ] = useState("");
     const [ matchNumber, setMatchNumber ] = useState(0);
     const [ teamNumber, setTeamNumber ] = useState(0);
+    const [ sha, setSha ] = useState("");
 
     const sync = () => {
         AsyncStorage.getItem("unsynced").then(async (res) => {
@@ -54,7 +55,7 @@ export default function App() {
             setMatchNumber(data["matchNumber"]);
         });
 
-        console.log(process.env.EXPO_PUBLIC_SHA)
+        setSha(process.env.EXPO_PUBLIC_SHA ?? "");
         sync();
    }, []);
 
@@ -84,6 +85,7 @@ export default function App() {
 
     return (
         <View style={styles.container} onTouchStart={Keyboard.dismiss}>
+            <Text>{sha}</Text>
             <PageHeader title='Main' pageNumber='1/4' showTeam={false} />
             <ScrollView>
                 { eventCode !== "" && <Text>Event Code: {eventCode}</Text> }
