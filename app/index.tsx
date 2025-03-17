@@ -3,7 +3,7 @@ import { Keyboard, StyleSheet, View, Text, ScrollView } from 'react-native';
 import NavButton from './components/NavButton';
 import PageHeader from './components/Header';
 import LabeledTextInput from './components/LabeledTextInput';
-import { getMatchData, updateMatchNumber, updateName, updateTeamNumber, updateDriverStation } from './api/data';
+import { getMatchData, updateMatchNumber, updateName, updateTeamNumber, updateDriverStation, deleteMatchData } from './api/data';
 import { DRIVER_STATION, MatchData } from './api/data_types';
 import { useEffect, useState } from 'react';
 import RadioButton from './components/RadioButton';
@@ -21,6 +21,7 @@ export default function App() {
     const [ teamNumber, setTeamNumber ] = useState(0);
 
     const sync = () => {
+        deleteMatchData();
         AsyncStorage.getItem("unsynced").then(async (res) => {
             
             const unsyncedMatches = JSON.parse(res ?? "[]") as MatchData[];
@@ -59,7 +60,7 @@ export default function App() {
    }, []);
 
     useEffect(() => {
-        if (matchNumber !== 0 && eventCode !== "") {
+        if (matchNumber !== 0 && eventCode !== "" && driverStation !== DRIVER_STATION.UNSELECTED) {
             onValue(ref(db, `${eventCode}Schedule`), (snap) => {
                 if (!snap.exists()) return;
 
@@ -107,7 +108,8 @@ export default function App() {
                         updateDriverStation(selected as DRIVER_STATION);
                         setDriverStation(selected);
                     }}
-                    oldSelected={getMatchData().then((data) => data["driverStation"])} />
+                    oldSelected={getMatchData().then((data) => data["driverStation"])}
+                    defaultValue="Unselected" />
 
 
                 <NavButton text="Go" pageName="auto"

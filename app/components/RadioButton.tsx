@@ -7,16 +7,17 @@ interface RadioButton {
     data: string[];
     onSelect?: (option: string) => void;
     oldSelected?: Promise<string>;
+    defaultValue?: string;
 }
 
-function RadioButton({ data, onSelect, oldSelected }: RadioButton) {
+function RadioButton({ data, onSelect, oldSelected, defaultValue }: RadioButton) {
     onSelect ??= () => {};
 
     const [ selectedOption, setSelectedOption ] = useState("");
 
     useEffect(() => {
         const getPreviousSelected = async () => {
-            setSelectedOption(await oldSelected ?? data[0]);
+            setSelectedOption(await oldSelected ?? defaultValue ?? "");
         }
 
         getPreviousSelected();

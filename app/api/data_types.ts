@@ -5,6 +5,7 @@ export enum DRIVER_STATION {
     BLUE_ONE = "Blue 1",
     BLUE_TWO = "Blue 2",
     BLUE_THREE = "Blue 3",
+    UNSELECTED = "Unselected",
 };
 
 export enum START_POSITION {
@@ -48,7 +49,7 @@ export class MatchData {
     scouterName: string = "";
     teamNumber: number = 0;
     matchNumber: number = 0;
-    driverStation: DRIVER_STATION = DRIVER_STATION.BLUE_ONE;
+    driverStation: DRIVER_STATION = DRIVER_STATION.UNSELECTED;
     autonomous: AutoData = new AutoData();
     teleop: TeleopData = new TeleopData();
     notes: string = "";
