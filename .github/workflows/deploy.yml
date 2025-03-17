@@ -17,11 +17,11 @@ jobs:
       with:
         node-version: "20.x"
         cache: "npm"
+    - run: npm ci
+    - name: Prebuild
       run: |
         echo EXPO_PUBLIC_SHA=${{ github.sha }} >> .env
-        npm ci
-    - name: Prebuild
-      run: npx expo prebuild
+        npx expo prebuild
     - uses: irgaly/xcode-cache@v1
       with:
         key: xcode-cache-deriveddata-${{ github.workflow }}-${{ github.sha }}
