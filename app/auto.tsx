@@ -1,3 +1,4 @@
+
 import { StatusBar } from 'expo-status-bar';
 import { Divider } from "react-native-paper";
 import { Keyboard, ScrollView, StyleSheet, View } from 'react-native';
@@ -13,8 +14,9 @@ export default function App() {
         <View style={styles.container}>
              
             <PageHeader title='Auto' pageNumber='2/4' previous='' />
+        
             <ScrollView>
-                
+
             <AutoStartPositionView/>
 
             <Divider />

@@ -86,9 +86,9 @@ export default function App() {
         <View style={styles.container} onTouchStart={Keyboard.dismiss}>
             <PageHeader title='Main' pageNumber='1/4' showTeam={false} />
             <ScrollView>
-                {eventCode !== "" && <Text>Event Code: {eventCode}</Text>}
-                {unsyncedMatches !== 0 && <Text>Unsynced Matches: {unsyncedMatches}</Text>}
-                {teamNumber !== 0 && <Text>Team Number: {teamNumber}</Text>}
+                { eventCode !== "" && <Text>Event Code: {eventCode}</Text> }
+                { unsyncedMatches !== 0 && <Text>Unsynced Matches: {unsyncedMatches}</Text> }
+                { teamNumber !== 0 && <Text>Team Number: {teamNumber}</Text> }
                 <LabeledTextInput label="Name" editable={true} submit={(e) => {
                     updateName(e.nativeEvent.text);
                     setNameFilled(e.nativeEvent.text !== "");
@@ -120,6 +120,7 @@ export default function App() {
 
                     {unsyncedMatches > 0 && <NavButton text="Sync" onClick={sync} />}
                 </View>
+
 
                 <StatusBar style="auto" />
             </ScrollView>

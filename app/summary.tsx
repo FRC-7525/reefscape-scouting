@@ -22,7 +22,6 @@ export default function App() {
                 }} oldValue={getMatchData().then((data) => data["notes"])} />
 
             <SummaryTableView />
-            
             <View style={styles.checkboxes}>
                 <Checkbox tag='Caught on fire'/>
                 <Checkbox tag='Stuck on gamepiece'/>
@@ -31,6 +30,7 @@ export default function App() {
                 <Checkbox tag='Gamepiece stuck'/>
             </View>
             <NavButton text="End" pageName='submit'/>
+
             <StatusBar style="auto" />
             </ScrollView>
         </View>
