@@ -60,22 +60,17 @@ export default function App() {
 
     useEffect(() => {
         if (matchNumber !== 0 && eventCode !== "") {
-            onValue(ref(db, "/apiKey"), (snap) => {
-                fetch(`https://www.thebluealliance.com/api/v3/event/${eventCode}/matches/simple?X-TBA-Auth-Key=${snap.val()}`)
-                .then(res => res.json())
-                .then(json => {
-                    json.forEach((match: any) => {
-                        if (match.comp_level == "qm" && match.match_number == matchNumber) {
-                            const [ teamColor, position ] = driverStation.split(" ");
-                            const alliance = match["alliances"][teamColor.toLocaleLowerCase()];
-                            const teamCode = alliance["team_keys"][Number(position) - 1];
-                            const team = teamCode.split("frc")[1]; // every teamCode has "frc" prepended, this just gets rid of it
+            onValue(ref(db, `${eventCode}Schedule`), (snap) => {
+                if (!snap.exists()) return;
 
-                            setTeamNumber(team); 
-                            updateTeamNumber(team);
-                        }
-                    })
-                }).catch(err => console.warn(err));
+                const matches = snap.val();
+                const match = matches[matchNumber];
+
+                if (match === null) return;
+
+                const [ alliance, station ] = driverStation.split(' ');
+
+                setTeamNumber(match[alliance.toLowerCase()][Number(station) - 1]);
             }, { onlyOnce: true });
         } else {
             setTeamNumber(0);
