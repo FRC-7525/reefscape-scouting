@@ -7,7 +7,7 @@ import { getMatchData, updateMatchNumber, updateName, updateTeamNumber, updateDr
 import { DRIVER_STATION, MatchData } from './api/data_types';
 import { useEffect, useState } from 'react';
 import RadioButton from './components/RadioButton';
-import { child, onValue, push, ref, set, update } from 'firebase/database';
+import { child, get, onValue, push, ref, set, update } from 'firebase/database';
 import { db } from '../firebaseConfig';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as FileSystem from "expo-file-system";
@@ -19,7 +19,7 @@ export default function App() {
     const [ driverStation, setDriverStation ] = useState("");
     const [ matchNumber, setMatchNumber ] = useState(0);
     const [ teamNumber, setTeamNumber ] = useState(0);
-    const [ sha, setSha ] = useState("");
+    const [ appUpdated, setAppUpdated ] = useState(false);
 
     const sync = () => {
         AsyncStorage.getItem("unsynced").then(async (res) => {
@@ -55,7 +55,13 @@ export default function App() {
             setMatchNumber(data["matchNumber"]);
         });
 
-        setSha(process.env.EXPO_PUBLIC_SHA ?? "");
+        get(ref(db, "/updateSha")).then(snap => {
+            if (!snap.exists()) return;
+
+            const appSha = process.env.EXPO_PUBLIC_SHA ?? "";
+            setAppUpdated(appSha === snap.val());
+        });
+
         sync();
    }, []);
 
@@ -85,7 +91,6 @@ export default function App() {
 
     return (
         <View style={styles.container} onTouchStart={Keyboard.dismiss}>
-            <Text>{sha}</Text>
             <PageHeader title='Main' pageNumber='1/4' showTeam={false} />
             <ScrollView>
                 { eventCode !== "" && <Text>Event Code: {eventCode}</Text> }

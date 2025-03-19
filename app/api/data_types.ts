@@ -45,6 +45,7 @@ export class TeleopData extends PhaseData {
 }
 
 export class MatchData {
+    appUpdated: boolean = true;
     scouterName: string = "";
     teamNumber: number = 0;
     matchNumber: number = 0;
