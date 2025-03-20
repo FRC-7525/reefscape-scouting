@@ -21,7 +21,6 @@ export default function App() {
     const [ teamNumber, setTeamNumber ] = useState(0);
 
     const sync = () => {
-        deleteMatchData();
         AsyncStorage.getItem("unsynced").then(async (res) => {
             
             const unsyncedMatches = JSON.parse(res ?? "[]") as MatchData[];
@@ -61,7 +60,7 @@ export default function App() {
 
     useEffect(() => {
         if (matchNumber !== 0 && eventCode !== "" && driverStation !== DRIVER_STATION.UNSELECTED) {
-            onValue(ref(db, `${eventCode}Schedule`), (snap) => {
+            onValue(ref(db, `${eventCode}/schedule`), (snap) => {
                 if (!snap.exists()) return;
 
                 const matches = snap.val();
