@@ -22,7 +22,6 @@ export default function App() {
             <AlgaeView phase="teleop" />
             <Divider />
             <EndgameView/>  
-            <Divider />
 
             <StatusBar style="auto" />
             <NavButton pageName='summary' text='Next' />

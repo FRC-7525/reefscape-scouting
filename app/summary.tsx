@@ -8,7 +8,7 @@ import Checkbox from './components/Checkbox';
 import NavButton from './components/NavButton';
 import { Divider } from 'react-native-paper';
 
-const {height, width} = Dimensions.get("window");
+const { width } = Dimensions.get("window");
 
 export default function App() {
     return (

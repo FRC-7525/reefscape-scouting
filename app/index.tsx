@@ -13,12 +13,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as FileSystem from "expo-file-system";
 
 export default function App() {
-    const [nameFilled, setNameFilled] = useState(false);
-    const [eventCode, setEventCode] = useState("");
-    const [unsyncedMatches, setUnsyncedMatches] = useState(0);
-    const [driverStation, setDriverStation] = useState("");
-    const [matchNumber, setMatchNumber] = useState(0);
-    const [teamNumber, setTeamNumber] = useState(0);
+    const [ nameFilled, setNameFilled ] = useState(false);
+    const [ eventCode, setEventCode ] = useState("");
+    const [ unsyncedMatches, setUnsyncedMatches ] = useState(0);
+    const [ driverStation, setDriverStation ] = useState("");
+    const [ matchNumber, setMatchNumber ] = useState(0);
+    const [ teamNumber, setTeamNumber ] = useState(0);
 
     const sync = () => {
         AsyncStorage.getItem("unsynced").then(async (res) => {
@@ -80,7 +80,7 @@ export default function App() {
         } else {
             setTeamNumber(0);
         }
-    }, [driverStation, matchNumber, eventCode]);
+    }, [ driverStation, matchNumber, eventCode ]);
 
     return (
         <View style={styles.container} onTouchStart={Keyboard.dismiss}>
@@ -90,11 +90,11 @@ export default function App() {
                 { unsyncedMatches !== 0 && <Text>Unsynced Matches: {unsyncedMatches}</Text> }
                 { teamNumber !== 0 && <Text>Team Number: {teamNumber}</Text> }
                 <LabeledTextInput label="Name" editable={true} submit={(e) => {
-                    updateName(e.nativeEvent.text);
-                    setNameFilled(e.nativeEvent.text !== "");
-                }} oldValue={
-                    getMatchData().then((data) => data["scouterName"])
-                } required />
+                      updateName(e.nativeEvent.text);
+                      setNameFilled(e.nativeEvent.text !== "");
+                  }} oldValue={
+                      getMatchData().then((data) => data["scouterName"])
+                  } required />
 
 
                 <LabeledTextInput label="Match number" editable={true}
