@@ -66,7 +66,7 @@ export default function App() {
                 .then(json => {
                     json.forEach((match: any) => {
                         if (match.comp_level == "qm" && match.match_number == matchNumber) {
-                            const [teamColor, position] = driverStation.split(" ");
+                            const [ teamColor, position ] = driverStation.split(" ");
                             const alliance = match["alliances"][teamColor.toLocaleLowerCase()];
                             const teamCode = alliance["team_keys"][Number(position) - 1];
                             const team = teamCode.split("frc")[1]; // every teamCode has "frc" prepended, this just gets rid of it
