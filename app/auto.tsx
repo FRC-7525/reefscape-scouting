@@ -19,7 +19,6 @@ export default function App() {
 
             <AutoStartPositionView/>
 
-            <Divider />
             <ReefAlgaeView phase="autonomous" />
             <Divider />
             <AlgaeView phase="autonomous" />
