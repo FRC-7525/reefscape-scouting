@@ -22,14 +22,14 @@ export default function App() {
 
     const sync = () => {
         AsyncStorage.getItem("unsynced").then(async (res) => {
-            
+
             const unsyncedMatches = JSON.parse(res ?? "[]") as MatchData[];
-            
+
             setUnsyncedMatches(unsyncedMatches.length);
 
             onValue(ref(db, "eventCode"), (code) => {
                 setEventCode(code.val());
-                
+
                 if (unsyncedMatches.length === 0) return;
                 const updates: { [key: string]: MatchData } = {};
                 unsyncedMatches.forEach((data) => {
@@ -39,7 +39,7 @@ export default function App() {
 
                     updates[path] = data;
                 });
-                    
+
                 update(ref(db), updates).then(() => {
                     AsyncStorage.setItem("unsynced", "[]");
                     setUnsyncedMatches(0);
@@ -71,7 +71,7 @@ export default function App() {
                             const teamCode = alliance["team_keys"][Number(position) - 1];
                             const team = teamCode.split("frc")[1]; // every teamCode has "frc" prepended, this just gets rid of it
 
-                            setTeamNumber(team); 
+                            setTeamNumber(team);
                             updateTeamNumber(team);
                         }
                     })
@@ -86,7 +86,6 @@ export default function App() {
         <View style={styles.container} onTouchStart={Keyboard.dismiss}>
             <PageHeader title='Main' pageNumber='1/4' showTeam={false} />
             <ScrollView>
-
                 { eventCode !== "" && <Text>Event Code: {eventCode}</Text> }
                 { unsyncedMatches !== 0 && <Text>Unsynced Matches: {unsyncedMatches}</Text> }
                 { teamNumber !== 0 && <Text>Team Number: {teamNumber}</Text> }
@@ -115,11 +114,12 @@ export default function App() {
                     }}
                     oldSelected={getMatchData().then((data) => data["driverStation"])} />
 
+                <View style={styles.buttons}>
+                    <NavButton text="Go" pageName="auto"
+                        disabled={!(nameFilled && teamNumber !== 0 && matchNumber !== 0)} />
 
-                <NavButton text="Go" pageName="auto"
-                    disabled={ !(nameFilled && teamNumber !== 0 && matchNumber !== 0) } />
-                
-                { unsyncedMatches > 0 && <NavButton text="Sync" onClick={sync} /> }
+                    {unsyncedMatches > 0 && <NavButton text="Sync" onClick={sync} />}
+                </View>
 
 
                 <StatusBar style="auto" />
@@ -134,7 +134,11 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         rowGap: 15
-        // alignItems: 'center',
-        // justifyContent: 'center',
     },
+
+    buttons: {
+        flex: 1,
+        columnGap: 15,
+        flexDirection: "row-reverse"
+    }
 });

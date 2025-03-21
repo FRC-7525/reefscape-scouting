@@ -35,7 +35,7 @@ function LabeledTextInput({ label, editable, placeholder, inputMode, multiline, 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View>
-                <TextInput label={`${label ?? ""}${required ? "*" : ""}`} editable={editable} style={styles.input}
+                <TextInput label={`${label ?? ""}${required ? "*" : ""}`} editable={editable} style={(multiline && styles.multilineInput) || (styles.input)}
                         placeholder={placeholder} placeholderTextColor={"#bbb"}
                         mode="outlined" onEndEditing={submit}
                         inputMode={inputMode} multiline={multiline}
@@ -48,6 +48,10 @@ function LabeledTextInput({ label, editable, placeholder, inputMode, multiline, 
 const styles = StyleSheet.create({
     input: {
         width: "50%"
+    },
+    multilineInput: {
+        width: "100%",
+        paddingBottom: 40
     }
 })
 

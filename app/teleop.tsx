@@ -18,10 +18,10 @@ export default function App() {
             <Divider />
             
             <ReefAlgaeView phase="teleop" />
+            <Divider />
             <AlgaeView phase="teleop" />
-            <EndgameView/>
-           
-            
+            <Divider />
+            <EndgameView/>  
 
             <StatusBar style="auto" />
             <NavButton pageName='summary' text='Next' />
@@ -36,7 +36,5 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         rowGap: 15
-        // alignItems: 'center',
-        // justifyContent: 'center',
     },
 });
