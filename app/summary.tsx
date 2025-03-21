@@ -43,9 +43,6 @@ const styles = StyleSheet.create({
             flex: 1,
             backgroundColor: '#fff',
             rowGap: 20,
-
-            // alignItems: 'center',
-            // justifyContent: 'center',
         },
 
         checkboxes: {

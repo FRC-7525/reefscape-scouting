@@ -18,11 +18,11 @@ function AlgaeView({ phase }: AlgaeViewProps) {
             <SectionTitle>Algae</SectionTitle>
 
             <MathBlock min={0} label="Net" onPress={(count: number) => {
-                updateAlgaeScore(phase, "net", count);
-            }} oldCount={getOldCount("net")} />
+                    updateAlgaeScore(phase, "net", count);
+                }} oldCount={getOldCount("net")} />
             <MathBlock min={0} label="Processor" onPress={(count: number) => {
-                updateAlgaeScore(phase, "processor", count);
-            }} oldCount={getOldCount("processor")} />
+                    updateAlgaeScore(phase, "processor", count);
+                }} oldCount={getOldCount("processor")} />
         </View>
     )
 }

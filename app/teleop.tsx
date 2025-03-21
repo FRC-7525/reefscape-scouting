@@ -36,7 +36,5 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         rowGap: 15
-        // alignItems: 'center',
-        // justifyContent: 'center',
     },
 });

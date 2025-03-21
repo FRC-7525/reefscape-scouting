@@ -33,13 +33,9 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         padding: 15,
-        // paddingLeft: 20,
-        // paddingRight: 20,
         flex: 1,
         backgroundColor: '#fff',
         rowGap: 15
-        // alignItems: 'center',
-        // justifyContent: 'center',
     },
    
 });

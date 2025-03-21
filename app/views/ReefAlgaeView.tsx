@@ -16,8 +16,6 @@ function ReefAlgaeView({ phase }: ReefAlgaeViewProps) {
 
 
     return (
-
-
         <View style={styles.container}>
             <SectionTitle>Reef</SectionTitle>
             <MathBlock label="L4" min={0} max={10} onPress={(count: number) => {

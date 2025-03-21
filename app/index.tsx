@@ -56,26 +56,26 @@ export default function App() {
         });
 
         sync();
-    }, []);
+   }, []);
 
     useEffect(() => {
         if (matchNumber !== 0 && eventCode !== "") {
             onValue(ref(db, "/apiKey"), (snap) => {
                 fetch(`https://www.thebluealliance.com/api/v3/event/${eventCode}/matches/simple?X-TBA-Auth-Key=${snap.val()}`)
-                    .then(res => res.json())
-                    .then(json => {
-                        json.forEach((match: any) => {
-                            if (match.comp_level == "qm" && match.match_number == matchNumber) {
-                                const [teamColor, position] = driverStation.split(" ");
-                                const alliance = match["alliances"][teamColor.toLocaleLowerCase()];
-                                const teamCode = alliance["team_keys"][Number(position) - 1];
-                                const team = teamCode.split("frc")[1]; // every teamCode has "frc" prepended, this just gets rid of it
+                .then(res => res.json())
+                .then(json => {
+                    json.forEach((match: any) => {
+                        if (match.comp_level == "qm" && match.match_number == matchNumber) {
+                            const [teamColor, position] = driverStation.split(" ");
+                            const alliance = match["alliances"][teamColor.toLocaleLowerCase()];
+                            const teamCode = alliance["team_keys"][Number(position) - 1];
+                            const team = teamCode.split("frc")[1]; // every teamCode has "frc" prepended, this just gets rid of it
 
-                                setTeamNumber(team);
-                                updateTeamNumber(team);
-                            }
-                        })
-                    }).catch(err => console.warn(err));
+                            setTeamNumber(team);
+                            updateTeamNumber(team);
+                        }
+                    })
+                }).catch(err => console.warn(err));
             }, { onlyOnce: true });
         } else {
             setTeamNumber(0);
@@ -134,8 +134,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         rowGap: 15
-        // alignItems: 'center',
-        // justifyContent: 'center',
     },
 
     buttons: {
