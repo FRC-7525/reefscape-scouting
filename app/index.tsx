@@ -90,11 +90,11 @@ export default function App() {
                 { unsyncedMatches !== 0 && <Text>Unsynced Matches: {unsyncedMatches}</Text> }
                 { teamNumber !== 0 && <Text>Team Number: {teamNumber}</Text> }
                 <LabeledTextInput label="Name" editable={true} submit={(e) => {
-                      updateName(e.nativeEvent.text);
-                      setNameFilled(e.nativeEvent.text !== "");
-                  }} oldValue={
-                      getMatchData().then((data) => data["scouterName"])
-                  } required />
+                        updateName(e.nativeEvent.text);
+                        setNameFilled(e.nativeEvent.text !== "");
+                    }} oldValue={
+                        getMatchData().then((data) => data["scouterName"])
+                    } required />
 
 
                 <LabeledTextInput label="Match number" editable={true}
