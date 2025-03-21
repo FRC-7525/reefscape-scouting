@@ -23,7 +23,6 @@ export default function App() {
             <ReefAlgaeView phase="autonomous" />
             <Divider />
             <AlgaeView phase="autonomous" />
-            <Divider />
 
             <NavButton text="Next" pageName="teleop" />
             <StatusBar style="auto" />
