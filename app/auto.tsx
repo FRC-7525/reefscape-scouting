@@ -1,4 +1,6 @@
+
 import { StatusBar } from 'expo-status-bar';
+import { Divider } from "react-native-paper";
 import { Keyboard, ScrollView, StyleSheet, View } from 'react-native';
 import PageHeader from './components/Header';
 import NavButton from './components/NavButton';
@@ -12,11 +14,13 @@ export default function App() {
         <View style={styles.container}>
              
             <PageHeader title='Auto' pageNumber='2/4' previous='' />
+        
             <ScrollView>
-                
+
             <AutoStartPositionView/>
 
             <ReefAlgaeView phase="autonomous" />
+            <Divider />
             <AlgaeView phase="autonomous" />
 
             <NavButton text="Next" pageName="teleop" />
@@ -32,8 +36,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         rowGap: 15
-        // alignItems: 'center',
-        // justifyContent: 'center',
     },
    
 });

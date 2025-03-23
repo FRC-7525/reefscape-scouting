@@ -9,7 +9,6 @@ import SectionTitle from "../components/SectionTitle";
 function EndgameView() {
     return (
         <View>
-            <Divider />
             <SectionTitle>{"Climb"}</SectionTitle>
            
             <View style={styles.container}>
@@ -29,6 +28,7 @@ function EndgameView() {
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
+        paddingBottom: 10
     },
     centerRadioButtons: {
         flex: 1,

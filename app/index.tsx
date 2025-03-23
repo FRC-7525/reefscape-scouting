@@ -22,14 +22,14 @@ export default function App() {
 
     const sync = () => {
         AsyncStorage.getItem("unsynced").then(async (res) => {
-            
+
             const unsyncedMatches = JSON.parse(res ?? "[]") as MatchData[];
-            
+
             setUnsyncedMatches(unsyncedMatches.length);
 
             onValue(ref(db, "eventCode"), (code) => {
                 setEventCode(code.val());
-                
+
                 if (unsyncedMatches.length === 0) return;
                 const updates: { [key: string]: MatchData } = {};
                 unsyncedMatches.forEach((data) => {
@@ -39,7 +39,7 @@ export default function App() {
 
                     updates[path] = data;
                 });
-                    
+
                 update(ref(db), updates).then(() => {
                     AsyncStorage.setItem("unsynced", "[]");
                     setUnsyncedMatches(0);
@@ -110,11 +110,13 @@ export default function App() {
                     oldSelected={getMatchData().then((data) => data["driverStation"])}
                     defaultValue="Unselected" />
 
+                <View style={styles.buttons}>
+                    <NavButton text="Go" pageName="auto"
+                        disabled={!(nameFilled && teamNumber !== 0 && matchNumber !== 0)} />
 
-                <NavButton text="Go" pageName="auto"
-                    disabled={ !(nameFilled && teamNumber !== 0 && matchNumber !== 0) } />
-                
-                { unsyncedMatches > 0 && <NavButton text="Sync" onClick={sync} /> }
+                    {unsyncedMatches > 0 && <NavButton text="Sync" onClick={sync} />}
+                </View>
+
 
                 <StatusBar style="auto" />
             </ScrollView>
@@ -128,7 +130,11 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         rowGap: 15
-        // alignItems: 'center',
-        // justifyContent: 'center',
     },
+
+    buttons: {
+        flex: 1,
+        columnGap: 15,
+        flexDirection: "row-reverse"
+    }
 });
