@@ -33,6 +33,7 @@ function AutoStartPositionView () {
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
+        paddingBottom: 10
     },
     side: {
         flex: 1,
