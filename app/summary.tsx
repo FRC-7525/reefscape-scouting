@@ -28,6 +28,7 @@ export default function App() {
                 <Checkbox tag='Broke'/>
                 <Checkbox tag='Tipped over'/>
                 <Checkbox tag='Gamepiece stuck'/>
+                <Checkbox tag='Climb failure'/>
             </View>
             <NavButton text="End" pageName='submit'/>
 
