@@ -71,6 +71,7 @@ export default function App() {
                 const [ alliance, station ] = driverStation.split(' ');
 
                 setTeamNumber(match[alliance.toLowerCase()][Number(station) - 1]);
+                updateTeamNumber(match[alliance.toLowerCase()][Number(station) - 1]);
             }, { onlyOnce: true });
         } else {
             setTeamNumber(0);
