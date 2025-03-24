@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { Keyboard, StyleSheet, View, Text, ScrollView } from 'react-native';
+import { Keyboard, StyleSheet, View, ScrollView } from 'react-native';
+import { Text } from 'react-native-paper';
 import NavButton from './components/NavButton';
 import PageHeader from './components/Header';
 import LabeledTextInput from './components/LabeledTextInput';
@@ -11,6 +12,7 @@ import { child, onValue, push, ref, set, update } from 'firebase/database';
 import { db } from '../firebaseConfig';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as FileSystem from "expo-file-system";
+import { TEXT_WARNING_COLOR } from './consts';
 
 export default function App() {
     const [ nameFilled, setNameFilled ] = useState(false);
@@ -19,10 +21,10 @@ export default function App() {
     const [ driverStation, setDriverStation ] = useState("");
     const [ matchNumber, setMatchNumber ] = useState(0);
     const [ teamNumber, setTeamNumber ] = useState(0);
+    const [ scoutingDisabled, setScoutingDisabled ] = useState(true);
 
     const sync = () => {
         AsyncStorage.getItem("unsynced").then(async (res) => {
-
             const unsyncedMatches = JSON.parse(res ?? "[]") as MatchData[];
 
             setUnsyncedMatches(unsyncedMatches.length);
@@ -55,6 +57,12 @@ export default function App() {
             setMatchNumber(data["matchNumber"]);
         });
 
+        onValue(ref(db, "scoutingEnabled"), (snap) => {
+            if (!snap.exists()) return;
+
+            setScoutingDisabled(!snap.val());
+        });
+
         sync();
    }, []);
 
@@ -81,6 +89,7 @@ export default function App() {
         <View style={styles.container} onTouchStart={Keyboard.dismiss}>
             <PageHeader title='Main' pageNumber='1/4' showTeam={false} />
             <ScrollView>
+                { scoutingDisabled && <Text variant="bodyLarge" theme={{ colors: { 'onSurface': TEXT_WARNING_COLOR } }}>Scouting is disabled, no data will be synced.</Text> }
                 { eventCode !== "" && <Text>Event Code: {eventCode}</Text> }
                 { unsyncedMatches !== 0 && <Text>Unsynced Matches: {unsyncedMatches}</Text> }
                 { teamNumber !== 0 && <Text>Team Number: {teamNumber}</Text> }
