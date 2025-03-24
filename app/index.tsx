@@ -108,7 +108,7 @@ export default function App() {
                         setDriverStation(selected);
                     }}
                     oldSelected={getMatchData().then((data) => data["driverStation"])}
-                    defaultValue="Unselected" />
+                    defaultValue={DRIVER_STATION.UNSELECTED} />
 
                 <View style={styles.buttons}>
                     <NavButton text="Go" pageName="auto"
