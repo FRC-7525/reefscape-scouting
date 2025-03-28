@@ -5,6 +5,7 @@ export enum DRIVER_STATION {
     BLUE_ONE = "Blue 1",
     BLUE_TWO = "Blue 2",
     BLUE_THREE = "Blue 3",
+    UNSELECTED = "Unselected",
 };
 
 export enum START_POSITION {
@@ -49,7 +50,7 @@ export class MatchData {
     scouterName: string = "";
     teamNumber: number = 0;
     matchNumber: number = 0;
-    driverStation: DRIVER_STATION = DRIVER_STATION.BLUE_ONE;
+    driverStation: DRIVER_STATION = DRIVER_STATION.UNSELECTED;
     autonomous: AutoData = new AutoData();
     teleop: TeleopData = new TeleopData();
     notes: string = "";
@@ -57,6 +58,6 @@ export class MatchData {
 }
 
 export type GamePhase = "teleop" | "autonomous";
-export type Tag = "Caught on fire" | "Stuck on gamepiece" | "Broke" | "Tipped over" | "Gamepiece stuck";
+export type Tag = "Caught on fire" | "Stuck on gamepiece" | "Broke" | "Tipped over" | "Gamepiece stuck" | "Climb failure";
 export type ReefLevel = "L4" | "L3" | "L2" | "L1";
 export type AlgaeLevel = "net" | "processor";

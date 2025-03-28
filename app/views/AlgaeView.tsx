@@ -1,7 +1,6 @@
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import MathBlock from "../components/MathBlock";
 import SectionTitle from "../components/SectionTitle";
-import { Divider } from "react-native-paper";
 import { getMatchData, updateAlgaeScore } from "../api/data";
 import { AlgaeLevel, GamePhase } from "../api/data_types";
 
@@ -15,18 +14,23 @@ function AlgaeView({ phase }: AlgaeViewProps) {
     }
 
     return (
-        <View>
-            <Divider />
+        <View style={styles.container}>
             <SectionTitle>Algae</SectionTitle>
 
-          <MathBlock min={0} label="Net" onPress={(count: number) => {
-                updateAlgaeScore(phase, "net", count);
-            }} oldCount={getOldCount("net")} />
+            <MathBlock min={0} label="Net" onPress={(count: number) => {
+                    updateAlgaeScore(phase, "net", count);
+                }} oldCount={getOldCount("net")} />
             <MathBlock min={0} label="Processor" onPress={(count: number) => {
-                updateAlgaeScore(phase, "processor", count);
-            }} oldCount={getOldCount("processor")} />
+                    updateAlgaeScore(phase, "processor", count);
+                }} oldCount={getOldCount("processor")} />
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        paddingVertical: 10
+    }
+});
 
 export default AlgaeView;

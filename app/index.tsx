@@ -1,9 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { Keyboard, StyleSheet, View, Text, ScrollView } from 'react-native';
+import { Keyboard, StyleSheet, View, ScrollView } from 'react-native';
+import { Text } from 'react-native-paper';
 import NavButton from './components/NavButton';
 import PageHeader from './components/Header';
 import LabeledTextInput from './components/LabeledTextInput';
-import { getMatchData, updateMatchNumber, updateName, updateTeamNumber, updateDriverStation } from './api/data';
+import { getMatchData, updateMatchNumber, updateName, updateTeamNumber, updateDriverStation, deleteMatchData } from './api/data';
 import { DRIVER_STATION, MatchData } from './api/data_types';
 import { useEffect, useState } from 'react';
 import RadioButton from './components/RadioButton';
@@ -11,6 +12,7 @@ import { child, get, onValue, push, ref, set, update } from 'firebase/database';
 import { db } from '../firebaseConfig';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as FileSystem from "expo-file-system";
+import { TEXT_WARNING_COLOR } from './consts';
 
 export default function App() {
     const [ nameFilled, setNameFilled ] = useState(false);
@@ -20,16 +22,17 @@ export default function App() {
     const [ matchNumber, setMatchNumber ] = useState(0);
     const [ teamNumber, setTeamNumber ] = useState(0);
     const [ appUpdated, setAppUpdated ] = useState(false);
+    const [ scoutingDisabled, setScoutingDisabled ] = useState(true);
 
     const sync = () => {
         AsyncStorage.getItem("unsynced").then(async (res) => {
             const unsyncedMatches = JSON.parse(res ?? "[]") as MatchData[];
-            
+
             setUnsyncedMatches(unsyncedMatches.length);
 
             onValue(ref(db, "eventCode"), (code) => {
                 setEventCode(code.val());
-                
+
                 if (unsyncedMatches.length === 0) return;
                 const updates: { [key: string]: MatchData } = {};
                 unsyncedMatches.forEach((data) => {
@@ -39,7 +42,7 @@ export default function App() {
 
                     updates[path] = data;
                 });
-                    
+
                 update(ref(db), updates).then(() => {
                     AsyncStorage.setItem("unsynced", "[]");
                     setUnsyncedMatches(0);
@@ -60,29 +63,31 @@ export default function App() {
 
             const appSha = process.env.EXPO_PUBLIC_SHA ?? "";
             setAppUpdated(appSha === snap.val());
+        )};
+        
+        onValue(ref(db, "scoutingEnabled"), (snap) => {
+            if (!snap.exists()) return;
+
+            setScoutingDisabled(!snap.val());
         });
 
         sync();
    }, []);
 
     useEffect(() => {
-        if (matchNumber !== 0 && eventCode !== "") {
-            onValue(ref(db, "/apiKey"), (snap) => {
-                fetch(`https://www.thebluealliance.com/api/v3/event/${eventCode}/matches/simple?X-TBA-Auth-Key=${snap.val()}`)
-                .then(res => res.json())
-                .then(json => {
-                    json.forEach((match: any) => {
-                        if (match.comp_level == "qm" && match.match_number == matchNumber) {
-                            const [ teamColor, position ] = driverStation.split(" ");
-                            const alliance = match["alliances"][teamColor.toLocaleLowerCase()];
-                            const teamCode = alliance["team_keys"][Number(position) - 1];
-                            const team = teamCode.split("frc")[1]; // every teamCode has "frc" prepended, this just gets rid of it
+        if (matchNumber !== 0 && eventCode !== "" && driverStation !== DRIVER_STATION.UNSELECTED) {
+            onValue(ref(db, `${eventCode}/schedule`), (snap) => {
+                if (!snap.exists()) return;
 
-                            setTeamNumber(team); 
-                            updateTeamNumber(team);
-                        }
-                    })
-                }).catch(err => console.warn(err));
+                const matches = snap.val();
+                const match = matches[matchNumber];
+
+                if (match === null) return;
+
+                const [ alliance, station ] = driverStation.split(' ');
+
+                setTeamNumber(match[alliance.toLowerCase()][Number(station) - 1]);
+                updateTeamNumber(match[alliance.toLowerCase()][Number(station) - 1]);
             }, { onlyOnce: true });
         } else {
             setTeamNumber(0);
@@ -93,6 +98,7 @@ export default function App() {
         <View style={styles.container} onTouchStart={Keyboard.dismiss}>
             <PageHeader title='Main' pageNumber='1/4' showTeam={false} />
             <ScrollView>
+                { scoutingDisabled && <Text variant="bodyLarge" theme={{ colors: { 'onSurface': TEXT_WARNING_COLOR } }}>Scouting is disabled, no data will be synced.</Text> }
                 { eventCode !== "" && <Text>Event Code: {eventCode}</Text> }
                 { unsyncedMatches !== 0 && <Text>Unsynced Matches: {unsyncedMatches}</Text> }
                 { teamNumber !== 0 && <Text>Team Number: {teamNumber}</Text> }
@@ -119,13 +125,16 @@ export default function App() {
                         updateDriverStation(selected as DRIVER_STATION);
                         setDriverStation(selected);
                     }}
-                    oldSelected={getMatchData().then((data) => data["driverStation"])} />
+                    oldSelected={getMatchData().then((data) => data["driverStation"])}
+                    defaultValue={DRIVER_STATION.UNSELECTED} />
 
+                <View style={styles.buttons}>
+                    <NavButton text="Go" pageName="auto"
+                        disabled={!(nameFilled && teamNumber !== 0 && matchNumber !== 0)} />
 
-                <NavButton text="Go" pageName="auto"
-                    disabled={ !(nameFilled && teamNumber !== 0 && matchNumber !== 0) } />
-                
-                { unsyncedMatches > 0 && <NavButton text="Sync" onClick={sync} /> }
+                    {unsyncedMatches > 0 && <NavButton text="Sync" onClick={sync} />}
+                </View>
+
 
                 <StatusBar style="auto" />
             </ScrollView>
@@ -139,7 +148,11 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         rowGap: 15
-        // alignItems: 'center',
-        // justifyContent: 'center',
     },
+
+    buttons: {
+        flex: 1,
+        columnGap: 15,
+        flexDirection: "row-reverse"
+    }
 });
