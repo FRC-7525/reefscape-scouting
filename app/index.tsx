@@ -74,7 +74,7 @@ export default function App() {
                 const matches = snap.val();
                 const match = matches[matchNumber];
 
-                if (match === null) return;
+                if (match === undefined) return;
 
                 const [ alliance, station ] = driverStation.split(' ');
 

@@ -14,8 +14,8 @@ export default function App() {
             <PageHeader title='Teleop' pageNumber='3/4' previous="auto" />
             <ScrollView>
 
-            <Stopwatch/>
-            <Divider />
+            {/* <Stopwatch/>
+            <Divider /> */}
             
             <ReefAlgaeView phase="teleop" />
             <Divider />
