@@ -8,7 +8,7 @@ import { getMatchData, updateMatchNumber, updateName, updateTeamNumber, updateDr
 import { DRIVER_STATION, MatchData } from './api/data_types';
 import { useEffect, useState } from 'react';
 import RadioButton from './components/RadioButton';
-import { child, onValue, push, ref, set, update } from 'firebase/database';
+import { child, get, onValue, push, ref, set, update } from 'firebase/database';
 import { db } from '../firebaseConfig';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as FileSystem from "expo-file-system";
@@ -21,6 +21,7 @@ export default function App() {
     const [ driverStation, setDriverStation ] = useState("");
     const [ matchNumber, setMatchNumber ] = useState(0);
     const [ teamNumber, setTeamNumber ] = useState(0);
+    const [ appUpdated, setAppUpdated ] = useState(false);
     const [ scoutingDisabled, setScoutingDisabled ] = useState(true);
 
     const sync = () => {
@@ -57,6 +58,13 @@ export default function App() {
             setMatchNumber(data["matchNumber"]);
         });
 
+        get(ref(db, "/updateSha")).then(snap => {
+            if (!snap.exists()) return;
+
+            const appSha = process.env.EXPO_PUBLIC_SHA ?? "";
+            setAppUpdated(appSha === snap.val());
+        });
+        
         onValue(ref(db, "scoutingEnabled"), (snap) => {
             if (!snap.exists()) return;
 

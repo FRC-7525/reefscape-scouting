@@ -133,3 +133,10 @@ export function updateDefenseTime(time: number): Promise<void> {
         return data;
     });
 }
+
+export function updateAppUpdate(updated: boolean): Promise<void> {
+    return modifyMatchData((data) => {
+        data["appUpdated"] = updated;
+        return data;
+    })
+}
