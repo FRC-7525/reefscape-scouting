@@ -63,7 +63,7 @@ export default function App() {
 
             const appSha = process.env.EXPO_PUBLIC_SHA ?? "";
             setAppUpdated(appSha === snap.val());
-        )};
+        });
         
         onValue(ref(db, "scoutingEnabled"), (snap) => {
             if (!snap.exists()) return;
